@@ -45,7 +45,7 @@ export function getLine(lineId: string, lang?: string) {
     if (lang === undefined) {
         lang = getLanguageOrDefault();
     }
-    return translations[lang][lineId];
+    return translations[lang][lineId] ?? `{{${lineId} : ${lang}}}`;
 }
 
 

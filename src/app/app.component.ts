@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { getLine } from '../configuration';
+import { getLine } from '../unsorted/configuration';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,38 @@
-@switch (pageLayout) {
-    @default {
-        <app-language-selector />
-    }
-}
-<router-outlet /> <!-- seems unless in single-page application -->
+<header>
+    <div id="header">
+        <div class="headerLeft">
+            <a href=""> <!-- TODO help page -->
+                <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+            </a> <a href=""> <!-- TODO language selector -->
+                <i class="fa fa-language" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="headerMiddle">
+            <h1><a href=""> <!-- TODO language selector -->
+                PolitiScales <!-- TODO site name -->
+            </a></h1>
+        </div>
+
+        <div class="headerRight">
+            <!-- Twitter on headerRight, removed -->
+        </div>
+    </div>
+</header>
+
+<div id="content">
+    <div id="mainFrame">
+        @switch (pageLayout) {
+            @default {
+                <app-language-selector />
+            }
+        }
+        <router-outlet /> <!-- seems useless in single-page application -->
+    </div>
+</div>
+
+<div id="footer">
+    <p>{{localize('footer')}}</p>
+
+    <!-- prompt to participate in translation, replaced -->
+    <p>{{localize('footer2')}} <a href="">GitHub</a> !</p>
+</div>

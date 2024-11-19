@@ -1,4 +1,4 @@
-<h2>Choose your language !</h2>
+<h2>Choose your language</h2>
 
 <p class="simpleText" style="text-align: center;">
     {{localize('languageSelectorPrompt')}}
@@ -6,6 +6,6 @@
 
 <div class="navButtons">
     @for (languageId of languageIds; track languageId) {
-        <button>{{localize('languageName', languageId)}}</button>
+        <a class="button">{{localize('languageName', languageId)}}</a>
     }
 </div>

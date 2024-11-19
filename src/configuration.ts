@@ -1,12 +1,12 @@
-import languageIds from '../assets/langages.json';
-import rawQuestions from '../assets/questions.json';
+import languageIds from './assets/langages.json';
+import rawQuestions from './assets/questions.json';
 import { Question } from './datamodel/questionsConfiguration';
 import { getQuestions } from './services/questionsConfigurationService';
 
 export { languageIds };
 const translations: Readonly<Record<string, Readonly<Record<string, string>>>> = Object.fromEntries(
     languageIds.map((languageId) => (
-        [languageId, require(`../assets/languages/${languageId}.json`)]
+        [languageId, require(`./assets/languages/${languageId}.json`)]
 )));
 let currentLanguage: string|null = null;
 /**

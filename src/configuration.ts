@@ -31,5 +31,4 @@ export function getLine(lineId: string, lang?: string) {
 }
 
 
-
-export const questions: Question[] = getQuestions(rawQuestions);
+export const questions: Readonly<Question[]> = getQuestions(rawQuestions);

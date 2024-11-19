@@ -4,10 +4,10 @@ import { Question } from './datamodel/questionsConfiguration';
 import { getQuestions } from './services/questionsConfigurationService';
 
 export { languageIds };
-const translations: Readonly<Record<string, Readonly<Record<string, string>>>> = Object.fromEntries(await Promise.all(
-    languageIds.map(async (languageId) => (
-        [languageId, await import(`../assets/languages/${languageId}.json`)]
-))));
+const translations: Readonly<Record<string, Readonly<Record<string, string>>>> = Object.fromEntries(
+    languageIds.map((languageId) => (
+        [languageId, require(`../assets/languages/${languageId}.json`)]
+)));
 let currentLanguage: string|null = null;
 /**
  * When used with no parameter, returns the current selected language.

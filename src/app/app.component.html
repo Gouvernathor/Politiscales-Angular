@@ -1,2 +1,6 @@
-
-<router-outlet />
+@switch (pageLayout) {
+    @default {
+        <app-language-selector />
+    }
+}
+<router-outlet /> <!-- seems unless in single-page application -->

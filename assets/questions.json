@@ -1,0 +1,1779 @@
+[
+    {
+        "id": "qc0",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc1",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc2",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc3",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc4",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc5",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc6",
+        "valuesYes": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc7",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc8",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc9",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc10",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc11",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc12",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qc13",
+        "valuesYes": [
+            {
+                "axis": "c1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "c0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qb0",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb1",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb2",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb3",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb4",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb5",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb6",
+        "valuesYes": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb7",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb8",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb9",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb10",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb11",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb12",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qb13",
+        "valuesYes": [
+            {
+                "axis": "b1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "b0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qp0",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp1",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp2",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp3",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp4",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp5",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp6",
+        "valuesYes": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp7",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp8",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp9",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp10",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp11",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp12",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qp13",
+        "valuesYes": [
+            {
+                "axis": "p1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "p0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qm0",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm1",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm2",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm3",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm4",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm5",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm6",
+        "valuesYes": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm7",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm8",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm9",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm10",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm11",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm12",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qm13",
+        "valuesYes": [
+            {
+                "axis": "m1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "m0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qs0",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs1",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs2",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs3",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs4",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs5",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs6",
+        "valuesYes": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs7",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs8",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            },
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            },
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs9",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs10",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs11",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            },
+            {
+                "axis": "femi",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs12",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qs13",
+        "valuesYes": [
+            {
+                "axis": "s1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "s0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qe0",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe1",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe2",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe3",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe4",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe5",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe6",
+        "valuesYes": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe7",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe8",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe9",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe10",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe11",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe12",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qe13",
+        "valuesYes": [
+            {
+                "axis": "e1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "e0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qj0",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj1",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj2",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj3",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj4",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj5",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj6",
+        "valuesYes": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj7",
+        "valuesYes": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj8",
+        "valuesYes": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj9",
+        "valuesYes": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj10",
+        "valuesYes": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj11",
+        "valuesYes": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qj12",
+        "valuesYes": [
+            {
+                "axis": "j1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "j0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qt0",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt1",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt2",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt3",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt4",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt5",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt6",
+        "valuesYes": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt7",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt8",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt9",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt10",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt11",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt12",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "id": "qt13",
+        "valuesYes": [
+            {
+                "axis": "t1",
+                "value": 3
+            }
+        ],
+        "valuesNo": [
+            {
+                "axis": "t0",
+                "value": 3
+            }
+        ]
+    },
+
+
+    {
+        "id": "qreli",
+        "valuesYes": [
+            {
+                "axis": "reli",
+                "value": 3
+            }
+        ],
+        "valuesNo": []
+    },
+    {
+        "id": "qcons",
+        "valuesYes": [
+            {
+                "axis": "comp",
+                "value": 3
+            }
+        ],
+        "valuesNo": []
+    },
+    {
+        "id": "qprag",
+        "valuesYes": [
+            {
+                "axis": "prag",
+                "value": 3
+            }
+        ],
+        "valuesNo": []
+    },
+    {
+        "id": "qmona",
+        "valuesYes": [
+            {
+                "axis": "mona",
+                "value": 3
+            }
+        ],
+        "valuesNo": []
+    },
+    {
+        "id": "qvega",
+        "valuesYes": [
+            {
+                "axis": "vega",
+                "value": 3
+            }
+        ],
+        "valuesNo": []
+    },
+    {
+        "id": "qanar",
+        "valuesYes": [
+            {
+                "axis": "anar",
+                "value": 3
+            }
+        ],
+        "valuesNo": []
+    }
+]

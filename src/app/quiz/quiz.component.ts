@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { getLine } from '../../unsorted/configuration';
+import { getLine, setLanguage } from '../../unsorted/configuration';
+import { firstValueFrom } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -10,4 +12,13 @@ import { getLine } from '../../unsorted/configuration';
 })
 export class QuizComponent {
   localize = getLine;
+  constructor(private route: ActivatedRoute) {}
+
+  async ngOnInit() {
+    let lang: string;
+    lang = (await firstValueFrom(this.route.data))["lang"];
+    if (lang) {
+      setLanguage(lang);
+    }
+  }
 }

@@ -255,10 +255,6 @@ h2
 	height: 15vmin;
 }
 
-.axisDesc
-{
-
-}
 .axisDescLeft, .axisDescRight
 {
 	width:50%;
@@ -413,6 +409,8 @@ h2
 	-moz-transition:.5s;
 	-webkit-transition:.5s;
 	transition: .5s;
+
+	color: white;
 }
 .button:hover
 {
@@ -423,12 +421,6 @@ h2
 .button
 {
 	background-color: #500076;
-	color: white;
-}
-
-.buttonQuestion
-{
-	color: white;
 }
 
 .buttonTwitter

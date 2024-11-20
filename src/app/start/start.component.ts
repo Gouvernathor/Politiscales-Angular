@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { setLanguage } from '../../unsorted/configuration';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-start',
@@ -12,12 +13,11 @@ import { setLanguage } from '../../unsorted/configuration';
 export class StartComponent {
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
-      let lang = data['lang'];
-      if (lang) {
-        setLanguage(lang);
-      }
-    });
+  async ngOnInit() {
+    let lang: string;
+    lang = (await firstValueFrom(this.activatedRoute.data))["lang"];
+    if (lang) {
+      setLanguage(lang);
+    }
   }
 }

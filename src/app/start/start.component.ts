@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getLine, setLanguage } from '../../unsorted/configuration';
 import { firstValueFrom } from 'rxjs';
 
@@ -12,13 +12,17 @@ import { firstValueFrom } from 'rxjs';
 })
 export class StartComponent {
   localize = getLine;
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit() {
     let lang: string;
-    lang = (await firstValueFrom(this.activatedRoute.data))["lang"];
+    lang = (await firstValueFrom(this.route.data))["lang"];
     if (lang) {
       setLanguage(lang);
     }
+  }
+
+  onStartQuiz() {
+    this.router.navigate(['quiz'], {relativeTo: this.route});
   }
 }

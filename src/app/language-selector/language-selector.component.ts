@@ -16,6 +16,6 @@ export class LanguageSelectorComponent {
   constructor(private router: Router) {}
 
   onLanguageChange(lang: string) {
-    this.router.navigate([lang, '']);
+    this.router.navigate([lang]);
   }
 }

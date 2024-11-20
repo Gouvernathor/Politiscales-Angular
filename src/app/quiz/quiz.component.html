@@ -26,7 +26,7 @@
 </div>
 
 <div class="navButtons">
-    @if (question_number !== 0) {
+    @if (!loading && question_number !== 0) {
         <button class="button" (click)="prevQuestion()">{{localize("quiz_btn_back_q")}}</button>
     } @else {
         <button class="button" (click)="gotoStart()">{{localize("quiz_btn_back_i")}}</button>

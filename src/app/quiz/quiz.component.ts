@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { getLine, questions as baseQuestions, setLanguage } from '../../unsorted/configuration';
 import { firstValueFrom } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AnswerValue, Axis, Question, SpecialAxis } from '../../datamodel/questionsConfiguration';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AnswerValue, Axis, getAxisId, Question, SpecialAxis } from '../../datamodel/questionsConfiguration';
 
 type Answer = any;
 
@@ -88,7 +88,11 @@ export class QuizComponent {
       tallyValues(question.valuesNo, answer * -1);
     }
 
-    // TODO calculate parameters of url and redirect
+    const queryParams: Params = {};
+    for (const [axis, data] of axes.entries()) {
+      queryParams[getAxisId(axis)!] = (100 * data.val / data.sum).toFixed(0);
+    }
+    this.router.navigate(['..', 'results'], {relativeTo: this.route, queryParams: queryParams});
   }
 
   simulate() {

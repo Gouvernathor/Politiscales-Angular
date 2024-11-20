@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { getLine, questions as baseQuestions, setLanguage } from '../../unsorted/configuration';
 import { firstValueFrom } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from '../../datamodel/questionsConfiguration';
 
 @Component({
@@ -16,7 +16,7 @@ export class QuizComponent {
   loading = true;
   question_number: number; // TODO make a property, computed from answers ?
   readonly questions: Question[];
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.question_number = 0;
 
     let questions = baseQuestions.slice();
@@ -42,7 +42,13 @@ export class QuizComponent {
   }
 
   prevQuestion() {
-    // TODO
+    if (this.question_number > 0) {
+      this.question_number--;
+    }
+  }
+
+  gotoStart() {
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 
   gotoResults() {

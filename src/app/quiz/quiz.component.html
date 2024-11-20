@@ -16,9 +16,10 @@
 </div>
 
 <div class="navButtons">
+    <!-- TODO visibility using @if ? -->
     <button class="button" id="back_button">{{localize("quiz_btn_back_q")}}</button> <!-- TODO js prev_question & visibility -->
     <button class="button" id="button_back_off">{{localize("quiz_btn_back_i")}}</button> <!-- TODO goto start & visibility -->
 </div>
 <div class="navButtons">
-    <button class="button">{{localize("quiz_btn_random")}}</button> <!-- TODO js simulate -->
+    <button class="button" (click)="simulate()">{{localize("quiz_btn_random")}}</button>
 </div>

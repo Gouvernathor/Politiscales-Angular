@@ -13,8 +13,9 @@ import { Question } from '../../datamodel/questionsConfiguration';
 })
 export class QuizComponent {
   localize = getLine;
-  private question_number: number; // TODO make a property, computed from answers ?
-  private readonly questions: Question[];
+  loading = true;
+  question_number: number; // TODO make a property, computed from answers ?
+  readonly questions: Question[];
   constructor(private route: ActivatedRoute) {
     this.question_number = 0;
 
@@ -33,11 +34,7 @@ export class QuizComponent {
       setLanguage(lang);
     }
 
-    this.initQuestion();
-  }
-
-  private initQuestion() {
-    // TODO
+    this.loading = false;
   }
 
   answer(answer: any) {

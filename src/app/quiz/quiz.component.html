@@ -1,4 +1,10 @@
-<h2 id="question-number">{{localize("quiz_loading")}}</h2>
+<h2 id="question-number">
+    @if (loading) {
+        {{localize("quiz_loading")}}
+    } @else {
+        {{localize("quiz_question_counter").replace("%num%", (question_number + 1).toFixed()).replace("%sum%", questions.length.toFixed())}}
+    }
+</h2>
 <div class="questionBox">
     <div>
         <p id="question-text"></p>
@@ -6,7 +12,7 @@
 </div>
 <div class="navButtons">
     <!-- TODO onclicks -->
-    <!-- TODO class-ify button colors, with classes inheriting buttonQuestion -->
+    <!-- TODO class-ify button colors, with classes inheriting buttonQuestion, and re-enable hover color -->
     <!-- TODO repatriate CSS classes to respective files instead of main -->
     <button class="buttonQuestion" style="background-color: #1b5e20;">{{localize("quiz_btn_yes1")}}</button>
     <button class="buttonQuestion" style="background-color: #4caf50;">{{localize("quiz_btn_yes0")}}</button>
@@ -16,9 +22,11 @@
 </div>
 
 <div class="navButtons">
-    <!-- TODO visibility using @if ? -->
-    <button class="button" id="back_button">{{localize("quiz_btn_back_q")}}</button> <!-- TODO js prev_question & visibility -->
-    <button class="button" id="button_back_off">{{localize("quiz_btn_back_i")}}</button> <!-- TODO goto start & visibility -->
+    @if (question_number !== 0) {
+        <button class="button" id="back_button">{{localize("quiz_btn_back_q")}}</button> <!-- TODO js prev_question -->
+    } @else {
+        <button class="button" id="back_button_off">{{localize("quiz_btn_back_i")}}</button> <!-- TODO goto start -->
+    }
 </div>
 <div class="navButtons">
     <button class="button" (click)="simulate()">{{localize("quiz_btn_random")}}</button>

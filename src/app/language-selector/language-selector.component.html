@@ -6,6 +6,6 @@
 
 <div class="navButtons">
     @for (languageId of languageIds; track languageId) {
-        <a class="button">{{localize('languageName', languageId)}}</a>
+        <a class="button" (click)="onLanguageChange(languageId)">{{localize('languageName', languageId)}}</a>
     }
 </div>

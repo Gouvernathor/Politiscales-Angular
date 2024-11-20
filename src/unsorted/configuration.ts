@@ -12,7 +12,7 @@ let currentLanguage: string|null = null;
 /**
  * When used with no parameter, returns the current selected language.
  * If none is selected, performs the rest of the calculations based
- * on navigator.language.
+ * on navigator.languages (when available, which is not the case in SSR).
  *
  * Otherwise, tries to match the input string with any of the existing languages.
  * If none match, the first of the languages in languages.json is returned.
@@ -22,12 +22,18 @@ function getLanguageOrDefault(lang?: string) {
         if (currentLanguage !== null) {
             return currentLanguage;
         }
-        lang = navigator.language;
+        // this protection is for SSR, window doesn't exist there
+        if (globalThis.window) {
+            lang = globalThis.window?.navigator.languages.filter(l => languageIds.includes(l))[0]
+                || globalThis.window.navigator.language;
+        }
     }
-    lang = lang.replace("-", "_");
-    for (const languageId of languageIds) {
-        if (languageId.startsWith(lang)) {
-            return languageId;
+    if (lang !== undefined) {
+        lang = lang.replace("-", "_");
+        for (const languageId of languageIds) {
+            if (languageId.startsWith(lang)) {
+                return languageId;
+            }
         }
     }
     return languageIds[0];

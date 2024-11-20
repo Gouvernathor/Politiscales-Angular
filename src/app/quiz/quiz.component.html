@@ -7,7 +7,11 @@
 </h2>
 <div class="questionBox">
     <div>
-        <p id="question-text"></p>
+        <p id="question-text">
+            @if (!loading) {
+                {{localize(questions[question_number].id)}}
+            }
+        </p>
     </div>
 </div>
 <div class="navButtons">

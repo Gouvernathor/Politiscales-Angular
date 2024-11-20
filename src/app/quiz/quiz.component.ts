@@ -20,7 +20,7 @@ export class QuizComponent {
   readonly answers: Answer[];
   constructor(private route: ActivatedRoute, private router: Router) {
     let questions = baseQuestions.slice();
-    for (let j, i = questions.length; i>0; i--) {
+    for (let j, i = questions.length-1; i>0; i--) {
       j = Math.floor(Math.random()*(i+1));
       [questions[i], questions[j]] = [questions[j], questions[i]];
     }
@@ -81,7 +81,7 @@ export class QuizComponent {
       }
     }
 
-    for (var i in this.questions) {
+    for (let i=0; i<this.questions.length; i++) {
       const question = this.questions[i];
       const answer = this.answers[i];
       tallyValues(question.valuesYes, answer * 1);

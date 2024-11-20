@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { languageIds } from '../unsorted/configuration';
 import { StartComponent } from './start/start.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 export const routes: Routes = [
     // localized paths, each with children: empty, help, quiz, results
@@ -14,10 +15,10 @@ export const routes: Routes = [
             //     path: 'help',
             //     component: HelpComponent,
             // },
-            // {
-            //     path: 'quiz',
-            //     component: QuizComponent,
-            // },
+            {
+                path: 'quiz',
+                component: QuizComponent,
+            },
             // {
             //     path: 'results',
             //     component: ResultsComponent,

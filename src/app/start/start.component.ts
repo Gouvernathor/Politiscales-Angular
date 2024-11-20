@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { setLanguage } from '../../unsorted/configuration';
+import { getLine, setLanguage } from '../../unsorted/configuration';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -11,6 +11,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './start.component.css'
 })
 export class StartComponent {
+  localize = getLine;
   constructor(private activatedRoute: ActivatedRoute) {}
 
   async ngOnInit() {

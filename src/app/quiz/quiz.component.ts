@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { getLine, questions as baseQuestions, setLanguage } from '../../unsorted/configuration';
 import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Axis, Question, SpecialAxis } from '../../datamodel/questionsConfiguration';
+import { AnswerValue, Axis, Question, SpecialAxis } from '../../datamodel/questionsConfiguration';
 
 type Answer = any;
 
@@ -61,30 +61,31 @@ export class QuizComponent {
   gotoResults() {
     this.loading = true;
 
-    const valPerAxis = new Map<Axis|SpecialAxis, number>();
-    const sumPerAxis = new Map<Axis|SpecialAxis, number>();
+    const axes = new Map<Axis|SpecialAxis, {val: number, sum: number}>();
 
     for (var i in this.questions) {
       const question = this.questions[i];
       const answer = this.answers[i];
 
-      for (const valueYes of question.valuesYes) {
-        const axis = valueYes.axis;
+      function tallyValues(values: AnswerValue[], toggle: number) {
+        for (const value of values) {
+          const axis = value.axis;
+          let data;
+          if (axes.has(axis)) {
+            data = axes.get(axis)!;
+          } else {
+            data = {val: 0, sum: 0};
+            axes.set(axis, data);
+          }
 
-        if (answer > 0) {
-          valPerAxis.set(axis, (valPerAxis.get(axis)||0) + answer * valueYes.value);
+          if (toggle * answer > 0) {
+            data.val += toggle * answer * value.value;
+          }
+          data.sum += Math.max(value.value, 0);
         }
-        sumPerAxis.set(axis, (sumPerAxis.get(axis)||0) + Math.max(valueYes.value, 0));
       }
-
-      for (const valueNo of question.valuesNo) {
-        const axis = valueNo.axis;
-
-        if (answer < 0) {
-          valPerAxis.set(axis, (valPerAxis.get(axis)||0) - answer * valueNo.value);
-        }
-        sumPerAxis.set(axis, (sumPerAxis.get(axis)||0) + Math.max(valueNo.value, 0));
-      }
+      tallyValues(question.valuesYes, 1);
+      tallyValues(question.valuesNo, -1);
     }
 
     // TODO calculate parameters of url and redirect

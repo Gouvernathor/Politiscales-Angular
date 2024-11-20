@@ -63,29 +63,29 @@ export class QuizComponent {
 
     const axes = new Map<Axis|SpecialAxis, {val: number, sum: number}>();
 
+    function tallyValues(values: AnswerValue[], toggledAnswer: number) {
+      for (const value of values) {
+        const axis = value.axis;
+        let data;
+        if (axes.has(axis)) {
+          data = axes.get(axis)!;
+        } else {
+          data = {val: 0, sum: 0};
+          axes.set(axis, data);
+        }
+
+        if (toggledAnswer > 0) {
+          data.val += toggledAnswer * value.value;
+        }
+        data.sum += Math.max(value.value, 0);
+      }
+    }
+
     for (var i in this.questions) {
       const question = this.questions[i];
       const answer = this.answers[i];
-
-      function tallyValues(values: AnswerValue[], toggle: number) {
-        for (const value of values) {
-          const axis = value.axis;
-          let data;
-          if (axes.has(axis)) {
-            data = axes.get(axis)!;
-          } else {
-            data = {val: 0, sum: 0};
-            axes.set(axis, data);
-          }
-
-          if (toggle * answer > 0) {
-            data.val += toggle * answer * value.value;
-          }
-          data.sum += Math.max(value.value, 0);
-        }
-      }
-      tallyValues(question.valuesYes, 1);
-      tallyValues(question.valuesNo, -1);
+      tallyValues(question.valuesYes, answer * 1);
+      tallyValues(question.valuesNo, answer * -1);
     }
 
     // TODO calculate parameters of url and redirect

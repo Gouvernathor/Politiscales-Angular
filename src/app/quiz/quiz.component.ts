@@ -4,6 +4,8 @@ import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from '../../datamodel/questionsConfiguration';
 
+type Answer = any;
+
 @Component({
   selector: 'app-quiz',
   standalone: true,
@@ -14,17 +16,16 @@ import { Question } from '../../datamodel/questionsConfiguration';
 export class QuizComponent {
   localize = getLine;
   loading = true;
-  question_number: number; // TODO make a property, computed from answers ?
-  readonly questions: Question[];
+  readonly questions: Readonly<Question[]>;
+  readonly answers: Answer[];
   constructor(private route: ActivatedRoute, private router: Router) {
-    this.question_number = 0;
-
     let questions = baseQuestions.slice();
     for (let j, i = questions.length; i>0; i--) {
       j = Math.floor(Math.random()*(i+1));
       [questions[i], questions[j]] = [questions[j], questions[i]];
     }
     this.questions = questions;
+    this.answers = [];
   }
 
   async ngOnInit() {
@@ -37,14 +38,20 @@ export class QuizComponent {
     this.loading = false;
   }
 
-  answer(answer: any) {
-    // TODO (previously next_question)
+  get question_number() {
+    return this.answers.length;
+  }
+
+  answer(answer: Answer) {
+    this.answers.push(answer);
+
+    if (this.question_number >= this.questions.length) {
+      this.gotoResults();
+    }
   }
 
   prevQuestion() {
-    if (this.question_number > 0) {
-      this.question_number--;
-    }
+    this.answers.pop();
   }
 
   gotoStart() {

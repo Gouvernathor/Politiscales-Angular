@@ -21,12 +21,7 @@
 
 <div id="content">
     <div id="mainFrame">
-        @switch (pageLayout) {
-            @default {
-                <app-language-selector />
-            }
-        }
-        <router-outlet /> <!-- seems useless in single-page application -->
+        <router-outlet />
     </div>
 </div>
 

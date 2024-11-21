@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { getLine } from '../unsorted/configuration';
 
 @Component({
@@ -12,4 +12,10 @@ import { getLine } from '../unsorted/configuration';
 export class AppComponent {
   title = 'politiscales';
   localize = getLine;
+
+  constructor(private router: Router) {}
+
+  gotoLangSelect() {
+    this.router.navigate(['']);
+  }
 }

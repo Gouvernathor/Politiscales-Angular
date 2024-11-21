@@ -103,12 +103,12 @@ export class QuizComponent {
         )] // get unique elements
       .map(a => [a, Math.random()])); // generate a random number for each axis
 
-    function operate(props: number[], values: AnswerValue[], toggle: number) {
+    function operate(props: number[], values: AnswerValue[], invert: boolean) {
       for (const value of values) {
         const axis = value.axis;
         const rand = randPerAbsAxis.get(Math.abs(axis));
         if (rand !== undefined) {
-          props.push(rand * toggle * (axis > 0 ? axis : -axis));
+          props.push((invert === (axis > 0)) ? rand : 1-rand);
         }
       }
     }
@@ -119,11 +119,11 @@ export class QuizComponent {
       } else {
         let props: number[] = [];
         const question = this.questions[this.question_number];
-        operate(props, question.valuesYes, 1);
-        operate(props, question.valuesNo, -1);
+        operate(props, question.valuesYes, false);
+        operate(props, question.valuesNo, true);
 
         // questions with only special axes have .5 chance
-        if (Math.random() < (props.length !== 0 ? props.reduce((a, b) => a + b) : .5)) {
+        if (Math.random() < (props.length !== 0 ? props.reduce((a, b) => a + b)/props.length : .5)) {
           this.answer(1);
         } else {
           this.answer(-1);

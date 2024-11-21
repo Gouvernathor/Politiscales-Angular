@@ -412,15 +412,60 @@ h2
 
 	color: white;
 }
-.button:hover
+/* repetition to increase specificity so that it's not overridden by nth-child */
+.buttonQuestion:hover:hover, .button:hover
 {
 	background-color: white;
-	color: #500076;
 }
 
+.button:hover
+{
+	color: #500076;
+}
 .button
 {
 	background-color: #500076;
+}
+
+.buttonQuestion:nth-child(1):hover
+{
+	color: #1b5e20;
+}
+.buttonQuestion:nth-child(1)
+{
+	background-color: #1b5e20;
+}
+.buttonQuestion:nth-child(2):hover
+{
+	color: #4caf50;
+}
+.buttonQuestion:nth-child(2)
+{
+	background-color: #4caf50;
+}
+.buttonQuestion:nth-child(3):hover
+{
+	color: #bbbbbb;
+}
+.buttonQuestion:nth-child(3)
+{
+	background-color: #bbbbbb;
+}
+.buttonQuestion:nth-child(4):hover
+{
+	color: #f44336;
+}
+.buttonQuestion:nth-child(4)
+{
+	background-color: #f44336;
+}
+.buttonQuestion:nth-child(5):hover
+{
+	color: #b71c1c;
+}
+.buttonQuestion:nth-child(5)
+{
+	background-color: #b71c1c;
 }
 
 .buttonTwitter

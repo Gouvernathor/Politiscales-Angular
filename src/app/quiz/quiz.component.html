@@ -15,13 +15,11 @@
     </div>
 </div>
 <div class="navButtons">
-    <!-- TODO class-ify button colors, with classes inheriting buttonQuestion, and re-enable hover color -->
-    <!-- TODO repatriate CSS classes to respective files instead of main -->
-    <button class="buttonQuestion" style="background-color: #1b5e20;" [disabled]="loading" (click)="answer(1)">{{localize("quiz_btn_yes1")}}</button>
-    <button class="buttonQuestion" style="background-color: #4caf50;" [disabled]="loading" (click)="answer(2/3)">{{localize("quiz_btn_yes0")}}</button>
-    <button class="buttonQuestion" style="background-color: #bbbbbb;" [disabled]="loading" (click)="answer(0)">{{localize("quiz_btn_neutral")}}</button>
-    <button class="buttonQuestion" style="background-color: #f44336;" [disabled]="loading" (click)="answer(-2/3)">{{localize("quiz_btn_no0")}}</button>
-    <button class="buttonQuestion" style="background-color: #b71c1c;" [disabled]="loading" (click)="answer(-1)">{{localize("quiz_btn_no1")}}</button>
+    <button class="buttonQuestion" [disabled]="loading" (click)="answer(1)">{{localize("quiz_btn_yes1")}}</button>
+    <button class="buttonQuestion" [disabled]="loading" (click)="answer(2/3)">{{localize("quiz_btn_yes0")}}</button>
+    <button class="buttonQuestion" [disabled]="loading" (click)="answer(0)">{{localize("quiz_btn_neutral")}}</button>
+    <button class="buttonQuestion" [disabled]="loading" (click)="answer(-2/3)">{{localize("quiz_btn_no0")}}</button>
+    <button class="buttonQuestion" [disabled]="loading" (click)="answer(-1)">{{localize("quiz_btn_no1")}}</button>
 </div>
 
 <div class="navButtons">

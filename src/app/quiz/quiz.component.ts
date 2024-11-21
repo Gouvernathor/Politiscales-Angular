@@ -43,7 +43,7 @@ export class QuizComponent {
   }
 
   answer(answer: Answer) {
-    this.loading = this.question_number >= this.questions.length;
+    this.loading = this.question_number+1 >= this.questions.length;
     this.answers.push(answer);
 
     if (this.loading) {

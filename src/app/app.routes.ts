@@ -9,7 +9,7 @@ export const routes: Routes = [
     // to related component with parameter set to the language id
     ...languageIds.map((languageId) => ({
         path: languageId,
-        data: {lang: languageId}, // TODO: check that it works
+        data: {lang: languageId},
         children: [
             // {
             //     path: 'help',

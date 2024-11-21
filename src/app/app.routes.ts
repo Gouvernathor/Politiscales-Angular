@@ -3,6 +3,7 @@ import { LanguageSelectorComponent } from './language-selector/language-selector
 import { languageIds } from '../unsorted/configuration';
 import { StartComponent } from './start/start.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { HelpComponent } from './help/help.component';
 
 export const routes: Routes = [
     // localized paths, each with children: empty, help, quiz, results
@@ -11,10 +12,10 @@ export const routes: Routes = [
         path: languageId,
         data: {lang: languageId},
         children: [
-            // {
-            //     path: 'help',
-            //     component: HelpComponent,
-            // },
+            {
+                path: 'help',
+                component: HelpComponent,
+            },
             {
                 path: 'quiz',
                 component: QuizComponent,
@@ -31,10 +32,10 @@ export const routes: Routes = [
     })),
 
     // help (will improvize language based on navigator language)
-    // {
-    //     path: 'help',
-    //     component: HelpComponent,
-    // },
+    {
+        path: 'help',
+        component: HelpComponent,
+    },
     // optional, results/quiz (will improvize language too)
 
     // empty for language selector

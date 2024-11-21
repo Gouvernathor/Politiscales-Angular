@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { getLine } from '../unsorted/configuration';
+import { getLine, languageIds } from '../unsorted/configuration';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,18 @@ export class AppComponent {
   localize = getLine;
 
   constructor(private router: Router) {}
+
+  gotoHelp() {
+    // if in a language page, go to /xx_XX/help
+    // if not, go to /help
+    const [[, firstSegment],] = this.router.url.matchAll(/^\/*([^/]*)/g);
+    const target = [];
+    if (languageIds.includes(firstSegment)) {
+      target.push(firstSegment);
+    }
+    target.push('help');
+    this.router.navigate(target);
+  }
 
   gotoLangSelect() {
     this.router.navigate(['']);

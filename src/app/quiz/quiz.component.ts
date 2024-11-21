@@ -97,8 +97,43 @@ export class QuizComponent {
   }
 
   simulate() {
-    while (!this.loading) {
-      this.answer([-1, -2/3, 0, 2/3, 1][Math.floor(Math.random()*5)]);
+    const randPerAbsAxis = new Map([...new Set(this.questions
+          .flatMap(q => q.valuesYes.map(v => v.axis)) // get all axes or special axes
+          .filter(a => 0 < a && a in Axis) // filter out special axes
+        )] // get unique elements
+      .map(a => [a, Math.random()])); // generate a random number for each axis
+
+    function operate(props: number[], values: AnswerValue[], toggle: number) {
+      for (const value of values) {
+        const axis = value.axis;
+        const rand = randPerAbsAxis.get(Math.abs(axis));
+        if (rand !== undefined) {
+          props.push(rand * toggle * (axis > 0 ? axis : -axis));
+        }
+      }
     }
+
+    while (!this.loading) {
+      if (Math.random() < .1) {
+        this.answer(0);
+      } else {
+        let props: number[] = [];
+        const question = this.questions[this.question_number];
+        operate(props, question.valuesYes, 1);
+        operate(props, question.valuesNo, -1);
+
+        // questions with only special axes have .5 chance
+        if (Math.random() < (props.length !== 0 ? props.reduce((a, b) => a + b) : .5)) {
+          this.answer(1);
+        } else {
+          this.answer(-1);
+        }
+      }
+    }
+
+    // simpler version, full-random
+    // while (!this.loading) {
+    //   this.answer([-1, -2/3, 0, 2/3, 1][Math.floor(Math.random()*5)]);
+    // }
   }
 }

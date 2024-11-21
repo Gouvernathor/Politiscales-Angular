@@ -31,6 +31,10 @@ export const routes: Routes = [
     })),
 
     // help (will improvize language based on navigator language)
+    // {
+    //     path: 'help',
+    //     component: HelpComponent,
+    // },
     // optional, results/quiz (will improvize language too)
 
     // empty for language selector

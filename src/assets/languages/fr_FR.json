@@ -124,10 +124,21 @@
 
     "footer": "PolitiScales est adapté d’une initiative du même nom créée par le collectif « Radicalisé·e·s sur Internet », elle-même librement inspirée de 8values.",
 
-	"index_welcome": "Bienvenue dans PolitiScales, le test politique <i>online</i>. Vous allez être confronté à une série d'affirmations. Pour chacune d'elles, cliquez sur le bouton correspondant à votre opinion.",
+	"index_welcome": "Bienvenue dans PolitiScales, le test politique <i>online</i>. Vous allez être confronté à une série d’affirmations. Pour chacune d’elles, cliquez sur le bouton correspondant à votre opinion.",
 	"index_context": "Les questions supposent que vous êtes citoyen d’une nation avec un système politique multi-parti et une économie de marché.",
-	"index_advice": "Vous pouvez tout à fait ne pas répondre à une question. Mais si vous ne comprenez pas le sens d'une question, essayez d'inverser son sens pour mieux comprendre ce qu'elle implique.",
-	"index_warning": "Ce test cherche à représenter le panel le plus large possible d'opinions et contient donc des phrases qui peuvent vous choquer, en particulier concernant le racisme et l'homophobie.",
+	"index_advice": "Vous pouvez tout à fait ne pas répondre à une question. Mais si vous ne comprenez pas le sens d’une question, essayez d’inverser son sens pour mieux comprendre ce qu’elle implique.",
+	"index_warning": "Ce test cherche à représenter le panel le plus large possible d’opinions et contient donc des phrases qui peuvent vous choquer, en particulier concernant le racisme et l’homophobie.",
 	"index_title_instructions": "Instructions",
-	"index_btn_start": "Commencer le test"
+	"index_btn_start": "Commencer le test",
+
+	"quiz_loading": "Chargement…",
+	"quiz_btn_yes1": "Absolument d’accord",
+	"quiz_btn_yes0": "Plutôt d’accord",
+	"quiz_btn_neutral": "Neutre ou hésitant",
+	"quiz_btn_no0": "Plutôt pas d’accord",
+	"quiz_btn_no1": "Absolument pas d’accord",
+	"quiz_btn_back_q": "Retour à la question précédente",
+	"quiz_btn_back_i": "Retour à l’accueil",
+	"quiz_btn_random": "Voir un résultat aléatoire",
+	"quiz_question_counter": "Question %num% sur %sum%"
 }

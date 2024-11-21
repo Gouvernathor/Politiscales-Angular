@@ -129,5 +129,16 @@
 	"index_advice": "You can always avoid answering a question. But if you do not understand the meaning of one of them, try to invert its meaning for a better understanding of what is implied.",
 	"index_warning": "This test tries to represent the wider set of ideas as possible and contains some phrases that can be shocking, notably concerning racism and homosexuality.",
 	"index_title_instructions": "Instructions",
-	"index_btn_start": "Start the test"
+	"index_btn_start": "Start the test",
+
+	"quiz_loading": "Loading...",
+	"quiz_btn_yes1": "Absolutely agree",
+	"quiz_btn_yes0": "Somewhat agree",
+	"quiz_btn_neutral": "Neutral or hesitant",
+	"quiz_btn_no0": "Rather disagree",
+	"quiz_btn_no1": "Absolutely disagree",
+	"quiz_btn_back_q": "Return to the previous question",
+	"quiz_btn_back_i": "Go back to home page",
+	"quiz_btn_random": "See a random result",
+	"quiz_question_counter": "Question %num% of %sum%"
 }

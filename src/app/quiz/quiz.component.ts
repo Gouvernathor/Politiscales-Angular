@@ -97,6 +97,8 @@ export class QuizComponent {
   }
 
   simulate() {
-    // TODO
+    while (!this.loading) {
+      this.answer([-1, -2/3, 0, 2/3, 1][Math.floor(Math.random()*5)]);
+    }
   }
 }

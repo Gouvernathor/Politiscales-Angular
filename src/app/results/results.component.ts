@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAxes, getAxisId } from '../../services/commonConfigurationService';
-import { bonusThresholds, getSlogan } from '../../services/resultsConfigurationService';
+import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 
 @Component({
   selector: 'app-results',
@@ -72,7 +72,7 @@ export class ResultsComponent {
       } else if (axis in SpecialAxis) {
         const sAxisId = getAxisId(axis)!;
         const value = this.axesData.get(axis)!;
-        const thresh = bonusThresholds.get(axis as SpecialAxis)!;
+        const thresh = getBonusThreshold(axis as SpecialAxis);
 
         this.setBonus(`${sAxisId}Bonus`, value, thresh);
 

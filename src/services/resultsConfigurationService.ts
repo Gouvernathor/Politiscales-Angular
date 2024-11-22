@@ -1,7 +1,7 @@
 import { Axis, SpecialAxis } from "../datamodel/commonConfiguration";
 import { getLine } from "./localizationService";
 
-export const bonusThresholds = new Map<SpecialAxis, number>([
+const bonusThresholds = new Map<SpecialAxis, number>([
     [SpecialAxis.Anarchism, .9],
     [SpecialAxis.Pragmatism, .5],
     [SpecialAxis.Feminism, .9],
@@ -10,6 +10,9 @@ export const bonusThresholds = new Map<SpecialAxis, number>([
     [SpecialAxis.Religion, .5],
     [SpecialAxis.Monarchism, .5],
 ]);
+export function getBonusThreshold(axis: SpecialAxis) {
+    return bonusThresholds.get(axis)!;
+}
 
 const charSlogan = new Map<Axis|SpecialAxis, string>([
     [Axis.Constructivism, "slogan_constructivism"],

@@ -71,7 +71,7 @@ export class RNG {
     /**
      * @returns one of the elements
      */
-    choice<T>(array: string | T[]) {
+    choice<T>(array: T[]) {
         return array[this.randRange(0, array.length)];
     }
 }

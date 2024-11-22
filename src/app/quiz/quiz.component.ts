@@ -142,7 +142,7 @@ export class QuizComponent {
 
     // simpler version, full-random
     // while (!this.loading) {
-    //   this.answer([-1, -2/3, 0, 2/3, 1][this.rng.randRange(0, 5)]);
+    //   this.answer(this.rng.choice([-1, -2/3, 0, 2/3, 1]));
     // }
   }
 }

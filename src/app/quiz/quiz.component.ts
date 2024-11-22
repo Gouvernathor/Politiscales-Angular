@@ -3,7 +3,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
-import { AnyAxis, BaseAxis } from '../../datamodel/commonConfiguration';
+import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisId } from '../../services/commonConfigurationService';
 import { getQuestions } from '../../services/questionsConfigurationService';
 import { getAllEnumValues } from 'enum-for';
@@ -64,18 +64,13 @@ export class QuizComponent {
   }
 
   gotoResults() {
-    const axes = new Map<AnyAxis, {val: number, sum: number}>();
+    const tally = new Map<AnyAxis, {val: number, sum: number}>(
+      [...getAllEnumValues(Axis), ...getAllEnumValues(SpecialAxis)]
+        .map(a => [a, {val: 0, sum: 0}]));
 
     function tallyValues(values: AnswerValue[], toggledAnswer: number) {
       for (const value of values) {
-        const axis = value.axis;
-        let data;
-        if (axes.has(axis)) {
-          data = axes.get(axis)!;
-        } else {
-          data = {val: 0, sum: 0};
-          axes.set(axis, data);
-        }
+        const data = tally.get(value.axis)!;
 
         if (toggledAnswer > 0) {
           data.val += toggledAnswer * value.value;
@@ -92,8 +87,7 @@ export class QuizComponent {
     }
 
     const queryParams: Params = {};
-    // TODO maybe sort the entries to make reliable result
-    for (const [axis, data] of axes.entries()) {
+    for (const [axis, data] of tally.entries()) {
       queryParams[getAnyAxisId(axis)!] = (100 * data.val / data.sum).toFixed(0);
     }
     // FIXME the generated queryParams may not match the original

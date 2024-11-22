@@ -8,7 +8,7 @@ import { getAnyAxisId } from '../../services/commonConfigurationService';
 import { getQuestions } from '../../services/questionsConfigurationService';
 import { getAllEnumValues } from 'enum-for';
 
-type Answer = any;
+type Answer = number;
 
 @Component({
   selector: 'app-quiz',
@@ -92,9 +92,11 @@ export class QuizComponent {
     }
 
     const queryParams: Params = {};
+    // TODO maybe sort the entries to make reliable result
     for (const [axis, data] of axes.entries()) {
       queryParams[getAnyAxisId(axis)!] = (100 * data.val / data.sum).toFixed(0);
     }
+    // FIXME the generated queryParams may not match the original
     this.router.navigate(['..', 'results'], {relativeTo: this.route, queryParams: queryParams});
   }
 

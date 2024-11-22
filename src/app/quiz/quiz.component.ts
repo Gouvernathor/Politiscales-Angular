@@ -64,8 +64,6 @@ export class QuizComponent {
   }
 
   gotoResults() {
-    this.loading = true;
-
     const axes = new Map<AnyAxis, {val: number, sum: number}>();
 
     function tallyValues(values: AnswerValue[], toggledAnswer: number) {

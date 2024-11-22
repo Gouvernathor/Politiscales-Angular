@@ -22,16 +22,9 @@ export class QuizComponent {
   localize = getLine;
   loading = true;
   private readonly rng: RNG = new RNG();
-  readonly questions: Readonly<Question[]>;
+  questions!: Readonly<Question[]>;
   readonly answers: Answer[] = [];
-  constructor(private route: ActivatedRoute, private router: Router) {
-    let questions = getQuestions().slice();
-    for (let j, i = questions.length-1; i>0; i--) {
-      j = Math.floor(Math.random()*(i+1));
-      [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
-    this.questions = questions;
-  }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit() {
     // manage language
@@ -50,6 +43,14 @@ export class QuizComponent {
       }
       this.rng.seed = seed;
     }
+
+    // generate questions
+    let questions = getQuestions().slice();
+    for (let j, i=questions.length-1; i>0; i--) {
+      j = this.rng.randRange(0, i+1);
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+    this.questions = questions;
 
     // loading is done
     this.loading = false;

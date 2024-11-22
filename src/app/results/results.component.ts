@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
-import { AnyAxis, Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
+import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAnyAxes, getIdsAndBaseAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 
@@ -17,7 +17,7 @@ import { getBonusThreshold, getSlogan } from '../../services/resultsConfiguratio
 export class ResultsComponent {
   localize = getLine;
   private axesData = new Map<AnyAxis, number>();
-  private axesValues = new Map<string, number>();
+  private axesValues = new Map<BaseAxis, number>();
   private generatedSlogan = "";
   constructor(private route: ActivatedRoute) {}
 
@@ -36,9 +36,9 @@ export class ResultsComponent {
 
   private storeAxesData() {
     const params = this.route.snapshot.paramMap;
-    for (const [key, axis] of getIdsAndAnyAxes()) {
+    for (const [id, axis] of getIdsAndAnyAxes()) {
       let value = 0;
-      const rawVal = params.get(key);
+      const rawVal = params.get(id);
       if (rawVal !== null) {
         const ivalue = parseInt(rawVal);
         if (!isNaN(ivalue)) {
@@ -65,6 +65,8 @@ export class ResultsComponent {
       } else {
         characteristics.push({axis: -baseAxis as Axis, value: positiveValue});
       }
+
+      this.axesValues.set(baseAxis, positiveValue-negativeValue);
     }
 
     let bonusEnabled = false;

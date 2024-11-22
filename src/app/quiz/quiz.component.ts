@@ -110,7 +110,7 @@ export class QuizComponent {
 
   simulate() {
     const randPerBaseAxis = new Map(getAllEnumValues(BaseAxis)
-      .map(a => [a, Math.random()]));
+      .map(a => [a, this.rng.random()]));
 
     function operate(props: number[], values: AnswerValue[], invert: boolean) {
       for (const value of values) {
@@ -123,7 +123,7 @@ export class QuizComponent {
     }
 
     while (!this.loading) {
-      if (Math.random() < .1) {
+      if (this.rng.random() < .1) {
         this.answer(0);
       } else {
         let props: number[] = [];
@@ -132,7 +132,7 @@ export class QuizComponent {
         operate(props, question.valuesNo, true);
 
         // questions with only special axes have .5 chance
-        if (Math.random() < (props.length !== 0 ? props.reduce((a, b) => a + b)/props.length : .5)) {
+        if (this.rng.random() < (props.length !== 0 ? props.reduce((a, b) => a + b)/props.length : .5)) {
           this.answer(1);
         } else {
           this.answer(-1);
@@ -142,7 +142,7 @@ export class QuizComponent {
 
     // simpler version, full-random
     // while (!this.loading) {
-    //   this.answer([-1, -2/3, 0, 2/3, 1][Math.floor(Math.random()*5)]);
+    //   this.answer([-1, -2/3, 0, 2/3, 1][this.rng.randRange(0, 5)]);
     // }
   }
 }

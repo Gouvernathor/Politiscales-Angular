@@ -1,7 +1,15 @@
 <!-- <h2>{{localize("help_whois")}}</h2> -->
+<h2>PolitiScales</h2>
 
-<!-- TODO center <p> text on this page -->
-<!-- TODO tweak CSS to avoid descImg, maybe even descText (coordinate with the results page) -->
+<!-- TODO tweak CSS to avoid descImg, maybe even descText (coordinate with the results page)
+another class should replace "description", with a use and rules specific to help
+the images should be centered vertically relative to the text(s)
+the help_desc should be centered horizontally
+the <p> talking about the element to the right should be aligned to the right
+and those talking about the element to the left should be aligned to the left
+usually those are the last and penultimate but using classes is better
+and the <p> talking about both axes should be centered
+ -->
 
 <p class="simpleText">{{localize("help_desc")}}</p>
 
@@ -70,7 +78,7 @@
         <p>{{localize("help_regulationism2")}}</p>
         <p>{{localize("help_regulationism3")}}</p>
     </div>
-    <div class="descImg"><img src="images/laissez_faire.png" [alt]="localize('laissez_faire')"/></div>
+    <div class="descImg"><img src="images/laissezfaire.png" [alt]="localize('laissez_faire')"/></div>
 </div>
 
 <h2>{{localize("ecology")}} / {{localize("productivism")}}</h2>

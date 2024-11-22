@@ -1,4 +1,6 @@
-import { AnswerValue, Question, getAxisFromId } from "../datamodel/questionsConfiguration";
+import rawQuestions from '../assets/questions.json';
+import { AnswerValue, Question } from "../datamodel/questionsConfiguration";
+import { getAxisFromId } from "./commonConfigurationService";
 
 type RawAnswerValue = {
     axis: string,
@@ -16,7 +18,7 @@ function valueMapper(value: RawAnswerValue): AnswerValue {
     };
 }
 
-export function getQuestions(rawData: RawQuestion[]): Question[] {
+export function getQuestions(rawData: RawQuestion[] = rawQuestions): Question[] {
     return rawData.map((question: RawQuestion) => ({
         ...question,
         valuesYes: question.valuesYes.map(valueMapper),

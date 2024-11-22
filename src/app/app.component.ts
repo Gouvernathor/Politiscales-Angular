@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { getLanguageOrDefault, getLine, languageIds } from '../unsorted/configuration';
+import { getLanguageOrDefault, getLine, languageIds } from '../services/localizationService';
 
 @Component({
   selector: 'app-root',

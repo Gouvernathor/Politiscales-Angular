@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getLine, setLanguage } from '../../unsorted/configuration';
+import { getLine, setLanguage } from '../../services/localizationService';
 import { firstValueFrom } from 'rxjs';
 
 @Component({

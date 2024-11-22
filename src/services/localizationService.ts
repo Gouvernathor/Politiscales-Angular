@@ -1,7 +1,4 @@
 import languageIds from '../assets/langages.json';
-import rawQuestions from '../assets/questions.json';
-import { Question } from '../datamodel/questionsConfiguration';
-import { getQuestions } from '../services/questionsConfigurationService';
 
 export { languageIds };
 const translations: Readonly<Record<string, Readonly<Record<string, string>>>> = Object.fromEntries(
@@ -53,6 +50,3 @@ export function getLine(lineId: string, lang?: string) {
     }
     return translations[lang][lineId] ?? `{{${lineId} : ${lang}}}`;
 }
-
-
-export const questions: Readonly<Question[]> = getQuestions(rawQuestions);

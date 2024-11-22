@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { getLine, questions as baseQuestions, setLanguage } from '../../unsorted/configuration';
+import { getLine, setLanguage } from '../../services/localizationService';
 import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AnswerValue, Axis, getAxisId, Question, SpecialAxis } from '../../datamodel/questionsConfiguration';
+import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
+import { Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
+import { getAxisId } from '../../services/commonConfigurationService';
+import { getQuestions } from '../../services/questionsConfigurationService';
 
 type Answer = any;
 
@@ -19,7 +22,7 @@ export class QuizComponent {
   readonly questions: Readonly<Question[]>;
   readonly answers: Answer[];
   constructor(private route: ActivatedRoute, private router: Router) {
-    let questions = baseQuestions.slice();
+    let questions = getQuestions().slice();
     for (let j, i = questions.length-1; i>0; i--) {
       j = Math.floor(Math.random()*(i+1));
       [questions[i], questions[j]] = [questions[j], questions[i]];

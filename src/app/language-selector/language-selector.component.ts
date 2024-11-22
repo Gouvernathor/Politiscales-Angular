@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { getLine, languageIds } from '../../unsorted/configuration';
+import { getLine, languageIds } from '../../services/localizationService';
 import { Router } from '@angular/router';
 
 @Component({

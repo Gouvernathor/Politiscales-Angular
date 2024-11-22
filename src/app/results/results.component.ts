@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { getLine, setLanguage } from '../../unsorted/configuration';
+import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute } from '@angular/router';
-import { Axis, bonusThresholds, getAxisId, getIdsAndAxes, SpecialAxis } from '../../datamodel/questionsConfiguration';
-import { flagShapes } from '../../unsorted/flagConfiguration';
+import { flagShapes } from '../../services/flagConfigurationService';
+import { Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
+import { getIdsAndAxes, getAxisId } from '../../services/commonConfigurationService';
+import { bonusThresholds } from '../../services/resultsConfigurationService';
 
 @Component({
   selector: 'app-results',

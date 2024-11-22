@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
-import { languageIds } from '../unsorted/configuration';
+import { languageIds } from '../services/localizationService';
 import { StartComponent } from './start/start.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { HelpComponent } from './help/help.component';

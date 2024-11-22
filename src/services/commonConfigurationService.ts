@@ -32,8 +32,8 @@ function getAxisId(axis: Axis) {
 function getSpecialAxisId(axis: SpecialAxis) {
     return idBySpecialAxis.get(axis);
 }
-export function getAnyAxisId(axis: AnyAxis): string|null {
-    return idByAnyAxis.get(axis) || null;
+export function getAnyAxisId(axis: AnyAxis) {
+    return idByAnyAxis.get(axis);
 }
 function getAxisFromId(id: string) {
     return axisById.get(id);
@@ -41,8 +41,8 @@ function getAxisFromId(id: string) {
 function getSpecialAxisFromId(id: string) {
     return specialAxisById.get(id);
 }
-export function getAnyAxisFromId(id: string): AnyAxis|null {
-    return anyAxisById.get(id) || null;
+export function getAnyAxisFromId(id: string) {
+    return anyAxisById.get(id);
 }
 function* getIdsAndAxes() {
     yield* axisById.entries();
@@ -50,7 +50,7 @@ function* getIdsAndAxes() {
 function* getIdsAndSpecialAxes() {
     yield* specialAxisById.entries();
 }
-export function* getIdsAndAnyAxes(): Iterable<[string, AnyAxis]> {
+export function* getIdsAndAnyAxes() {
     yield* axisById.entries();
     yield* specialAxisById.entries();
 }

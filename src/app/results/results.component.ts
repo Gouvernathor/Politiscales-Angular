@@ -50,20 +50,20 @@ export class ResultsComponent {
   }
 
   private applyResults() {
-    const characteristics = [];
+    const characteristicsMap = new Map<AnyAxis, number>(); // similar to axesData but without the minor direction of each base axis (favoring "bad" directions)
     for (const [bid, baseAxis] of getIdsAndBaseAxes()) {
       // very confusing : the "positive" is the "bad" one, the "0", the one with a negative enum value in this system
       // should be "left" vs "right", from both political and visual points of view
-      let negativeValue = this.axesData.get(+baseAxis as Axis)!;
-      let positiveValue = this.axesData.get(-baseAxis as Axis)!;
+      const negativeValue = this.axesData.get(+baseAxis as Axis)!;
+      const positiveValue = this.axesData.get(-baseAxis as Axis)!;
       this.setAxisValue(`${bid}AxisNeg`, negativeValue);
       this.setAxisValue(`${bid}AxisPos`, positiveValue);
       this.setAxisValue(`${bid}AxisMid`, 1-negativeValue-positiveValue);
 
       if (negativeValue<positiveValue) {
-        characteristics.push({axis: +baseAxis as Axis, value: negativeValue});
+        characteristicsMap.set(+baseAxis, negativeValue);
       } else {
-        characteristics.push({axis: -baseAxis as Axis, value: positiveValue});
+        characteristicsMap.set(-baseAxis, positiveValue);
       }
 
       this.axesValues.set(baseAxis, positiveValue-negativeValue);
@@ -78,25 +78,24 @@ export class ResultsComponent {
 
       if (value > thresh) {
         bonusEnabled = true;
-        characteristics.push({axis: axis, value: value});
+        characteristicsMap.set(axis, value);
       }
     }
 
-    characteristics.sort((a, b) => b.value - a.value);
-
     const sloganDiv = null!; //  #slogan element
     if (sloganDiv) {
-      const selectedSlogan = [];
-      for (const {axis: axis, value: value} of characteristics) {
+      const sloganMap = new Map<AnyAxis, string>();
+      for (const [axis, value] of characteristicsMap.entries()) {
         const slogan = getSlogan(axis);
         if (value > 0 && slogan) {
-          selectedSlogan.push({text: slogan, value: value});
+          sloganMap.set(axis, slogan);
         }
       }
 
-      selectedSlogan.sort((a, b) => b.value - a.value);
+      const sortedAxesWithSlogans = [...sloganMap.keys()]
+        .sort((a, b) => characteristicsMap.get(b)! - characteristicsMap.get(a)!);
 
-      this.generatedSlogan = selectedSlogan.slice(0, 3).map(o => o.value).join(" · ");
+      this.generatedSlogan = sortedAxesWithSlogans.slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
 
       // TODO
       // sloganDiv.innerHTML = this.generatedSlogan;

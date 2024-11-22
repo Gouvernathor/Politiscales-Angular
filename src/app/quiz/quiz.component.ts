@@ -7,6 +7,7 @@ import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConf
 import { getAnyAxisId } from '../../services/commonConfigurationService';
 import { getQuestions } from '../../services/questionsConfigurationService';
 import { getAllEnumValues } from 'enum-for';
+import { hashString, RNG } from '../../util/utils';
 
 type Answer = number;
 
@@ -20,8 +21,9 @@ type Answer = number;
 export class QuizComponent {
   localize = getLine;
   loading = true;
+  private readonly rng: RNG = new RNG();
   readonly questions: Readonly<Question[]>;
-  readonly answers: Answer[];
+  readonly answers: Answer[] = [];
   constructor(private route: ActivatedRoute, private router: Router) {
     let questions = getQuestions().slice();
     for (let j, i = questions.length-1; i>0; i--) {
@@ -29,16 +31,27 @@ export class QuizComponent {
       [questions[i], questions[j]] = [questions[j], questions[i]];
     }
     this.questions = questions;
-    this.answers = [];
   }
 
   async ngOnInit() {
+    // manage language
     let lang: string;
-    lang = (await firstValueFrom(this.route.data))["lang"];
-    if (lang) {
+    if (lang = (await firstValueFrom(this.route.data))["lang"]) {
       setLanguage(lang);
     }
 
+    // seed the rng
+    const params = this.route.snapshot.paramMap;
+    const seedstring = params.get("seed");
+    if (seedstring !== null) {
+      let seed = parseInt(seedstring);
+      if (isNaN(seed)) {
+        seed = hashString(seedstring);
+      }
+      this.rng.seed = seed;
+    }
+
+    // loading is done
     this.loading = false;
   }
 

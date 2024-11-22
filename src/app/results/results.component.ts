@@ -6,6 +6,7 @@ import { flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAnyAxes, getIdsAndBaseAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
+import { sorted } from '../../util/utils';
 
 @Component({
   selector: 'app-results',
@@ -92,10 +93,9 @@ export class ResultsComponent {
         }
       }
 
-      const sortedAxesWithSlogans = [...sloganMap.keys()]
-        .sort((a, b) => characteristicsMap.get(b)! - characteristicsMap.get(a)!);
-
-      this.generatedSlogan = sortedAxesWithSlogans.slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
+      // FIXME weird, comparison should probably go the other way around
+      this.generatedSlogan = sorted(sloganMap.keys(), a => characteristicsMap.get(a)!)
+        .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
 
       // TODO
       // sloganDiv.innerHTML = this.generatedSlogan;

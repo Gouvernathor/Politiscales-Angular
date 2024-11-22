@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../unsorted/configuration';
 import { ActivatedRoute } from '@angular/router';
-import { Axis, getAxisFromId, getIdsAndAxes, SpecialAxis } from '../../datamodel/questionsConfiguration';
+import { Axis, bonusThresholds, getAxisId, getIdsAndAxes, SpecialAxis } from '../../datamodel/questionsConfiguration';
+import { flagShapes } from '../../unsorted/flagConfiguration';
 
 @Component({
   selector: 'app-results',
@@ -14,6 +15,21 @@ import { Axis, getAxisFromId, getIdsAndAxes, SpecialAxis } from '../../datamodel
 export class ResultsComponent {
   localize = getLine;
   private axesData = new Map<Axis | SpecialAxis, number>();
+  private axesValues = new Map<string, number>();
+  private static charSlogan = new Map<Axis|SpecialAxis, string>([
+    [Axis.Constructivism, getLine("slogan_constructivism")],
+    [Axis.Internationalism, getLine("slogan_internationalism")],
+    [Axis.Nationalism, getLine("slogan_nationalism")],
+    [Axis.Communism, getLine("slogan_communism")],
+    [Axis.Capitalism, getLine("slogan_capitalism")],
+    [Axis.LaissezFaire, getLine("slogan_laissez_faire")],
+    [Axis.Conservatism, getLine("slogan_conservatism")],
+    [Axis.JusticeSoft, getLine("slogan_justice_soft")],
+    [Axis.JusticeHard, getLine("slogan_justice_hard")],
+    [Axis.Ecology, getLine("slogan_ecology")],
+    [Axis.Revolution, getLine("slogan_revo")],
+  ]);
+  private generatedSlogan = "";
   constructor(private route: ActivatedRoute) {}
 
   async ngOnInit() {
@@ -25,6 +41,11 @@ export class ResultsComponent {
 
     // TODO remplissage de #urlToCopy avec l'url actuel
 
+    this.storeAxesData();
+    this.applyResults();
+  }
+
+  private storeAxesData() {
     const params = this.route.snapshot.paramMap;
     for (const [key, axis] of getIdsAndAxes()) {
       let value = 0;
@@ -37,14 +58,154 @@ export class ResultsComponent {
       }
       this.axesData.set(axis, value);
     }
+  }
 
+  private applyResults() {
+    let bonusEnabled = false;
+    const characteristics = [];
     for (const axis of this.axesData.keys()) {
       if (axis in Axis && axis > 0) {
-        let negativeValue = this.axesData.get(-axis as Axis);
-        let positiveValue = this.axesData.get(axis);
+        // very confusing : the "positive" is the "bad" one, the "0", the one with a negative enum value in this system
+        // should be "left" vs "right", politically and visually
+        let negativeValue = this.axesData.get(axis)!;
+        let positiveValue = this.axesData.get(-axis as Axis)!;
+        const fAxisId = getAxisId(axis)!; // FIXME no, it's just the letter without the 0 or 1
+        this.setAxisValue(`${fAxisId}AxisNeg`, negativeValue);
+        this.setAxisValue(`${fAxisId}AxisPos`, positiveValue);
+        this.setAxisValue(`${fAxisId}AxisMid`, 1-negativeValue-positiveValue);
+        if (negativeValue > positiveValue) {
+          characteristics.push({axis: axis, value: negativeValue});
+        } else {
+          characteristics.push({axis: -axis as Axis, value: positiveValue});
+        }
 
-        // TODO continue
+        this.axesValues.set(fAxisId, positiveValue-negativeValue);
+      } else if (axis in SpecialAxis) {
+        const sAxisId = getAxisId(axis)!;
+        const value = this.axesData.get(axis)!;
+        const thresh = bonusThresholds.get(axis as SpecialAxis)!;
+
+        this.setBonus(`${sAxisId}Bonus`, value, thresh);
+
+        if (value > thresh) {
+          bonusEnabled = true;
+          characteristics.push({axis: axis, value: value});
+        }
       }
+    }
+
+    characteristics.sort((a, b) => b.value - a.value);
+
+    const sloganDiv = null!; //  #slogan element
+    if (sloganDiv) {
+      const selectedSlogan = [];
+      for (const {axis: axis, value: value} of characteristics) {
+        const slogan = ResultsComponent.charSlogan.get(axis);
+        if (value > 0 && slogan) {
+          selectedSlogan.push({text: slogan, value: value});
+        }
+      }
+
+      selectedSlogan.sort((a, b) => b.value - a.value);
+
+      this.generatedSlogan = selectedSlogan.slice(0, 3).map(o => o.value).join(" · ");
+
+      // TODO
+      // sloganDiv.innerHTML = this.generatedSlogan;
+    }
+
+    if (!bonusEnabled) {
+      // TODO
+      // hide #bonusBox
+    }
+
+    // twitterbutton
+    // redditButton
+
+    // TODO
+    // loop on images with onload callback,
+    // call to onImageLoaded when all callbacks are done
+
+    // TODO continue
+  }
+
+  private setAxisValue(id: string, value: number) {
+    // TODO
+    // To be replaced by direct access from the html
+    // gets the #{id} element
+    // gets the #{id}Text element
+    // sets the axis element's width to {100*value}%
+    // sets the text to the same value (rounded to the percent)
+    // sets the text visibility CSS rule to "hidden" or "visible",
+    // based on the offsetWidths of the two elements
+  }
+
+  private setBonus(id: string, value: number, limit: number) {
+    // TODO
+    // To be replaced by direct access from the html
+    // gets the #{id} element
+    // if the value is greater than the limit, set its display to block
+    // and its opacity to value*value
+    // if not, hides the element
+  }
+
+  private findFlagColors() {
+    // TODO
+  }
+
+  private findFlagShape(numColors: number) {
+    // TODO
+  }
+
+  private getCharacteristic(name: never, vmin: never, vmax: never) {
+    // TODO
+  }
+
+  private findFlagSymbol(numColors: number) {
+    // TODO
+  }
+
+  private shareFacebook() {
+    // TODO
+  }
+
+  private onAllImagesLoaded() {
+    const flag: any = null!; // #generatedFlag element
+    if (flag) {
+      const ctx = flag.getContext("2d");
+
+      let spriteX = 256,
+          spriteY = 128,
+          spriteS = 1.0;
+
+      const colors: any[] = this.findFlagColors()!; // TODO type and remove bang
+      const symbolData = this.findFlagSymbol(colors.length);
+
+      const flagId: number = this.findFlagShape(colors.length)!; // TODO type and remove bang
+
+      if (colors.length <= 0) {
+        // TODO maybe do this in findFlagColors() ???
+        colors.push({bgColor: "#fff", fgColor: "#000"});
+      }
+
+      if (flagId < 0) {
+        // TODO
+        // draw a rectangle (0, 0, 512, 256) filled with "#fff"
+      } else {
+        const flagShape = flagShapes[flagId];
+        for (const path of flagShape.shapes) {
+          const numPoints = path.length/2;
+
+          // TODO
+          // draw a SVG path
+        }
+
+        spriteX = flagShape.symbol[0]*512;
+        spriteY = flagShape.symbol[1]*256;
+        spriteS = flagShape.symbol[2];
+      }
+
+      // TODO continue
     }
   }
 }

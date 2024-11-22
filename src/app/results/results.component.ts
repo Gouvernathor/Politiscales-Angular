@@ -36,7 +36,7 @@ export class ResultsComponent {
   }
 
   private storeAxesData() {
-    const params = this.route.snapshot.paramMap;
+    const params = this.route.snapshot.queryParamMap;
     for (const [id, axis] of getIdsAndAnyAxes()) {
       let value = 0;
       const rawVal = params.get(id);

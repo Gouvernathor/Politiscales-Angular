@@ -41,7 +41,7 @@ export class QuizComponent {
     }
 
     // seed the rng
-    const params = this.route.snapshot.paramMap;
+    const params = this.route.snapshot.queryParamMap;
     const seedstring = params.get("seed");
     if (seedstring !== null) {
       let seed = parseInt(seedstring);

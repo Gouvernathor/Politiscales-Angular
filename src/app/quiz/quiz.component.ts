@@ -88,7 +88,7 @@ export class QuizComponent {
 
     const queryParams: Params = {};
     for (const [axis, data] of tally.entries()) {
-      queryParams[getAnyAxisId(axis)!] = (100 * data.val / data.sum).toFixed(0);
+      queryParams[getAnyAxisId(axis)] = (100 * data.val / data.sum).toFixed(0);
     }
     // FIXME the generated queryParams may not match the original
     this.router.navigate(['..', 'results'], {relativeTo: this.route, queryParams: queryParams});

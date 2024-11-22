@@ -31,16 +31,16 @@ const idByAnyAxis = new Map<AnyAxis, string>(
 
 // Access functions
 function getBaseAxisId(axis: BaseAxis) {
-    return idByBaseAxis.get(axis);
+    return idByBaseAxis.get(axis)!;
 }
 function getAxisId(axis: Axis) {
-    return idByAxis.get(axis);
+    return idByAxis.get(axis)!;
 }
 function getSpecialAxisId(axis: SpecialAxis) {
-    return idBySpecialAxis.get(axis);
+    return idBySpecialAxis.get(axis)!;
 }
 export function getAnyAxisId(axis: AnyAxis) {
-    return idByAnyAxis.get(axis);
+    return idByAnyAxis.get(axis)!;
 }
 function getBaseAxisFromId(id: string) {
     return baseAxisById.get(id);

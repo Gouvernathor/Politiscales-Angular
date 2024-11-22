@@ -1,3 +1,4 @@
+// TODO move to commonConfiguration
 export enum Axis {
     Constructivism = 1,
     JusticeSoft,
@@ -27,6 +28,7 @@ export enum SpecialAxis {
     Anarchism,
 }
 
+// TODO leave here
 export interface AnswerValue {
     readonly axis: Axis|SpecialAxis;
     readonly value: number;
@@ -38,6 +40,7 @@ export interface Question {
     readonly valuesNo: AnswerValue[];
 }
 
+// TODO move to commonConfiguration
 const axisById = new Map<string, Axis|SpecialAxis>([
     ["c0", Axis.Constructivism],
     ["c1", Axis.Essentialism],
@@ -78,3 +81,14 @@ export function getAxisFromId(id: string): Axis|SpecialAxis|null {
 export function* getIdsAndAxes(): Iterable<[string, Axis|SpecialAxis]> {
     yield* axisById.entries();
 }
+
+// TODO move to resultsConfiguration
+export const bonusThresholds = new Map<SpecialAxis, number>([
+    [SpecialAxis.Anarchism, .9],
+    [SpecialAxis.Pragmatism, .5],
+    [SpecialAxis.Feminism, .9],
+    [SpecialAxis.Conspiracy, .9],
+    [SpecialAxis.Veganism, .5],
+    [SpecialAxis.Religion, .5],
+    [SpecialAxis.Monarchism, .5],
+]);

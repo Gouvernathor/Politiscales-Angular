@@ -3,9 +3,10 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
-import { Axis, AnyAxis } from '../../datamodel/commonConfiguration';
+import { AnyAxis, BaseAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisId } from '../../services/commonConfigurationService';
 import { getQuestions } from '../../services/questionsConfigurationService';
+import { getAllEnumValues } from 'enum-for';
 
 type Answer = any;
 
@@ -100,17 +101,13 @@ export class QuizComponent {
   }
 
   simulate() {
-    // TODO replace with BaseAxis
-    const randPerAbsAxis = new Map([...new Set(this.questions
-          .flatMap(q => q.valuesYes.map(v => v.axis)) // get all axes or special axes
-          .filter(a => 0 < a && a in Axis) // filter out special axes
-        )] // get unique elements
-      .map(a => [a, Math.random()])); // generate a random number for each axis
+    const randPerBaseAxis = new Map(getAllEnumValues(BaseAxis)
+      .map(a => [a, Math.random()]));
 
     function operate(props: number[], values: AnswerValue[], invert: boolean) {
       for (const value of values) {
         const axis = value.axis;
-        const rand = randPerAbsAxis.get(Math.abs(axis));
+        const rand = randPerBaseAxis.get(Math.abs(axis) as BaseAxis);
         if (rand !== undefined) {
           props.push((invert === (axis > 0)) ? rand : 1-rand);
         }

@@ -1,6 +1,7 @@
 import { getAllEnumValues } from "enum-for";
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from "../datamodel/commonConfiguration";
 
+// Primary cache maps
 const axisById = new Map<string, Axis>(getAllEnumValues(Axis).map(axis =>
     [BaseAxis[Math.abs(axis) as BaseAxis] + (axis > 0 ? "0" : "1"), axis]));
 const specialAxisById = new Map<string, SpecialAxis>([
@@ -12,15 +13,42 @@ const specialAxisById = new Map<string, SpecialAxis>([
     ["reli", SpecialAxis.Religion],
     ["vega", SpecialAxis.Veganism],
 ]);
-const anyAxisIdByAnyAxis = new Map<AnyAxis, string>(
-    [...axisById.entries(), ...specialAxisById.entries()]
-        .map(([id, axis]) => [axis, id])
-);
+// Merges and reverse maps
+const anyAxisById = new Map<string, AnyAxis>(
+    [...axisById.entries(), ...specialAxisById.entries()]);
+const idByAxis = new Map<Axis, string>(
+    [...axisById.entries()]
+        .map(([id, axis]) => [axis, id]));
+const idBySpecialAxis = new Map<SpecialAxis, string>(
+    [...specialAxisById.entries()]
+        .map(([id, axis]) => [axis, id]));
+const idByAnyAxis = new Map<AnyAxis, string>(
+    [...idByAxis.entries(), ...idBySpecialAxis.entries()]);
+
+// Access functions
+function getAxisId(axis: Axis) {
+    return idByAxis.get(axis);
+}
+function getSpecialAxisId(axis: SpecialAxis) {
+    return idBySpecialAxis.get(axis);
+}
 export function getAnyAxisId(axis: AnyAxis): string|null {
-    return anyAxisIdByAnyAxis.get(axis) || null;
+    return idByAnyAxis.get(axis) || null;
+}
+function getAxisFromId(id: string) {
+    return axisById.get(id);
+}
+function getSpecialAxisFromId(id: string) {
+    return specialAxisById.get(id);
 }
 export function getAnyAxisFromId(id: string): AnyAxis|null {
-    return axisById.get(id) || specialAxisById.get(id) || null;
+    return anyAxisById.get(id) || null;
+}
+function* getIdsAndAxes() {
+    yield* axisById.entries();
+}
+function* getIdsAndSpecialAxes() {
+    yield* specialAxisById.entries();
 }
 export function* getIdsAndAnyAxes(): Iterable<[string, AnyAxis]> {
     yield* axisById.entries();

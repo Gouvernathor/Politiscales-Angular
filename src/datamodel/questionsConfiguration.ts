@@ -75,3 +75,6 @@ export function getAxisId(axis: Axis|SpecialAxis): string|null {
 export function getAxisFromId(id: string): Axis|SpecialAxis|null {
     return axisById.get(id) || null;
 }
+export function* getIdsAndAxes(): Iterable<[string, Axis|SpecialAxis]> {
+    yield* axisById.entries();
+}

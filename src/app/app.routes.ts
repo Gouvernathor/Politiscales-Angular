@@ -4,6 +4,7 @@ import { languageIds } from '../unsorted/configuration';
 import { StartComponent } from './start/start.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { HelpComponent } from './help/help.component';
+import { ResultsComponent } from './results/results.component';
 
 export const routes: Routes = [
     // localized paths, each with children: empty, help, quiz, results
@@ -20,10 +21,10 @@ export const routes: Routes = [
                 path: 'quiz',
                 component: QuizComponent,
             },
-            // {
-            //     path: 'results',
-            //     component: ResultsComponent,
-            // },
+            {
+                path: 'results',
+                component: ResultsComponent,
+            },
             {
                 path: '',
                 component: StartComponent,
@@ -38,11 +39,9 @@ export const routes: Routes = [
     },
     // optional, results/quiz (will improvize language too)
 
-    // empty for language selector
+    // empty (or optionally wildcard) for language selector
     {
         path: '',
         component: LanguageSelectorComponent,
     },
-
-    // optional, wildcard redirect to empty
 ];

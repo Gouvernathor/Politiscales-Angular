@@ -4,7 +4,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getIdsAndAnyAxes, getAnyAxisId } from '../../services/commonConfigurationService';
+import { getIdsAndAnyAxes, getIdsAndBaseAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 
 @Component({
@@ -50,36 +50,33 @@ export class ResultsComponent {
   }
 
   private applyResults() {
-    let bonusEnabled = false;
     const characteristics = [];
-    for (const axis of this.axesData.keys()) {
-      if (axis in Axis && axis > 0) {
-        // very confusing : the "positive" is the "bad" one, the "0", the one with a negative enum value in this system
-        // should be "left" vs "right", politically and visually
-        let negativeValue = this.axesData.get(axis)!;
-        let positiveValue = this.axesData.get(-axis as Axis)!;
-        const fAxisId = getAnyAxisId(axis)!; // FIXME no, it's just the letter without the 0 or 1
-        this.setAxisValue(`${fAxisId}AxisNeg`, negativeValue);
-        this.setAxisValue(`${fAxisId}AxisPos`, positiveValue);
-        this.setAxisValue(`${fAxisId}AxisMid`, 1-negativeValue-positiveValue);
-        if (negativeValue > positiveValue) {
-          characteristics.push({axis: axis, value: negativeValue});
-        } else {
-          characteristics.push({axis: -axis as Axis, value: positiveValue});
-        }
+    for (const [bid, baseAxis] of getIdsAndBaseAxes()) {
+      // very confusing : the "positive" is the "bad" one, the "0", the one with a negative enum value in this system
+      // should be "left" vs "right", from both political and visual points of view
+      let negativeValue = this.axesData.get(+baseAxis as Axis)!;
+      let positiveValue = this.axesData.get(-baseAxis as Axis)!;
+      this.setAxisValue(`${bid}AxisNeg`, negativeValue);
+      this.setAxisValue(`${bid}AxisPos`, positiveValue);
+      this.setAxisValue(`${bid}AxisMid`, 1-negativeValue-positiveValue);
 
-        this.axesValues.set(fAxisId, positiveValue-negativeValue);
-      } else if (axis in SpecialAxis) {
-        const sAxisId = getAnyAxisId(axis)!;
-        const value = this.axesData.get(axis)!;
-        const thresh = getBonusThreshold(axis as SpecialAxis);
+      if (negativeValue<positiveValue) {
+        characteristics.push({axis: +baseAxis as Axis, value: negativeValue});
+      } else {
+        characteristics.push({axis: -baseAxis as Axis, value: positiveValue});
+      }
+    }
 
-        this.setBonus(`${sAxisId}Bonus`, value, thresh);
+    let bonusEnabled = false;
+    for (const [id, axis] of getIdsAndSpecialAxes()) {
+      const value = this.axesData.get(axis)!;
+      const thresh = getBonusThreshold(axis as SpecialAxis);
 
-        if (value > thresh) {
-          bonusEnabled = true;
-          characteristics.push({axis: axis, value: value});
-        }
+      this.setBonus(`${id}Bonus`, value, thresh);
+
+      if (value > thresh) {
+        bonusEnabled = true;
+        characteristics.push({axis: axis, value: value});
       }
     }
 

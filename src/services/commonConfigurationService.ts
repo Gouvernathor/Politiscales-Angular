@@ -54,14 +54,14 @@ function getSpecialAxisFromId(id: string) {
 export function getAnyAxisFromId(id: string) {
     return anyAxisById.get(id);
 }
-function* getIdsAndBaseAxes() {
+export function* getIdsAndBaseAxes() {
     // yield* baseAxisById.entries();
     yield* getAllEnumEntries(BaseAxis); // presumably faster
 }
 function* getIdsAndAxes() {
     yield* axisById.entries();
 }
-function* getIdsAndSpecialAxes() {
+export function* getIdsAndSpecialAxes() {
     yield* specialAxisById.entries();
 }
 export function* getIdsAndAnyAxes() {

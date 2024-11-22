@@ -1,23 +1,9 @@
-import { Axis, SpecialAxis } from "../datamodel/commonConfiguration";
+import { getAllEnumValues } from "enum-for";
+import { AnyAxis, Axis, BaseAxis, SpecialAxis } from "../datamodel/commonConfiguration";
 
-const axisById = new Map<string, Axis|SpecialAxis>([
-    ["c0", Axis.Constructivism],
-    ["c1", Axis.Essentialism],
-    ["b0", Axis.Internationalism],
-    ["b1", Axis.Nationalism],
-    ["p0", Axis.Communism],
-    ["p1", Axis.Capitalism],
-    ["m0", Axis.Regulationnism],
-    ["m1", Axis.LaissezFaire],
-    ["s0", Axis.Progressivism],
-    ["s1", Axis.Conservatism],
-    ["j0", Axis.JusticeSoft],
-    ["j1", Axis.JusticeHard],
-    ["e0", Axis.Ecology],
-    ["e1", Axis.Productivism],
-    ["t0", Axis.Revolution],
-    ["t1", Axis.Reformism],
-
+const axisById = new Map<string, Axis>(getAllEnumValues(Axis).map(axis =>
+    [BaseAxis[Math.abs(axis) as BaseAxis] + (axis > 0 ? "0" : "1"), axis]));
+const specialAxisById = new Map<string, SpecialAxis>([
     ["femi", SpecialAxis.Feminism],
     ["anar", SpecialAxis.Anarchism],
     ["comp", SpecialAxis.Conspiracy],
@@ -26,17 +12,17 @@ const axisById = new Map<string, Axis|SpecialAxis>([
     ["reli", SpecialAxis.Religion],
     ["vega", SpecialAxis.Veganism],
 ]);
-export function getAxisId(axis: Axis|SpecialAxis): string|null {
-    for (const [id, value] of axisById.entries()) {
-        if (value === axis) {
-            return id;
-        }
-    }
-    return null;
+const anyAxisIdByAnyAxis = new Map<AnyAxis, string>(
+    [...axisById.entries(), ...specialAxisById.entries()]
+        .map(([id, axis]) => [axis, id])
+);
+export function getAnyAxisId(axis: AnyAxis): string|null {
+    return anyAxisIdByAnyAxis.get(axis) || null;
 }
-export function getAxisFromId(id: string): Axis|SpecialAxis|null {
-    return axisById.get(id) || null;
+export function getAnyAxisFromId(id: string): AnyAxis|null {
+    return axisById.get(id) || specialAxisById.get(id) || null;
 }
-export function* getIdsAndAxes(): Iterable<[string, Axis|SpecialAxis]> {
+export function* getIdsAndAnyAxes(): Iterable<[string, AnyAxis]> {
     yield* axisById.entries();
+    yield* specialAxisById.entries();
 }

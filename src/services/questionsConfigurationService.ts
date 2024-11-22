@@ -1,6 +1,6 @@
 import rawQuestions from '../assets/questions.json';
 import { AnswerValue, Question } from "../datamodel/questionsConfiguration";
-import { getAxisFromId } from "./commonConfigurationService";
+import { getAnyAxisFromId } from "./commonConfigurationService";
 
 type RawAnswerValue = {
     axis: string,
@@ -13,7 +13,7 @@ type RawQuestion = Omit<Question, "valuesYes"|"valuesNo"> & {
 
 function valueMapper(value: RawAnswerValue): AnswerValue {
     return {
-        axis: getAxisFromId(value.axis)!,
+        axis: getAnyAxisFromId(value.axis)!,
         value: value.value,
     };
 }

@@ -4,7 +4,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getIdsAndAxes, getAxisId } from '../../services/commonConfigurationService';
+import { getIdsAndAnyAxes, getAnyAxisId } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 
 @Component({
@@ -36,7 +36,7 @@ export class ResultsComponent {
 
   private storeAxesData() {
     const params = this.route.snapshot.paramMap;
-    for (const [key, axis] of getIdsAndAxes()) {
+    for (const [key, axis] of getIdsAndAnyAxes()) {
       let value = 0;
       const rawVal = params.get(key);
       if (rawVal !== null) {
@@ -58,7 +58,7 @@ export class ResultsComponent {
         // should be "left" vs "right", politically and visually
         let negativeValue = this.axesData.get(axis)!;
         let positiveValue = this.axesData.get(-axis as Axis)!;
-        const fAxisId = getAxisId(axis)!; // FIXME no, it's just the letter without the 0 or 1
+        const fAxisId = getAnyAxisId(axis)!; // FIXME no, it's just the letter without the 0 or 1
         this.setAxisValue(`${fAxisId}AxisNeg`, negativeValue);
         this.setAxisValue(`${fAxisId}AxisPos`, positiveValue);
         this.setAxisValue(`${fAxisId}AxisMid`, 1-negativeValue-positiveValue);
@@ -70,7 +70,7 @@ export class ResultsComponent {
 
         this.axesValues.set(fAxisId, positiveValue-negativeValue);
       } else if (axis in SpecialAxis) {
-        const sAxisId = getAxisId(axis)!;
+        const sAxisId = getAnyAxisId(axis)!;
         const value = this.axesData.get(axis)!;
         const thresh = getBonusThreshold(axis as SpecialAxis);
 
@@ -197,4 +197,8 @@ export class ResultsComponent {
       // TODO continue
     }
   }
+
+  // TODO extract uses for the flagConfigurationService constants
+  // and export them as functions only, protecting the arrays
+  // also add typing in datamodel/flagConfiguration
 }

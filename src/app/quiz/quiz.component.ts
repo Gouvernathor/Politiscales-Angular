@@ -3,8 +3,8 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { firstValueFrom } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
-import { Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getAxisId } from '../../services/commonConfigurationService';
+import { Axis, AnyAxis } from '../../datamodel/commonConfiguration';
+import { getAnyAxisId } from '../../services/commonConfigurationService';
 import { getQuestions } from '../../services/questionsConfigurationService';
 
 type Answer = any;
@@ -65,7 +65,7 @@ export class QuizComponent {
   gotoResults() {
     this.loading = true;
 
-    const axes = new Map<Axis|SpecialAxis, {val: number, sum: number}>();
+    const axes = new Map<AnyAxis, {val: number, sum: number}>();
 
     function tallyValues(values: AnswerValue[], toggledAnswer: number) {
       for (const value of values) {
@@ -94,12 +94,13 @@ export class QuizComponent {
 
     const queryParams: Params = {};
     for (const [axis, data] of axes.entries()) {
-      queryParams[getAxisId(axis)!] = (100 * data.val / data.sum).toFixed(0);
+      queryParams[getAnyAxisId(axis)!] = (100 * data.val / data.sum).toFixed(0);
     }
     this.router.navigate(['..', 'results'], {relativeTo: this.route, queryParams: queryParams});
   }
 
   simulate() {
+    // TODO replace with BaseAxis
     const randPerAbsAxis = new Map([...new Set(this.questions
           .flatMap(q => q.valuesYes.map(v => v.axis)) // get all axes or special axes
           .filter(a => 0 < a && a in Axis) // filter out special axes

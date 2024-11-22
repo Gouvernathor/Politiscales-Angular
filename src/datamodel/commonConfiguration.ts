@@ -37,3 +37,5 @@ export enum SpecialAxis {
     Veganism,
     Anarchism,
 }
+
+export type AnyAxis = Axis|SpecialAxis;

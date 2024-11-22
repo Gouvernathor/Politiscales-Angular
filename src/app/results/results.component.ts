@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
-import { Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
+import { AnyAxis, Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAxes, getAxisId } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 
@@ -16,7 +16,7 @@ import { getBonusThreshold, getSlogan } from '../../services/resultsConfiguratio
 })
 export class ResultsComponent {
   localize = getLine;
-  private axesData = new Map<Axis | SpecialAxis, number>();
+  private axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<string, number>();
   private generatedSlogan = "";
   constructor(private route: ActivatedRoute) {}

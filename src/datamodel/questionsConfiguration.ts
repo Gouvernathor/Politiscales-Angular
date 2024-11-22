@@ -1,7 +1,7 @@
-import { Axis, SpecialAxis } from "./commonConfiguration";
+import { AnyAxis } from "./commonConfiguration";
 
 export interface AnswerValue {
-    readonly axis: Axis|SpecialAxis;
+    readonly axis: AnyAxis;
     readonly value: number;
 }
 

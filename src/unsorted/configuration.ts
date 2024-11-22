@@ -17,7 +17,7 @@ let currentLanguage: string|null = null;
  * Otherwise, tries to match the input string with any of the existing languages.
  * If none match, the first of the languages in languages.json is returned.
  */
-function getLanguageOrDefault(lang?: string) {
+export function getLanguageOrDefault(lang?: string) {
     if (lang === undefined) {
         if (currentLanguage !== null) {
             return currentLanguage;

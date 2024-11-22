@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { getLine, languageIds } from '../unsorted/configuration';
+import { getLanguageOrDefault, getLine, languageIds } from '../unsorted/configuration';
 
 @Component({
   selector: 'app-root',
@@ -29,5 +29,10 @@ export class AppComponent {
 
   gotoLangSelect() {
     this.router.navigate(['']);
+  }
+
+  gotoStart() {
+    // go to /xx_XX
+    this.router.navigate([getLanguageOrDefault()]);
   }
 }

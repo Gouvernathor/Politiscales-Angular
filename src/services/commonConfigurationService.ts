@@ -1,7 +1,8 @@
-import { getAllEnumValues } from "enum-for";
+import { getAllEnumEntries, getAllEnumValues } from "enum-for";
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from "../datamodel/commonConfiguration";
 
 // Primary cache maps
+const baseAxisById = new Map<string, BaseAxis>(getAllEnumEntries(BaseAxis));
 const axisById = new Map<string, Axis>(getAllEnumValues(Axis).map(axis =>
     [BaseAxis[Math.abs(axis) as BaseAxis] + (axis > 0 ? "0" : "1"), axis]));
 const specialAxisById = new Map<string, SpecialAxis>([
@@ -16,6 +17,9 @@ const specialAxisById = new Map<string, SpecialAxis>([
 // Merges and reverse maps
 const anyAxisById = new Map<string, AnyAxis>(
     [...axisById.entries(), ...specialAxisById.entries()]);
+const idByBaseAxis = new Map<BaseAxis, string>(
+    [...baseAxisById.entries()]
+        .map(([id, axis]) => [axis, id]));
 const idByAxis = new Map<Axis, string>(
     [...axisById.entries()]
         .map(([id, axis]) => [axis, id]));
@@ -26,6 +30,9 @@ const idByAnyAxis = new Map<AnyAxis, string>(
     [...idByAxis.entries(), ...idBySpecialAxis.entries()]);
 
 // Access functions
+function getBaseAxisId(axis: BaseAxis) {
+    return idByBaseAxis.get(axis);
+}
 function getAxisId(axis: Axis) {
     return idByAxis.get(axis);
 }
@@ -35,6 +42,9 @@ function getSpecialAxisId(axis: SpecialAxis) {
 export function getAnyAxisId(axis: AnyAxis) {
     return idByAnyAxis.get(axis);
 }
+function getBaseAxisFromId(id: string) {
+    return baseAxisById.get(id);
+}
 function getAxisFromId(id: string) {
     return axisById.get(id);
 }
@@ -43,6 +53,10 @@ function getSpecialAxisFromId(id: string) {
 }
 export function getAnyAxisFromId(id: string) {
     return anyAxisById.get(id);
+}
+function* getIdsAndBaseAxes() {
+    // yield* baseAxisById.entries();
+    yield* getAllEnumEntries(BaseAxis); // presumably faster
 }
 function* getIdsAndAxes() {
     yield* axisById.entries();

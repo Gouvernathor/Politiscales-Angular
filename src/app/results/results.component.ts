@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { Axis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAxes, getAxisId } from '../../services/commonConfigurationService';
-import { bonusThresholds } from '../../services/resultsConfigurationService';
+import { bonusThresholds, getSlogan } from '../../services/resultsConfigurationService';
 
 @Component({
   selector: 'app-results',
@@ -18,19 +18,6 @@ export class ResultsComponent {
   localize = getLine;
   private axesData = new Map<Axis | SpecialAxis, number>();
   private axesValues = new Map<string, number>();
-  private static charSlogan = new Map<Axis|SpecialAxis, string>([
-    [Axis.Constructivism, getLine("slogan_constructivism")],
-    [Axis.Internationalism, getLine("slogan_internationalism")],
-    [Axis.Nationalism, getLine("slogan_nationalism")],
-    [Axis.Communism, getLine("slogan_communism")],
-    [Axis.Capitalism, getLine("slogan_capitalism")],
-    [Axis.LaissezFaire, getLine("slogan_laissez_faire")],
-    [Axis.Conservatism, getLine("slogan_conservatism")],
-    [Axis.JusticeSoft, getLine("slogan_justice_soft")],
-    [Axis.JusticeHard, getLine("slogan_justice_hard")],
-    [Axis.Ecology, getLine("slogan_ecology")],
-    [Axis.Revolution, getLine("slogan_revo")],
-  ]);
   private generatedSlogan = "";
   constructor(private route: ActivatedRoute) {}
 
@@ -102,7 +89,7 @@ export class ResultsComponent {
     if (sloganDiv) {
       const selectedSlogan = [];
       for (const {axis: axis, value: value} of characteristics) {
-        const slogan = ResultsComponent.charSlogan.get(axis);
+        const slogan = getSlogan(axis);
         if (value > 0 && slogan) {
           selectedSlogan.push({text: slogan, value: value});
         }

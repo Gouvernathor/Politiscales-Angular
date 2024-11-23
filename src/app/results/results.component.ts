@@ -4,7 +4,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { flagColors, flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getIdsAndAnyAxes } from '../../services/commonConfigurationService';
+import { getAnyAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
@@ -118,16 +118,19 @@ export class ResultsComponent {
 
       for (const cond of flagColor.cond) {
         let charfound = false;
-        for (const [axis, value] of this.characteristicsMap.entries()) {
-          if ([Axis[axis], SpecialAxis[axis]].includes(cond.name)) {
+        const axis = getAnyAxisFromId(cond.name);
+        if (axis !== undefined) {
+          const value = this.characteristicsMap.get(axis);
+          if (value !== undefined) {
             charfound = true;
-            if (value < cond.vmin || value > cond.vmax) {
+            if (cond.vmin < value && value < cond.vmax) {
+              if (!mainValueFound) {
+                mainValueFound = true;
+                mainValue = value;
+              }
+            } else {
               accepted = false;
-            } else if (!mainValueFound) {
-              mainValueFound = true;
-              mainValue = value;
             }
-            break;
           }
         }
 

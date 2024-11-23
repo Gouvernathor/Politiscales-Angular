@@ -19,6 +19,7 @@ import { getAllEnumValues } from 'enum-for';
 })
 export class ResultsComponent {
   localize = getLine;
+  getBonusThreshold = getBonusThreshold;
   BaseAxis = BaseAxis;
   Axis = Axis;
   SpecialAxis = SpecialAxis;
@@ -73,9 +74,7 @@ export class ResultsComponent {
     let bonusEnabled = false;
     for (const [id, axis] of getIdsAndSpecialAxes()) {
       const value = this.axesData.get(axis)!;
-      const thresh = getBonusThreshold(axis as SpecialAxis);
-
-      this.setBonus(`${id}Bonus`, value, thresh);
+      const thresh = getBonusThreshold(axis);
 
       if (value > thresh) {
         bonusEnabled = true;
@@ -114,15 +113,6 @@ export class ResultsComponent {
     // call to onImageLoaded when all callbacks are done
 
     // TODO continue
-  }
-
-  private setBonus(id: string, value: number, limit: number) {
-    // TODO
-    // To be replaced by direct access from the html
-    // gets the #{id} element
-    // if the value is greater than the limit, set its display to block
-    // and its opacity to value*value
-    // if not, hides the element
   }
 
   private findFlagColors() {

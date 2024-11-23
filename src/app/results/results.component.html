@@ -289,7 +289,8 @@
 <div id="bonusBox">
     <h2>{{localize("result_special")}}</h2>
 
-    <div id="anarBonus" class="description">
+    @if (axesData.get(SpecialAxis.Anarchism)! > getBonusThreshold(SpecialAxis.Anarchism)) {
+    <div id="anarBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Anarchism)!*axesData.get(SpecialAxis.Anarchism)!">
         <div class="descImg"><img src="images/anarchism.png" [alt]="localize('anarchism')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_anarchism")}}</p>
@@ -298,8 +299,10 @@
             }
         </div>
     </div>
+    }
 
-    <div id="pragBonus" class="description">
+    @if (axesData.get(SpecialAxis.Pragmatism)! > getBonusThreshold(SpecialAxis.Pragmatism)) {
+    <div id="pragBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Pragmatism)!*axesData.get(SpecialAxis.Pragmatism)!">
         <div class="descImg"><img src="images/pragmatism.png" [alt]="localize('pragmatism')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_pragmatism")}}</p>
@@ -308,8 +311,10 @@
             }
         </div>
     </div>
+    }
 
-    <div id="femiBonus" class="description">
+    @if (axesData.get(SpecialAxis.Feminism)! > getBonusThreshold(SpecialAxis.Feminism)) {
+    <div id="femiBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Feminism)!*axesData.get(SpecialAxis.Feminism)!">
         <div class="descImg"><img src="images/feminism.png" [alt]="localize('feminism')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_feminism")}}</p>
@@ -318,8 +323,10 @@
             }
         </div>
     </div>
+    }
 
-    <div id="compBonus" class="description">
+    @if (axesData.get(SpecialAxis.Conspiracy)! > getBonusThreshold(SpecialAxis.Conspiracy)) {
+    <div id="compBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Conspiracy)!*axesData.get(SpecialAxis.Conspiracy)!">
         <div class="descImg"><img src="images/complotism.png" [alt]="localize('complotism')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_complotism")}}</p>
@@ -328,8 +335,10 @@
             }
         </div>
     </div>
+    }
 
-    <div id="vegaBonus" class="description">
+    @if (axesData.get(SpecialAxis.Veganism)! > getBonusThreshold(SpecialAxis.Veganism)) {
+    <div id="vegaBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Veganism)!*axesData.get(SpecialAxis.Veganism)!">
         <div class="descImg"><img src="images/veganism.png" [alt]="localize('veganism')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_veganism")}}</p>
@@ -338,8 +347,10 @@
             }
         </div>
     </div>
+    }
 
-    <div id="monaBonus" class="description">
+    @if (axesData.get(SpecialAxis.Monarchism)! > getBonusThreshold(SpecialAxis.Monarchism)) {
+    <div id="monaBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Monarchism)!*axesData.get(SpecialAxis.Monarchism)!">
         <div class="descImg"><img src="images/monarchism.png" [alt]="localize('monarchism')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_monarchism")}}</p>
@@ -348,8 +359,10 @@
             }
         </div>
     </div>
+    }
 
-    <div id="reliBonus" class="description">
+    @if (axesData.get(SpecialAxis.Religion)! > getBonusThreshold(SpecialAxis.Religion)) {
+    <div id="reliBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Religion)!*axesData.get(SpecialAxis.Religion)!">
         <div class="descImg"><img src="images/religion.png" [alt]="localize('religion')"/></div>
         <div class="descTextMono">
             <p>{{localize("result_religion")}}</p>
@@ -358,9 +371,10 @@
             }
         </div>
     </div>
+    }
     <!-- TODO reorder these elements dynamically depending on score -->
 </div>
 
 <div class="navButtons">
-    <a class="button" href="./quiz">{{localize("result_btn_redo")}}</a>
+    <a class="button" (click)="gotoQuiz()">{{localize("result_btn_redo")}}</a>
 </div>

@@ -53,21 +53,19 @@ export class ResultsComponent {
   private applyResults() {
     const characteristicsMap = new Map<AnyAxis, number>(); // similar to axesData but without the minor direction of each base axis (favoring "bad" directions)
     for (const [bid, baseAxis] of getIdsAndBaseAxes()) {
-      // very confusing : the "positive" is the "bad" one, the "0", the one with a negative enum value in this system
-      // should be "left" vs "right", from both political and visual points of view
-      const negativeValue = this.axesData.get(+baseAxis as Axis)!;
-      const positiveValue = this.axesData.get(-baseAxis as Axis)!;
-      this.setAxisValue(`${bid}AxisNeg`, negativeValue);
-      this.setAxisValue(`${bid}AxisPos`, positiveValue);
-      this.setAxisValue(`${bid}AxisMid`, 1-negativeValue-positiveValue);
+      const leftValue = this.axesData.get(+baseAxis as Axis)!;
+      const rightValue = this.axesData.get(-baseAxis as Axis)!;
+      this.setAxisValue(`${bid}AxisLeft`, leftValue);
+      this.setAxisValue(`${bid}AxisRight`, rightValue);
+      this.setAxisValue(`${bid}AxisMid`, 1-leftValue-rightValue);
 
-      if (negativeValue<positiveValue) {
-        characteristicsMap.set(+baseAxis, negativeValue);
+      if (leftValue<rightValue) {
+        characteristicsMap.set(+baseAxis, leftValue);
       } else {
-        characteristicsMap.set(-baseAxis, positiveValue);
+        characteristicsMap.set(-baseAxis, rightValue);
       }
 
-      this.axesValues.set(baseAxis, positiveValue-negativeValue);
+      this.axesValues.set(baseAxis, rightValue-leftValue);
     }
 
     let bonusEnabled = false;

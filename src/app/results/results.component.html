@@ -286,6 +286,7 @@
 
 <br/>
 
+@if (bonusEnabled) {
 <div id="bonusBox">
     <h2>{{localize("result_special")}}</h2>
 
@@ -374,6 +375,7 @@
     }
     <!-- TODO reorder these elements dynamically depending on score -->
 </div>
+}
 
 <div class="navButtons">
     <a class="button" (click)="gotoQuiz()">{{localize("result_btn_redo")}}</a>

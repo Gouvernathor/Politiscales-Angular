@@ -28,6 +28,7 @@ export class ResultsComponent {
   axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<BaseAxis, number>();
   generatedSlogan = "";
+  bonusEnabled = false; // TODO make it a property on the SpecialAxis storage (once fully segregated)
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit() {
@@ -75,13 +76,12 @@ export class ResultsComponent {
       this.axesValues.set(baseAxis, rightValue-leftValue);
     }
 
-    let bonusEnabled = false;
     for (const axis of getAllEnumValues(SpecialAxis)) {
       const value = this.axesData.get(axis)!;
       const thresh = getBonusThreshold(axis);
 
       if (value > thresh) {
-        bonusEnabled = true;
+        this.bonusEnabled = true;
         characteristicsMap.set(axis, value);
       }
     }
@@ -96,11 +96,6 @@ export class ResultsComponent {
 
     this.generatedSlogan = sorted(sloganMap.keys(), a => -characteristicsMap.get(a)!)
       .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
-
-    if (!bonusEnabled) {
-      // TODO
-      // hide #bonusBox
-    }
 
     // twitterbutton
     // redditButton

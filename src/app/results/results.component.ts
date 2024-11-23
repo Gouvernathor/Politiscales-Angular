@@ -114,49 +114,39 @@ export class ResultsComponent {
    * Each has a list of conditions : an acceptable range of values for an AnyAxis.
    * All of the conditions must be met for the color to be kept.
    * The first condition of a list of condition gives the main axis of the color.
-   * The remaining colors are then sorted by the (presumably decreasing) value of that axis.
+   * The remaining colors are then sorted by the (presumably decreasing) value of the main axis of the color.
+   * All provided objects are guaranteed to be created in the function with no possible side-effect.
    */
   private findFlagColors(): {bgColor: string, fgColor: string}[] {
-    const colors: {bgColor: string, fgColor: string, value: number}[] = [];
-    for (const flagColor of flagColors) {
-      let accepted = true;
-
-      let mainValue = 0,
-          mainValueFound = false;
-
+    const me = this;
+    function getColorMainValue(flagColor: typeof flagColors[0]) {
+      let mainValue = undefined;
       for (const cond of flagColor.cond) {
-        let charfound = false;
         const axis = getAnyAxisFromId(cond.name);
         if (axis !== undefined) {
-          const value = this.characteristicsMap.get(axis);
+          const value = me.characteristicsMap.get(axis);
           if (value !== undefined) {
-            charfound = true;
             if (cond.vmin < value && value < cond.vmax) {
-              if (!mainValueFound) {
-                mainValueFound = true;
+              if (mainValue === undefined) {
                 mainValue = value;
               }
             } else {
-              accepted = false;
+              return;
             }
+          } else {
+            return;
           }
-        }
-
-        if (!charfound) {
-          accepted = false;
-        }
-
-        if (!accepted) {
-          break;
+        } else {
+          return;
         }
       }
-
-      if (accepted) {
-        colors.push({bgColor: flagColor.bgColor, fgColor: flagColor.fgColor, value: mainValue});
-      }
+      return mainValue;
     }
 
-    return colors.sort((a, b) => b.value-a.value);
+    return flagColors
+      .map(fc => ({bgColor: fc.bgColor, fgColor: fc.fgColor, value: getColorMainValue(fc)}))
+      .filter(fc => fc.value !== undefined)
+      .sort((a, b) => b.value!-a.value!);
   }
 
   private findFlagShape(numColors: number) {

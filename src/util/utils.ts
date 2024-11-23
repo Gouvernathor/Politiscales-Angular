@@ -91,7 +91,7 @@ export function hashString(str: string): number {
  * This works the same way comparison works on tuples and lists in Python.
  * (This has nothing to do with the arrays elements being sorted inside the arrays.)
  */
-export function areArraysOrdered<V, T extends (string|number)>(a: T[], b: T[]): boolean {
+export function areArraysOrdered<T extends (string|number)>(a: T[], b: T[]): boolean {
     const minLength = Math.min(a.length, b.length);
     for (let i=0; i<minLength; i++) {
         if (a[i] !== b[i]) {

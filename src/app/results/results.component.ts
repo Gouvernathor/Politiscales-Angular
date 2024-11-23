@@ -130,15 +130,11 @@ export class ResultsComponent {
               if (mainValue === undefined) {
                 mainValue = value;
               }
-            } else {
-              return;
+              continue;
             }
-          } else {
-            return;
           }
-        } else {
-          return;
         }
+        return;
       }
       return mainValue;
     }

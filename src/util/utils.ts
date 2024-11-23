@@ -47,7 +47,7 @@ export class RNG {
      * @param seed integer between 0 and 2^31 - 1 ; if undefined, generates it from Math.random()
      */
     set seed(seed: number|undefined) {
-        this.state = seed ? seed : Math.floor(Math.random() * (this.m - 1));
+        this.state = seed ? Math.abs(seed) : Math.floor(Math.random() * (this.m - 1));
     }
     /**
      * @returns a number presumably in [[0, 2**31[[

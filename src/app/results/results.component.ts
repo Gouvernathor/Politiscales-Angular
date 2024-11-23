@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAnyAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
@@ -26,7 +26,7 @@ export class ResultsComponent {
   axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<BaseAxis, number>();
   private generatedSlogan = "";
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit() {
     let lang: string;
@@ -181,6 +181,10 @@ export class ResultsComponent {
 
   debug() {
     // TODO (maybe)
+  }
+
+  gotoQuiz() {
+    this.router.navigate(['..', 'quiz'], {relativeTo: this.route});
   }
 
   // TODO extract uses for the flagConfigurationService constants

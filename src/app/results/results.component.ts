@@ -97,7 +97,7 @@ export class ResultsComponent {
       this.generatedSlogan = sorted(sloganMap.keys(), a => characteristicsMap.get(a)!)
         .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
 
-      // TODO
+      // TODO in the html file
       // sloganDiv.innerHTML = this.generatedSlogan;
     }
 
@@ -152,7 +152,11 @@ export class ResultsComponent {
     // TODO
   }
 
-  private shareFacebook() {
+  shareLink() {
+    // TODO
+  }
+
+  shareFacebook() {
     // TODO
   }
 
@@ -194,6 +198,10 @@ export class ResultsComponent {
 
       // TODO continue
     }
+  }
+
+  debug() {
+    // TODO (maybe)
   }
 
   // TODO extract uses for the flagConfigurationService constants

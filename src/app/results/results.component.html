@@ -1,1 +1,189 @@
-<p>results works!</p>
+<h2>{{localize("result_title")}}</h2>
+
+<p class="simpleText">{{localize("result_desc")}}</p>
+
+<div class="generatedResultsDecorations"><canvas id="generatedResults" width="800" height="1200"></canvas></div>
+
+<div class="shareText">{{localize("result_share")}}</div>
+<div class="navButtons">
+    <a class="button buttonTwitter" id="buttonTwitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a class="button buttonFacebook" (click)="shareFacebook()"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a class="button buttonReddit" id="buttonReddit"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+    <a class="button buttonLink" (click)="shareLink()" id="buttonLink"><i class="fa fa-link" aria-hidden="true"></i></a>
+</div>
+
+<hr/>
+
+<div class="flagNavigation">
+    <canvas id="generatedFlag" width="512" height="256"></canvas>
+    <div id="slogan"></div>
+</div>
+
+<div class="columnContainer">
+    <div class="columnLeft">
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("constructivism")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("essentialism")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/constructivism.png" [alt]="localize('constructivism')"/></div>
+        <div class="axisProgress">
+            <div id="cAxisNeg" class="axisSubProgress axisConstructivism"><span id="cAxisNegText"></span></div>
+            <div id="cAxisMid" class="axisSubProgress axisNeutral"><span id="cAxisMidText"></span></div>
+            <div id="cAxisPos" class="axisSubProgress axisEssentialism"><span id="cAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/essentialism.png" [alt]="localize('essentialism')"/></div>
+        @if (false) {
+            <input type="range" id="debug_c" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_c" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("justice_soft")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("justice_hard")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/justice_soft.png" [alt]="localize('justice_soft')"/></div>
+        <div class="axisProgress">
+            <div id="jAxisNeg" class="axisSubProgress axisJusticeSoft"><span id="jAxisNegText"></span></div>
+            <div id="jAxisMid" class="axisSubProgress axisNeutral"><span id="jAxisMidText"></span></div>
+            <div id="jAxisPos" class="axisSubProgress axisJusticeHard"><span id="jAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/justice_hard.png" [alt]="localize('justice_hard')"/></div>
+        @if (false) {
+            <input type="range" id="debug_j" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_j" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("progressivism")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("conservatism")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/progressivism.png" [alt]="localize('progressivism')"/></div>
+        <div class="axisProgress">
+            <div id="sAxisNeg" class="axisSubProgress axisProgressivism"><span id="sAxisNegText"></span></div>
+            <div id="sAxisMid" class="axisSubProgress axisNeutral"><span id="sAxisMidText"></span></div>
+            <div id="sAxisPos" class="axisSubProgress axisConservatism"><span id="sAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/conservatism.png" [alt]="localize('conservatism')"/></div>
+        @if (false) {
+            <input type="range" id="debug_s" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_s" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("internationalism")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("nationalism")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/internationalism.png" [alt]="localize('internationalism')"/></div>
+        <div class="axisProgress">
+            <div id="bAxisNeg" class="axisSubProgress axisInternationalism"><span id="bAxisNegText"></span></div>
+            <div id="bAxisMid" class="axisSubProgress axisNeutral"><span id="bAxisMidText"></span></div>
+            <div id="bAxisPos" class="axisSubProgress axisNationalism"><span id="bAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/nationalism.png" [alt]="localize('nationalism')"/></div>
+        @if (false) {
+            <input type="range" id="debug_b" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_b" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+    </div>
+    <div class="columnRight">
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("communism")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("capitalism")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/communism.png" [alt]="localize('communism')"/></div>
+        <div class="axisProgress">
+            <div id="pAxisNeg" class="axisSubProgress axisCommunism"><span id="pAxisNegText"></span></div>
+            <div id="pAxisMid" class="axisSubProgress axisNeutral"><span id="pAxisMidText"></span></div>
+            <div id="pAxisPos" class="axisSubProgress axisCapitalism"><span id="pAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/capitalism.png" [alt]="localize('capitalism')"/></div>
+        @if (false) {
+            <input type="range" id="debug_p" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_p" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("regulationism")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("laissez_faire")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/regulation.png" [alt]="localize('regulationism')"/></div>
+        <div class="axisProgress">
+            <div id="mAxisNeg" class="axisSubProgress axisRegulation"><span id="mAxisNegText"></span></div>
+            <div id="mAxisMid" class="axisSubProgress axisNeutral"><span id="mAxisMidText"></span></div>
+            <div id="mAxisPos" class="axisSubProgress axisLaissezFaire"><span id="mAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/laissezfaire.png" [alt]="localize('laissez_faire')"/></div>
+        @if (false) {
+            <input type="range" id="debug_m" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_m" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("ecology")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("productivism")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/ecology.png" [alt]="localize('ecology')"/></div>
+        <div class="axisProgress">
+            <div id="eAxisNeg" class="axisSubProgress axisEcology"><span id="eAxisNegText"></span></div>
+            <div id="eAxisMid" class="axisSubProgress axisNeutral"><span id="eAxisMidText"></span></div>
+            <div id="eAxisPos" class="axisSubProgress axisProductivism"><span id="eAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/productivism.png" [alt]="localize('productivism')"/></div>
+        @if (false) {
+            <input type="range" id="debug_e" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_e" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+        <div class="axisDesc">
+            <div class="axisDescLeft">
+                <p>{{localize("revo")}}</p>
+            </div>
+            <div class="axisDescRight">
+                <p>{{localize("refo")}}</p>
+            </div>
+        </div>
+        <div class="axisEnd axisEndLeft"><img src="images/revolution.png" [alt]="localize('revo')"/></div>
+        <div class="axisProgress">
+            <div id="tAxisNeg" class="axisSubProgress axisRevo"><span id="tAxisNegText"></span></div>
+            <div id="tAxisMid" class="axisSubProgress axisNeutral"><span id="tAxisMidText"></span></div>
+            <div id="tAxisPos" class="axisSubProgress axisRefo"><span id="tAxisPosText"></span></div>
+        </div>
+        <div class="axisEnd axisEndRight"><img src="images/reformism.png" [alt]="localize('refo')"/></div>
+        @if (false) {
+            <input type="range" id="debug_t" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+            <input type="range" id="debugNeutral_t" value="50" min="0" max="100" step="1" style="width: 90%;" (change)="debug()"/>
+        }
+
+    </div>
+</div>

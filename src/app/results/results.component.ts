@@ -4,10 +4,11 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getIdsAndAnyAxes, getIdsAndBaseAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
+import { getIdsAndAnyAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
+import { getAllEnumValues } from 'enum-for';
 
 @Component({
   selector: 'app-results',
@@ -56,12 +57,9 @@ export class ResultsComponent {
 
   private applyResults() {
     const characteristicsMap = new Map<AnyAxis, number>(); // similar to axesData but without the minor direction of each base axis (favoring "bad" directions)
-    for (const [bid, baseAxis] of getIdsAndBaseAxes()) {
+    for (const baseAxis of getAllEnumValues(BaseAxis)) {
       const leftValue = this.axesData.get(+baseAxis as Axis)!;
       const rightValue = this.axesData.get(-baseAxis as Axis)!;
-      this.setAxisValue(`${bid}AxisLeft`, leftValue);
-      this.setAxisValue(`${bid}AxisRight`, rightValue);
-      this.setAxisValue(`${bid}AxisMid`, 1-leftValue-rightValue);
 
       if (leftValue<rightValue) {
         characteristicsMap.set(+baseAxis, leftValue);
@@ -116,17 +114,6 @@ export class ResultsComponent {
     // call to onImageLoaded when all callbacks are done
 
     // TODO continue
-  }
-
-  private setAxisValue(id: string, value: number) {
-    // TODO
-    // To be replaced by direct access from the html
-    // gets the #{id} element
-    // gets the #{id}Text element
-    // sets the axis element's width to {100*value}%
-    // sets the text to the same value (rounded to the percent)
-    // sets the text visibility CSS rule to "hidden" or "visible",
-    // based on the offsetWidths of the two elements
   }
 
   private setBonus(id: string, value: number, limit: number) {

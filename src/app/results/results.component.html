@@ -64,9 +64,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/justice_soft.png" [alt]="localize('justice_soft')"/></div>
         <div class="axisProgress">
-            <div id="jAxisLeft" class="axisSubProgress axisJusticeSoft"><span id="jAxisLeftText"></span></div>
-            <div id="jAxisMid" class="axisSubProgress axisNeutral"><span id="jAxisMidText"></span></div>
-            <div id="jAxisRight" class="axisSubProgress axisJusticeHard"><span id="jAxisRightText"></span></div>
+            <div id="jAxisLeft" class="axisSubProgress axisJusticeSoft" [style.width]="axesData.get(Axis.JusticeSoft)!*100+'%'">
+                <span id="jAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.JusticeSoft)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="jAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.JusticeSoft)!-axesData.get(Axis.JusticeHard)!)*100+'%'">
+                <span id="jAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.JusticeSoft)!-axesData.get(Axis.JusticeHard)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="jAxisRight" class="axisSubProgress axisJusticeHard" [style.width]="axesData.get(Axis.JusticeHard)!*100+'%'">
+                <span id="jAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.JusticeHard)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/justice_hard.png" [alt]="localize('justice_hard')"/></div>
         @if (false) {
@@ -84,9 +96,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/progressivism.png" [alt]="localize('progressivism')"/></div>
         <div class="axisProgress">
-            <div id="sAxisLeft" class="axisSubProgress axisProgressivism"><span id="sAxisLeftText"></span></div>
-            <div id="sAxisMid" class="axisSubProgress axisNeutral"><span id="sAxisMidText"></span></div>
-            <div id="sAxisRight" class="axisSubProgress axisConservatism"><span id="sAxisRightText"></span></div>
+            <div id="sAxisLeft" class="axisSubProgress axisProgressivism" [style.width]="axesData.get(Axis.Progressivism)!*100+'%'">
+                <span id="sAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Progressivism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="sAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Progressivism)!-axesData.get(Axis.Conservatism)!)*100+'%'">
+                <span id="sAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Progressivism)!-axesData.get(Axis.Conservatism)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="sAxisRight" class="axisSubProgress axisConservatism" [style.width]="axesData.get(Axis.Conservatism)!*100+'%'">
+                <span id="sAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Conservatism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/conservatism.png" [alt]="localize('conservatism')"/></div>
         @if (false) {
@@ -104,9 +128,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/internationalism.png" [alt]="localize('internationalism')"/></div>
         <div class="axisProgress">
-            <div id="bAxisLeft" class="axisSubProgress axisInternationalism"><span id="bAxisLeftText"></span></div>
-            <div id="bAxisMid" class="axisSubProgress axisNeutral"><span id="bAxisMidText"></span></div>
-            <div id="bAxisRight" class="axisSubProgress axisNationalism"><span id="bAxisRightText"></span></div>
+            <div id="bAxisLeft" class="axisSubProgress axisInternationalism" [style.width]="axesData.get(Axis.Internationalism)!*100+'%'">
+                <span id="bAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Internationalism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="bAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Internationalism)!-axesData.get(Axis.Nationalism)!)*100+'%'">
+                <span id="bAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Internationalism)!-axesData.get(Axis.Nationalism)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="bAxisRight" class="axisSubProgress axisNationalism" [style.width]="axesData.get(Axis.Nationalism)!*100+'%'">
+                <span id="bAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Nationalism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/nationalism.png" [alt]="localize('nationalism')"/></div>
         @if (false) {
@@ -127,9 +163,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/communism.png" [alt]="localize('communism')"/></div>
         <div class="axisProgress">
-            <div id="pAxisLeft" class="axisSubProgress axisCommunism"><span id="pAxisLeftText"></span></div>
-            <div id="pAxisMid" class="axisSubProgress axisNeutral"><span id="pAxisMidText"></span></div>
-            <div id="pAxisRight" class="axisSubProgress axisCapitalism"><span id="pAxisRightText"></span></div>
+            <div id="pAxisLeft" class="axisSubProgress axisCommunism" [style.width]="axesData.get(Axis.Communism)!*100+'%'">
+                <span id="pAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Communism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="pAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Communism)!-axesData.get(Axis.Capitalism)!)*100+'%'">
+                <span id="pAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Communism)!-axesData.get(Axis.Capitalism)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="pAxisRight" class="axisSubProgress axisCapitalism" [style.width]="axesData.get(Axis.Capitalism)!*100+'%'">
+                <span id="pAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Capitalism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/capitalism.png" [alt]="localize('capitalism')"/></div>
         @if (false) {
@@ -147,9 +195,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/regulation.png" [alt]="localize('regulationism')"/></div>
         <div class="axisProgress">
-            <div id="mAxisLeft" class="axisSubProgress axisRegulation"><span id="mAxisLeftText"></span></div>
-            <div id="mAxisMid" class="axisSubProgress axisNeutral"><span id="mAxisMidText"></span></div>
-            <div id="mAxisRight" class="axisSubProgress axisLaissezFaire"><span id="mAxisRightText"></span></div>
+            <div id="mAxisLeft" class="axisSubProgress axisRegulation" [style.width]="axesData.get(Axis.Regulationnism)!*100+'%'">
+                <span id="mAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Regulationnism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="mAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Regulationnism)!-axesData.get(Axis.LaissezFaire)!)*100+'%'">
+                <span id="mAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Regulationnism)!-axesData.get(Axis.LaissezFaire)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="mAxisRight" class="axisSubProgress axisLaissezFaire" [style.width]="axesData.get(Axis.LaissezFaire)!*100+'%'">
+                <span id="mAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.LaissezFaire)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/laissezfaire.png" [alt]="localize('laissez_faire')"/></div>
         @if (false) {
@@ -167,9 +227,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/ecology.png" [alt]="localize('ecology')"/></div>
         <div class="axisProgress">
-            <div id="eAxisLeft" class="axisSubProgress axisEcology"><span id="eAxisLeftText"></span></div>
-            <div id="eAxisMid" class="axisSubProgress axisNeutral"><span id="eAxisMidText"></span></div>
-            <div id="eAxisRight" class="axisSubProgress axisProductivism"><span id="eAxisRightText"></span></div>
+            <div id="eAxisLeft" class="axisSubProgress axisEcology" [style.width]="axesData.get(Axis.Ecology)!*100+'%'">
+                <span id="eAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Ecology)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="eAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Ecology)!-axesData.get(Axis.Productivism)!)*100+'%'">
+                <span id="eAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Ecology)!-axesData.get(Axis.Productivism)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="eAxisRight" class="axisSubProgress axisProductivism" [style.width]="axesData.get(Axis.Productivism)!*100+'%'">
+                <span id="eAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Productivism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/productivism.png" [alt]="localize('productivism')"/></div>
         @if (false) {
@@ -187,9 +259,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/revolution.png" [alt]="localize('revo')"/></div>
         <div class="axisProgress">
-            <div id="tAxisLeft" class="axisSubProgress axisRevo"><span id="tAxisLeftText"></span></div>
-            <div id="tAxisMid" class="axisSubProgress axisNeutral"><span id="tAxisMidText"></span></div>
-            <div id="tAxisRight" class="axisSubProgress axisRefo"><span id="tAxisRightText"></span></div>
+            <div id="tAxisLeft" class="axisSubProgress axisRevo" [style.width]="axesData.get(Axis.Revolution)!*100+'%'">
+                <span id="tAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Revolution)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="tAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Revolution)!-axesData.get(Axis.Reformism)!)*100+'%'">
+                <span id="tAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Revolution)!-axesData.get(Axis.Reformism)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="tAxisRight" class="axisSubProgress axisRefo" [style.width]="axesData.get(Axis.Reformism)!*100+'%'">
+                <span id="tAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Reformism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/reformism.png" [alt]="localize('refo')"/></div>
         @if (false) {

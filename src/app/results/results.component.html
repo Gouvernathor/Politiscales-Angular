@@ -32,9 +32,21 @@
         </div>
         <div class="axisEnd axisEndLeft"><img src="images/constructivism.png" [alt]="localize('constructivism')"/></div>
         <div class="axisProgress">
-            <div id="cAxisLeft" class="axisSubProgress axisConstructivism"><span id="cAxisLeftText"></span></div>
-            <div id="cAxisMid" class="axisSubProgress axisNeutral"><span id="cAxisMidText"></span></div>
-            <div id="cAxisRight" class="axisSubProgress axisEssentialism"><span id="cAxisRightText"></span></div>
+            <div id="cAxisLeft" class="axisSubProgress axisConstructivism" [style.width]="axesData.get(Axis.Constructivism)!*100+'%'">
+                <span id="cAxisLeftText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Constructivism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="cAxisMid" class="axisSubProgress axisNeutral" [style.width]="(1-axesData.get(Axis.Constructivism)!-axesData.get(Axis.Essentialism)!)*100+'%'">
+                <span id="cAxisMidText" axisLabelVisibility>
+                    {{((1-axesData.get(Axis.Constructivism)!-axesData.get(Axis.Essentialism)!)*100).toFixed(0)+'%'}}
+                </span>
+            </div>
+            <div id="cAxisRight" class="axisSubProgress axisEssentialism" [style.width]="axesData.get(Axis.Essentialism)!*100+'%'">
+                <span id="cAxisRightText" axisLabelVisibility>
+                    {{(axesData.get(Axis.Essentialism)!*100).toFixed(0)+'%'}}
+                </span>
+            </div>
         </div>
         <div class="axisEnd axisEndRight"><img src="images/essentialism.png" [alt]="localize('essentialism')"/></div>
         @if (false) {

@@ -7,17 +7,21 @@ import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConf
 import { getIdsAndAnyAxes, getIdsAndBaseAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { sorted } from '../../util/utils';
+import { VisibilityDirective } from './visibility.directive';
 
 @Component({
   selector: 'app-results',
   standalone: true,
-  imports: [],
+  imports: [VisibilityDirective],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })
 export class ResultsComponent {
   localize = getLine;
-  private axesData = new Map<AnyAxis, number>();
+  BaseAxis = BaseAxis;
+  Axis = Axis;
+  SpecialAxis = SpecialAxis;
+  axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<BaseAxis, number>();
   private generatedSlogan = "";
   constructor(private route: ActivatedRoute) {}

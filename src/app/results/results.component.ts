@@ -4,7 +4,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getIdsAndAnyAxes, getIdsAndSpecialAxes } from '../../services/commonConfigurationService';
+import { getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
@@ -23,6 +23,8 @@ export class ResultsComponent {
   BaseAxis = BaseAxis;
   Axis = Axis;
   SpecialAxis = SpecialAxis;
+  // TODO segregate the final values between Axes and SpecialAxes
+  // only store the special axis if above the threshold, and store the square/opacity value
   axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<BaseAxis, number>();
   private generatedSlogan = "";
@@ -72,7 +74,7 @@ export class ResultsComponent {
     }
 
     let bonusEnabled = false;
-    for (const [id, axis] of getIdsAndSpecialAxes()) {
+    for (const axis of getAllEnumValues(SpecialAxis)) {
       const value = this.axesData.get(axis)!;
       const thresh = getBonusThreshold(axis);
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { flagShapes } from '../../services/flagConfigurationService';
+import { flagColors, flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -28,6 +28,7 @@ export class ResultsComponent {
   axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<BaseAxis, number>();
   generatedSlogan = "";
+  private characteristicsMap!: Map<AnyAxis, number>;
   bonusEnabled = false; // TODO make it a property on the SpecialAxis storage (once fully segregated)
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -62,15 +63,15 @@ export class ResultsComponent {
   private applyResults() {
     // similar to axesData but without the minor direction of each base axis
     // (favoring "bad" directions in case of tie)
-    const characteristicsMap = new Map<AnyAxis, number>();
+    this.characteristicsMap = new Map();
     for (const baseAxis of getAllEnumValues(BaseAxis)) {
       const leftValue = this.axesData.get(+baseAxis as Axis)!;
       const rightValue = this.axesData.get(-baseAxis as Axis)!;
 
       if (leftValue > rightValue) {
-        characteristicsMap.set(+baseAxis, leftValue);
+        this.characteristicsMap.set(+baseAxis, leftValue);
       } else {
-        characteristicsMap.set(-baseAxis, rightValue);
+        this.characteristicsMap.set(-baseAxis, rightValue);
       }
 
       this.axesValues.set(baseAxis, rightValue-leftValue);
@@ -82,19 +83,19 @@ export class ResultsComponent {
 
       if (value > thresh) {
         this.bonusEnabled = true;
-        characteristicsMap.set(axis, value);
+        this.characteristicsMap.set(axis, value);
       }
     }
 
     const sloganMap = new Map<AnyAxis, string>();
-    for (const [axis, value] of characteristicsMap.entries()) {
+    for (const [axis, value] of this.characteristicsMap.entries()) {
       const slogan = getSlogan(axis);
       if (value > 0 && slogan) {
         sloganMap.set(axis, slogan);
       }
     }
 
-    this.generatedSlogan = sorted(sloganMap.keys(), a => -characteristicsMap.get(a)!)
+    this.generatedSlogan = sorted(sloganMap.keys(), a => -this.characteristicsMap.get(a)!)
       .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
 
     // twitterbutton
@@ -107,8 +108,44 @@ export class ResultsComponent {
     // TODO continue
   }
 
-  private findFlagColors() {
-    // TODO
+  private findFlagColors(): {bgColor: string, fgColor: string}[] {
+    const colors: {bgColor: string, fgColor: string, value: number}[] = [];
+    for (const flagColor of flagColors) {
+      let accepted = true;
+
+      let mainValue = 0,
+          mainValueFound = false;
+
+      for (const cond of flagColor.cond) {
+        let charfound = false;
+        for (const [axis, value] of this.characteristicsMap.entries()) {
+          if ([Axis[axis], SpecialAxis[axis]].includes(cond.name)) {
+            charfound = true;
+            if (value < cond.vmin || value > cond.vmax) {
+              accepted = false;
+            } else if (!mainValueFound) {
+              mainValueFound = true;
+              mainValue = value;
+            }
+            break;
+          }
+        }
+
+        if (!charfound) {
+          accepted = false;
+        }
+
+        if (!accepted) {
+          break;
+        }
+      }
+
+      if (accepted) {
+        colors.push({bgColor: flagColor.bgColor, fgColor: flagColor.fgColor, value: mainValue});
+      }
+    }
+
+    return colors.sort((a, b) => b.value-a.value);
   }
 
   private findFlagShape(numColors: number) {
@@ -140,7 +177,7 @@ export class ResultsComponent {
           spriteY = 128,
           spriteS = 1.0;
 
-      const colors: any[] = this.findFlagColors()!; // TODO type and remove bang
+      const colors = this.findFlagColors();
       const symbolData = this.findFlagSymbol(colors.length);
 
       const flagId: number = this.findFlagShape(colors.length)!; // TODO type and remove bang

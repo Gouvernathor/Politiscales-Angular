@@ -66,7 +66,7 @@ export class ResultsComponent {
       const leftValue = this.axesData.get(+baseAxis as Axis)!;
       const rightValue = this.axesData.get(-baseAxis as Axis)!;
 
-      if (leftValue<rightValue) {
+      if (leftValue > rightValue) {
         characteristicsMap.set(+baseAxis, leftValue);
       } else {
         characteristicsMap.set(-baseAxis, rightValue);
@@ -94,12 +94,8 @@ export class ResultsComponent {
       }
     }
 
-    // FIXME weird, comparison should probably go the other way around
-    this.generatedSlogan = sorted(sloganMap.keys(), a => characteristicsMap.get(a)!)
+    this.generatedSlogan = sorted(sloganMap.keys(), a => -characteristicsMap.get(a)!)
       .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
-
-    // TODO in the html file
-    // sloganDiv.innerHTML = this.generatedSlogan;
 
     if (!bonusEnabled) {
       // TODO

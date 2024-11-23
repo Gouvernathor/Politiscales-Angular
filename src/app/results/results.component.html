@@ -187,3 +187,84 @@
 
     </div>
 </div>
+
+<br/>
+
+<div id="bonusBox">
+    <h2>{{localize("result_special")}}</h2>
+
+    <div id="anarBonus" class="description">
+        <div class="descImg"><img src="images/anarchism.png" [alt]="localize('anarchism')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_anarchism")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_anar" (change)="debug()"/>
+            }
+        </div>
+    </div>
+
+    <div id="pragBonus" class="description">
+        <div class="descImg"><img src="images/pragmatism.png" [alt]="localize('pragmatism')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_pragmatism")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_pragmatism" (change)="debug()"/>
+            }
+        </div>
+    </div>
+
+    <div id="femiBonus" class="description">
+        <div class="descImg"><img src="images/feminism.png" [alt]="localize('feminism')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_feminism")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_femi" (change)="debug()"/>
+            }
+        </div>
+    </div>
+
+    <div id="compBonus" class="description">
+        <div class="descImg"><img src="images/complotism.png" [alt]="localize('complotism')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_complotism")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_comp" (change)="debug()"/>
+            }
+        </div>
+    </div>
+
+    <div id="vegaBonus" class="description">
+        <div class="descImg"><img src="images/veganism.png" [alt]="localize('veganism')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_veganism")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_vega" (change)="debug()"/>
+            }
+        </div>
+    </div>
+
+    <div id="monaBonus" class="description">
+        <div class="descImg"><img src="images/monarchism.png" [alt]="localize('monarchism')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_monarchism")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_mona" (change)="debug()"/>
+            }
+        </div>
+    </div>
+
+    <div id="reliBonus" class="description">
+        <div class="descImg"><img src="images/religion.png" [alt]="localize('religion')"/></div>
+        <div class="descTextMono">
+            <p>{{localize("result_religion")}}</p>
+            @if (false) {
+                <input type="checkbox" id="debug_reli" (change)="debug()"/>
+            }
+        </div>
+    </div>
+    <!-- TODO reorder these elements dynamically depending on score -->
+</div>
+
+<div class="navButtons">
+    <a class="button" href="./quiz">{{localize("result_btn_redo")}}</a>
+</div>

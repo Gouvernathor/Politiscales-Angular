@@ -193,6 +193,17 @@
 	"result_special": "Caractéristiques supplémentaires",
 	"result_desc": "Le résultat de votre PolitiScales est décomposé en 8 axes. Chaque axe indique votre positionnement par rapport à deux idéologies contradictoires. Des caractéristiques particulières, affichés en bas de page, peuvent également venir compléter votre résultat. Pour plus d’information sur les différents axes, <a href=\"help.html\">consultez la page d’aide</a>.",
 	"result_btn_redo": "Recommencer le test",
+	"slogan_constructivism": "Égalité",
+	"slogan_internationalism": "Humanité",
+	"slogan_nationalism": "Patrie",
+	"slogan_communism": "Socialisme",
+	"slogan_capitalism": "Travail",
+	"slogan_laissez_faire": "Liberté",
+	"slogan_conservatism": "Famille",
+	"slogan_justice_soft": "Justice",
+	"slogan_justice_hard": "Ordre",
+	"slogan_ecology": "Écologie",
+	"slogan_revo": "Révolution",
 
 	"result_title": "Résultats"
 }

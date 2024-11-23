@@ -27,7 +27,7 @@ export class ResultsComponent {
   // only store the special axis if above the threshold, and store the square/opacity value
   axesData = new Map<AnyAxis, number>();
   private axesValues = new Map<BaseAxis, number>();
-  private generatedSlogan = "";
+  generatedSlogan = "";
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit() {
@@ -59,7 +59,9 @@ export class ResultsComponent {
   }
 
   private applyResults() {
-    const characteristicsMap = new Map<AnyAxis, number>(); // similar to axesData but without the minor direction of each base axis (favoring "bad" directions)
+    // similar to axesData but without the minor direction of each base axis
+    // (favoring "bad" directions in case of tie)
+    const characteristicsMap = new Map<AnyAxis, number>();
     for (const baseAxis of getAllEnumValues(BaseAxis)) {
       const leftValue = this.axesData.get(+baseAxis as Axis)!;
       const rightValue = this.axesData.get(-baseAxis as Axis)!;
@@ -84,23 +86,20 @@ export class ResultsComponent {
       }
     }
 
-    const sloganDiv = null!; //  #slogan element
-    if (sloganDiv) {
-      const sloganMap = new Map<AnyAxis, string>();
-      for (const [axis, value] of characteristicsMap.entries()) {
-        const slogan = getSlogan(axis);
-        if (value > 0 && slogan) {
-          sloganMap.set(axis, slogan);
-        }
+    const sloganMap = new Map<AnyAxis, string>();
+    for (const [axis, value] of characteristicsMap.entries()) {
+      const slogan = getSlogan(axis);
+      if (value > 0 && slogan) {
+        sloganMap.set(axis, slogan);
       }
-
-      // FIXME weird, comparison should probably go the other way around
-      this.generatedSlogan = sorted(sloganMap.keys(), a => characteristicsMap.get(a)!)
-        .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
-
-      // TODO in the html file
-      // sloganDiv.innerHTML = this.generatedSlogan;
     }
+
+    // FIXME weird, comparison should probably go the other way around
+    this.generatedSlogan = sorted(sloganMap.keys(), a => characteristicsMap.get(a)!)
+      .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
+
+    // TODO in the html file
+    // sloganDiv.innerHTML = this.generatedSlogan;
 
     if (!bonusEnabled) {
       // TODO

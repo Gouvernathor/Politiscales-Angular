@@ -193,6 +193,17 @@
 	"result_special": "Additional characteristics",
 	"result_desc": "The result of your PolitiScale is decomposed in 8 axes. Each axis indicates your positionning compared with two opposed ideologies. Some particular caracteristics, displayed at the end of the page can also complete your result. For further information on the different axis <a href=\"../help\">Look at the help page</a>.",
 	"result_btn_redo": "Restart the test",
+	"slogan_constructivism": "Equality",
+	"slogan_internationalism": "Humanity",
+	"slogan_nationalism": "Fatherland",
+	"slogan_communism": "Socialism",
+	"slogan_capitalism": "Work",
+	"slogan_laissez_faire": "Liberty",
+	"slogan_conservatism": "Family",
+	"slogan_justice_soft": "Justice",
+	"slogan_justice_hard": "Order",
+	"slogan_ecology": "Ecology",
+	"slogan_revo": "Revolution",
 
 	"result_title": "Results"
 }

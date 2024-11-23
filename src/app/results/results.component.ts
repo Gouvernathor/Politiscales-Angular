@@ -108,6 +108,14 @@ export class ResultsComponent {
     // TODO continue
   }
 
+  /**
+   * @returns a sorted array of pairs of colors (one bg, one fg)
+   * Starting from the constant flagColors.
+   * Each has a list of conditions : an acceptable range of values for an AnyAxis.
+   * All of the conditions must be met for the color to be kept.
+   * The first condition of a list of condition gives the main axis of the color.
+   * The remaining colors are then sorted by the (presumably decreasing) value of that axis.
+   */
   private findFlagColors(): {bgColor: string, fgColor: string}[] {
     const colors: {bgColor: string, fgColor: string, value: number}[] = [];
     for (const flagColor of flagColors) {

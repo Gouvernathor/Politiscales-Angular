@@ -6,7 +6,7 @@ import { flagColors, flagShapes } from '../../services/flagConfigurationService'
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
-import { sorted } from '../../util/utils';
+import { areArraysOrdered, sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
 
@@ -157,7 +157,7 @@ export class ResultsComponent {
         continue;
       }
 
-      let condValue = [0, 0];
+      let condValue = [0, 0, 0];
       let accepted = true;
 
       for (let j = 0; j < flagShape.cond.length; j++) {
@@ -185,28 +185,12 @@ export class ResultsComponent {
         }
       }
 
-      if (accepted && flagColor <= flagShape.numColors) {
-        if (flagShape.numColors > flagColor) {
-          flagColor = flagShape.numColors;
-          [...flagValue] = condValue.slice(0, 3);
-          flagFound = i;
-        } else if (condValue[0] > flagValue[0]) {
-          flagColor = flagShape.numColors;
-          [...flagValue] = condValue.slice(0, 3);
-          flagFound = i;
-        } else if (condValue[0] === flagValue[0]) {
-          if (condValue[1] > flagValue[1]) {
-            flagColor = flagShape.numColors;
-            [...flagValue] = condValue.slice(0, 3);
-            flagFound = i;
-          } else if (condValue[1] === flagValue[1]) {
-            if (condValue[2] > flagValue[2]) {
-              flagColor = flagShape.numColors;
-              [...flagValue] = condValue.slice(0, 3);
-              flagFound = i;
-            }
-          }
-        }
+      if (accepted && flagColor <= flagShape.numColors
+          && (flagShape.numColors > flagColor
+            || areArraysOrdered(flagValue, condValue))) {
+        flagColor = flagShape.numColors;
+        [...flagValue] = condValue.slice(0, 3);
+        flagFound = i;
       }
     }
 

@@ -84,3 +84,19 @@ export function hashString(str: string): number {
     }
     return hash;
 }
+
+/**
+ * Returns whether the two provided arrays are strictly ordered when compared to each other term by term,
+ * with the longer one coming last in case of tie on every common index.
+ * This works the same way comparison works on tuples and lists in Python.
+ * (This has nothing to do with the arrays elements being sorted inside the arrays.)
+ */
+export function areArraysOrdered<V, T extends (string|number)>(a: T[], b: T[]): boolean {
+    const minLength = Math.min(a.length, b.length);
+    for (let i=0; i<minLength; i++) {
+        if (a[i] !== b[i]) {
+            return a[i] < b[i];
+        }
+    }
+    return a.length < b.length;
+}

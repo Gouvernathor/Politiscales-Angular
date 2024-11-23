@@ -42,7 +42,7 @@ function getSpecialAxisId(axis: SpecialAxis) {
 export function getAnyAxisId(axis: AnyAxis) {
     return idByAnyAxis.get(axis)!;
 }
-function getBaseAxisFromId(id: string) {
+export function getBaseAxisFromId(id: string) {
     return baseAxisById.get(id);
 }
 function getAxisFromId(id: string) {

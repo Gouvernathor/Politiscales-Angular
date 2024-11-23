@@ -4,7 +4,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { flagColors, flagShapes } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getAnyAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
+import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
@@ -146,7 +146,71 @@ export class ResultsComponent {
   }
 
   private findFlagShape(numColors: number) {
-    // TODO
+    let flagFound = undefined;
+    let flagValue = [0, 0, 0];
+    let flagColor = 0;
+
+    for (let i = 0; i < flagShapes.length; i++) {
+      const flagShape = flagShapes[i];
+    // for (const flagShape of flagShapes) {
+      if (flagShape.numColors > numColors) {
+        continue;
+      }
+
+      let condValue = [0, 0];
+      let accepted = true;
+
+      for (let j = 0; j < flagShape.cond.length; j++) {
+        const cond = flagShape.cond[j];
+      // for (const cond of flagShape.cond) {
+        const baseAxis = getBaseAxisFromId(cond.name);
+        if (baseAxis !== undefined) {
+          const value = this.axesValues.get(baseAxis);
+          if (value !== undefined) {
+            if (value < cond.vmin || value > cond.vmax) {
+              accepted = false;
+            }
+            if (j < 3) {
+              condValue[j] = Math.abs(value);
+            }
+          } else {
+            accepted = false;
+          }
+        } else {
+          accepted = false;
+        }
+
+        if (!accepted) {
+          break;
+        }
+      }
+
+      if (accepted && flagColor <= flagShape.numColors) {
+        if (flagShape.numColors > flagColor) {
+          flagColor = flagShape.numColors;
+          [...flagValue] = condValue.slice(0, 3);
+          flagFound = i;
+        } else if (condValue[0] > flagValue[0]) {
+          flagColor = flagShape.numColors;
+          [...flagValue] = condValue.slice(0, 3);
+          flagFound = i;
+        } else if (condValue[0] === flagValue[0]) {
+          if (condValue[1] > flagValue[1]) {
+            flagColor = flagShape.numColors;
+            [...flagValue] = condValue.slice(0, 3);
+            flagFound = i;
+          } else if (condValue[1] === flagValue[1]) {
+            if (condValue[2] > flagValue[2]) {
+              flagColor = flagShape.numColors;
+              [...flagValue] = condValue.slice(0, 3);
+              flagFound = i;
+            }
+          }
+        }
+      }
+    }
+
+    return flagFound;
   }
 
   private getCharacteristic(name: never, vmin: never, vmax: never) {

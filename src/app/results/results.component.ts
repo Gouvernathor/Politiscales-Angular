@@ -191,7 +191,6 @@ export class ResultsComponent {
     }
 
     return flagShapes
-      .map((fs, i) => ({...fs, index: i}))
       .filter(fs => fs.numColors <= numColors)
       .map(fs => ({...fs, flagValues: getConditionValues(fs)}))
       .filter(fs => fs.flagValues !== undefined)

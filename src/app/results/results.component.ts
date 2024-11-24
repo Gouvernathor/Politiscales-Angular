@@ -6,7 +6,7 @@ import { flagColors, flagShapes } from '../../services/flagConfigurationService'
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
-import { areArraysOrdered, sorted } from '../../util/utils';
+import { arrayCmp, sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
 
@@ -126,7 +126,7 @@ export class ResultsComponent {
         if (axis !== undefined) {
           const value = me.characteristicsMap.get(axis);
           if (value !== undefined) {
-            if (cond.vmin < value && value < cond.vmax) {
+            if (cond.vmin <= value && value <= cond.vmax) {
               if (mainValue === undefined) {
                 mainValue = value;
               }
@@ -152,59 +152,38 @@ export class ResultsComponent {
    * All of the conditions must be met for the flagShape to be eligible.
    * Each flagShape has (up to) three flagValues, which are the absolute values of the BaseAxis of the (up to) three first conditions.
    * The winning flagShap is the one with the most numColors,
-   * then maximizing the absolute value of the BaseAxis of its first condition,
-   * then of its second, then of its third.
+   * then with the highest value of the BaseAxis of its first condition,
+   * then of its second, and so on (with the most number of conditions winning in case of a tie).
    */
-  private findFlagShape(numColors: number) {
-    let flagFound = undefined;
-    let flagValue: [number, number, number] = [0, 0, 0];
-    let flagNumColors = 0;
-
-    for (let i = 0; i < flagShapes.length; i++) {
-      const flagShape = flagShapes[i];
-    // for (const flagShape of flagShapes) {
-      if (flagShape.numColors > numColors) {
-        continue;
-      }
-
-      let condValue: [number, number, number] = [0, 0, 0];
-      let accepted = true;
-
-      for (let j = 0; j < flagShape.cond.length; j++) {
-        const cond = flagShape.cond[j];
-      // for (const cond of flagShape.cond) {
+  private findFlagShape(numColors: number): number|undefined {
+    const me = this;
+    function getConditionValues(flagShape: typeof flagShapes[0]): number[]|undefined {
+      let condValues = [];
+      for (const cond of flagShape.cond) {
         const baseAxis = getBaseAxisFromId(cond.name);
         if (baseAxis !== undefined) {
-          const value = this.axesValues.get(baseAxis);
+          const value = me.axesValues.get(baseAxis);
           if (value !== undefined) {
-            if (value < cond.vmin || value > cond.vmax) {
-              accepted = false;
+            if (cond.vmin <= value && value <= cond.vmax) {
+              condValues.push(Math.abs(value));
+              continue;
             }
-            if (j < 3) {
-              condValue[j] = Math.abs(value);
-            }
-          } else {
-            accepted = false;
           }
-        } else {
-          accepted = false;
         }
-
-        if (!accepted) {
-          break;
-        }
+        return;
       }
-
-      if (accepted && flagNumColors <= flagShape.numColors
-          && (flagNumColors < flagShape.numColors
-            || areArraysOrdered(flagValue, condValue))) {
-        flagNumColors = flagShape.numColors;
-        flagValue = condValue;
-        flagFound = i;
-      }
+      return condValues;
     }
 
-    return flagFound;
+    return flagShapes
+      .map((fs, i) => ({...fs, index: i}))
+      .filter(fs => fs.numColors <= numColors)
+      .map(fs => ({...fs, flagValues: getConditionValues(fs)}))
+      .filter(fs => fs.flagValues !== undefined)
+      .sort((a, b) => arrayCmp(b.flagValues!, a.flagValues!))
+      .sort((a, b) => b.numColors-a.numColors)
+      [0]
+      ?.index;
   }
 
   private getCharacteristic(name: never, vmin: never, vmax: never) {
@@ -242,7 +221,7 @@ export class ResultsComponent {
         colors.push({bgColor: "#fff", fgColor: "#000"});
       }
 
-      if (flagId < 0) {
+      if (flagId  === undefined) {
         // TODO
         // draw a rectangle (0, 0, 512, 256) filled with "#fff"
       } else {

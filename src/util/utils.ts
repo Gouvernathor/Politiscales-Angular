@@ -86,17 +86,22 @@ export function hashString(str: string): number {
 }
 
 /**
- * Returns whether the two provided arrays are strictly ordered when compared to each other term by term,
+ * A cmp function (as the callback for the [].sort method) to sort arrays by comparing them term by term,
  * with the longer one coming last in case of tie on every common index.
  * This works the same way comparison works on tuples and lists in Python.
  * (This has nothing to do with the arrays elements being sorted inside the arrays.)
  */
-export function areArraysOrdered<T extends (string|number)>(a: T[], b: T[]): boolean {
+export function arrayCmp(a: number[], b: number[]): number {
     const minLength = Math.min(a.length, b.length);
     for (let i=0; i<minLength; i++) {
-        if (a[i] !== b[i]) {
-            return a[i] < b[i];
+        const m = a[i] - b[i];
+        if (m !== 0) {
+            return m;
         }
     }
-    return a.length < b.length;
+    return a.length - b.length;
+}
+
+function areArraysOrdered(a: number[], b: number[]) {
+    return arrayCmp(a, b) === -1;
 }

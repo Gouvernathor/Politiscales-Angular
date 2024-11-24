@@ -145,10 +145,20 @@ export class ResultsComponent {
       .sort((a, b) => b.value!-a.value!);
   }
 
+  /**
+   * Returns an optional index on flagShapes. (TODO return an optional flagShape)
+   * The flagShape must have a numColors lower or equal to the passed numColors.
+   * Each flagShape has a series of conditions : an acceptable range of values for a BaseAxis in axesValues.
+   * All of the conditions must be met for the flagShape to be eligible.
+   * Each flagShape has (up to) three flagValues, which are the absolute values of the BaseAxis of the (up to) three first conditions.
+   * The winning flagShap is the one with the most numColors,
+   * then maximizing the absolute value of the BaseAxis of its first condition,
+   * then of its second, then of its third.
+   */
   private findFlagShape(numColors: number) {
     let flagFound = undefined;
     let flagValue: [number, number, number] = [0, 0, 0];
-    let flagColor = 0;
+    let flagNumColors = 0;
 
     for (let i = 0; i < flagShapes.length; i++) {
       const flagShape = flagShapes[i];
@@ -185,10 +195,10 @@ export class ResultsComponent {
         }
       }
 
-      if (accepted && flagColor <= flagShape.numColors
-          && (flagShape.numColors > flagColor
+      if (accepted && flagNumColors <= flagShape.numColors
+          && (flagNumColors < flagShape.numColors
             || areArraysOrdered(flagValue, condValue))) {
-        flagColor = flagShape.numColors;
+        flagNumColors = flagShape.numColors;
         flagValue = condValue;
         flagFound = i;
       }

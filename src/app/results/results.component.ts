@@ -261,7 +261,7 @@ export class ResultsComponent {
             symbol0 = {
               parent_type: flagSymbol0.data.parent_type,
               transform: transform0,
-            }
+            };
             symbol1.parent_type = "none";
             valueMax = value;
           }
@@ -281,23 +281,21 @@ export class ResultsComponent {
             }
           }
 
-          if (transform0 === undefined || transform1 === undefined) {
-            continue;
-          }
-
-          const charVal1 = this.getCharacteristic(flagSymbol1.cond);
-          if (charVal1 !== undefined) {
-            const value = charVal0 + charVal1;
-            if (value > valueMax) {
-              symbol0 = {
-                parent_type: flagSymbol0.data.parent_type,
-                transform: transform0,
-              };
-              symbol1 = {
-                parent_type: flagSymbol1.data.parent_type,
-                transform: transform1,
-              };
-              valueMax = value;
+          if (transform0 !== undefined && transform1 !== undefined) {
+            const charVal1 = this.getCharacteristic(flagSymbol1.cond);
+            if (charVal1 !== undefined) {
+              const value = charVal0 + charVal1;
+              if (value > valueMax) {
+                symbol0 = {
+                  parent_type: flagSymbol0.data.parent_type,
+                  transform: transform0,
+                };
+                symbol1 = {
+                  parent_type: flagSymbol1.data.parent_type,
+                  transform: transform1,
+                };
+                valueMax = value;
+              }
             }
           }
         }

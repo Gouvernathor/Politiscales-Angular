@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlagColor, flagColors, FlagShape, flagShapes, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform } from '../../services/flagConfigurationService';
+import { FlagColor, flagColors, FlagShape, flagShapes, FlagSymbol, FlagSymbolCondition, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -202,7 +202,7 @@ export class ResultsComponent {
 
   // TODO make it return undefined instead of -1
   // private getCharacteristic(name: string, vmin: number, vmax: number) {
-  private getCharacteristic({name, vmin, vmax}: {name: string, vmin: number, vmax: number}) {
+  private getCharacteristic({name, vmin, vmax}: FlagSymbolCondition) {
     const axis = getAnyAxisFromId(name);
     if (axis !== undefined) {
       const value = this.characteristicsMap.get(axis);
@@ -222,6 +222,11 @@ export class ResultsComponent {
    * If the two are defined, then if the second has main to true, the first has to have it to true too.
    */
   private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
+    const me = this;
+    const filteredValuedFlagSymbols = flagSymbols
+      .map(fs => ({...fs, value: me.getCharacteristic(fs.cond)}))
+      .filter(fs => fs.value !== undefined) as (FlagSymbol & {value: number})[];
+
     const noneSymbol: NoneSymbol = {
       parent_type: null,
       transform: {
@@ -256,10 +261,10 @@ export class ResultsComponent {
     let symbol1: Symbol|NoneSymbol = noneSymbol;
     let valueMax = 0;
 
-    for (let s0 = 0; s0 < flagSymbols.length; s0++) {
-      const flagSymbol0 = flagSymbols[s0];
-      const charVal0 = this.getCharacteristic(flagSymbol0.cond);
-      if (charVal0 !== undefined) {
+    for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
+      const flagSymbol0 = filteredValuedFlagSymbols[s0];
+      const charVal0 = flagSymbol0.value;
+      { // readability-only scope for the value variable
         const value = charVal0*1.5;
         if (value > valueMax) {
           const transform0 = flagSymbol0.data.transforms
@@ -275,32 +280,30 @@ export class ResultsComponent {
             valueMax = value;
           }
         }
+      }
 
-        for (const flagSymbol1 of flagSymbols.slice(s0+1)) {
-          const transformPair = flagSymbol0.data.transforms
-            .flatMap(fs0transform => flagSymbol1.data.transforms
-              .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
-                && flagSymbol1.data.parent_type === fs0transform.child_type)
-              .map(fs1transform => [fs0transform, fs1transform] as [FlagSymbolTransform, FlagSymbolTransform]))
-            .at(-1);
+      for (const flagSymbol1 of filteredValuedFlagSymbols.slice(s0+1)) {
+        const transformPair = flagSymbol0.data.transforms
+          .flatMap(fs0transform => flagSymbol1.data.transforms
+            .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
+              && flagSymbol1.data.parent_type === fs0transform.child_type)
+            .map(fs1transform => [fs0transform, fs1transform] as [FlagSymbolTransform, FlagSymbolTransform]))
+          .at(-1);
 
-          if (transformPair !== undefined) {
-            const charVal1 = this.getCharacteristic(flagSymbol1.cond);
-            if (charVal1 !== undefined) {
-              const value = charVal0 + charVal1;
-              if (value > valueMax) {
-                const [transform0, transform1] = transformPair;
-                symbol0 = {
-                  parent_type: flagSymbol0.data.parent_type,
-                  transform: transform0,
-                };
-                symbol1 = {
-                  parent_type: flagSymbol1.data.parent_type,
-                  transform: transform1,
-                };
-                valueMax = value;
-              }
-            }
+        if (transformPair !== undefined) {
+          const charVal1 = flagSymbol1.value;
+          const value = charVal0 + charVal1;
+          if (value > valueMax) {
+            const [transform0, transform1] = transformPair;
+            symbol0 = {
+              parent_type: flagSymbol0.data.parent_type,
+              transform: transform0,
+            };
+            symbol1 = {
+              parent_type: flagSymbol1.data.parent_type,
+              transform: transform1,
+            };
+            valueMax = value;
           }
         }
       }

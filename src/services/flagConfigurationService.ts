@@ -1673,12 +1673,12 @@ type FlagSymbolData = {
 	parent_type: FlagSymbolDataParentType,
 	transforms: FlagSymbolTransform[],
 };
-type FlagSymbolCondition = {
+export type FlagSymbolCondition = {
 	name: string,
 	vmin: number,
 	vmax: number,
 };
-type FlagSymbol = {
+export type FlagSymbol = {
 	data: FlagSymbolData,
 	cond: FlagSymbolCondition,
 };

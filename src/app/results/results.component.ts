@@ -146,7 +146,7 @@ export class ResultsComponent {
   }
 
   /**
-   * Returns an optional index on flagShapes. (TODO return an optional flagShape)
+   * Returns an optional member of flagShapes.
    * The flagShape must have a numColors lower or equal to the passed numColors.
    * Each flagShape has a series of conditions : an acceptable range of values for a BaseAxis in axesValues.
    * All of the conditions must be met for the flagShape to be eligible.
@@ -155,7 +155,7 @@ export class ResultsComponent {
    * then with the highest value of the BaseAxis of its first condition,
    * then of its second, and so on (with the most number of conditions winning in case of a tie).
    */
-  private findFlagShape(numColors: number): number|undefined {
+  private findFlagShape(numColors: number): Pick<typeof flagShapes[0], "symbol"|"shapes">|undefined {
     const me = this;
     function getConditionValues(flagShape: typeof flagShapes[0]): number[]|undefined {
       let condValues = [];
@@ -182,8 +182,7 @@ export class ResultsComponent {
       .filter(fs => fs.flagValues !== undefined)
       .sort((a, b) => arrayCmp(b.flagValues!, a.flagValues!))
       .sort((a, b) => b.numColors-a.numColors)
-      [0]
-      ?.index;
+      [0];
   }
 
   private getCharacteristic(name: never, vmin: never, vmax: never) {
@@ -214,18 +213,17 @@ export class ResultsComponent {
       const colors = this.findFlagColors();
       const symbolData = this.findFlagSymbol(colors.length);
 
-      const flagId: number = this.findFlagShape(colors.length)!; // TODO type and remove bang
+      const flagShape = this.findFlagShape(colors.length);
 
       if (colors.length <= 0) {
         // TODO maybe do this in findFlagColors() ???
         colors.push({bgColor: "#fff", fgColor: "#000"});
       }
 
-      if (flagId  === undefined) {
+      if (flagShape === undefined) {
         // TODO
         // draw a rectangle (0, 0, 512, 256) filled with "#fff"
       } else {
-        const flagShape = flagShapes[flagId];
         for (const path of flagShape.shapes) {
           const numPoints = path.length/2;
 

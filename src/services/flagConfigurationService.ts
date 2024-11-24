@@ -2,8 +2,9 @@ type NumberTuple41 = [number, number, number, number, number, number, number, nu
 type NumberTuple13 = [number, number, number, number, number, number, number, number, number, number, number, number, number];
 type NumberTuple9 = [number, number, number, number, number, number, number, number, number];
 type NumberTuple7 = [number, number, number, number, number, number, number];
-type CirclePath = [number, ("circle" | "circleSymbol"), number, number, number];
-type FlagShapePath = (NumberTuple41 | NumberTuple13 | NumberTuple9 | NumberTuple7 | CirclePath);
+type CircleShape = [number, "circle", number, number, number];
+type CircleSymbolShape = [number, "circleSymbol", number, number, number];
+// The first element is the color index, lower than numColors
 type FlagShapeSymbolPlacement = [number, number, number]; // x, y, scale
 type FlagShapeCondition = {
 	name: string,
@@ -12,7 +13,7 @@ type FlagShapeCondition = {
 };
 export type FlagShape = {
 	numColors: 0|1|2|3,
-	shapes: FlagShapePath[],
+	shapes: (NumberTuple41 | NumberTuple13 | NumberTuple9 | NumberTuple7 | CircleShape | CircleSymbolShape)[],
 	symbol: FlagShapeSymbolPlacement,
 	cond: FlagShapeCondition[],
 };

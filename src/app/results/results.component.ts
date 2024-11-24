@@ -289,7 +289,7 @@ export class ResultsComponent {
             .flatMap(fs0transform => flagSymbol1.data.transforms
               .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
                 && flagSymbol1.data.parent_type === fs0transform.child_type)
-              .map(fs1transform => [fs0transform, fs1transform] as [FlagSymbolTransform, FlagSymbolTransform]))
+              .map(fs1transform => [fs0transform, fs1transform] as const))
             .at(-1);
 
           if (transformPair !== undefined) {

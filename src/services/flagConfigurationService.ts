@@ -3,7 +3,8 @@ type FlagShapePath = (
 	[number, number, number, number, number, number, number, number, number, number, number, number, number] |
 	[number, number, number, number, number, number, number, number, number] |
 	[number, number, number, number, number, number, number] |
-	[number, string, number, number, number]); // TODO improve
+	[number, ("circle"|"circleSymbol"), number, number, number]
+);
 type FlagShapeCondition = {
 	name: string,
 	vmin: number,

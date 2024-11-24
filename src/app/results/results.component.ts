@@ -267,8 +267,7 @@ export class ResultsComponent {
           }
         }
 
-        for (let s1=s0+1; s1<flagSymbols.length; s1++) {
-          const flagSymbol1 = flagSymbols[s1];
+        for (const flagSymbol1 of flagSymbols.slice(s0+1)) {
           let transform0 = undefined;
           let transform1 = undefined;
           for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
@@ -329,7 +328,7 @@ export class ResultsComponent {
           spriteS = 1.0;
 
       const colors = this.findFlagColors();
-      const symbolData = this.findFlagSymbol(colors.length);
+      const [symbol0, symbol1] = this.findFlagSymbol(colors.length);
 
       const flagShape = this.findFlagShape(colors.length);
 

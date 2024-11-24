@@ -21,7 +21,7 @@ export function getLanguageOrDefault(lang?: string) {
         }
         // this protection is for SSR, window doesn't exist there
         if (globalThis.window) {
-            lang = globalThis.window?.navigator.languages.filter(l => languageIds.includes(l))[0]
+            lang = globalThis.window.navigator.languages.filter(l => languageIds.includes(l))[0]
                 || globalThis.window.navigator.language;
         }
     }

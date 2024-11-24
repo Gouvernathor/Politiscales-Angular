@@ -54,6 +54,13 @@ export class ResultsComponent {
 
     this.storeAxesData();
     this.applyResults();
+
+    // twitterbutton
+    // redditButton
+
+    if (globalThis.document) { // TODO replace uses of document to enable server-side rendering of the canvas
+      await this.onAllImagesLoaded();
+    }
   }
 
   private storeAxesData() {
@@ -99,15 +106,6 @@ export class ResultsComponent {
     }
 
     this.generatedSlogan = this.generateSlogan();
-
-    // twitterbutton
-    // redditButton
-
-    // TODO
-    // loop on images with onload callback,
-    // call to onImageLoaded when all callbacks are done
-
-    // TODO continue
   }
 
   private generateSlogan() {
@@ -339,7 +337,16 @@ export class ResultsComponent {
     // TODO
   }
 
-  private onAllImagesLoaded() {
+  private imageLoadPromise(imageSrc: string): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = imageSrc;
+      img.onerror = reject;
+      img.onload = () => resolve(img);
+    });
+  }
+
+  private async onAllImagesLoaded() {
     const ctx = (document.getElementById("generatedFlag") as HTMLCanvasElement|null)?.getContext("2d");
     if (ctx) {
       let spriteX = 256,
@@ -386,7 +393,7 @@ export class ResultsComponent {
 
       if (symbol0.parent_type !== null) {
         const tmpC = document.createElement("canvas");
-        const images_sprites = null as unknown as Exclude<CanvasImageSource, VideoFrame|SVGImageElement>; // TODO
+        const images_sprites = await this.imageLoadPromise("/images/flag_sprites.png");
         tmpC.width = images_sprites.width;
         tmpC.height = images_sprites.height;
         const tmpCtx = tmpC.getContext("2d")!;
@@ -397,7 +404,7 @@ export class ResultsComponent {
         tmpCtx.fillRect(0, 0, tmpC.width, tmpC.height);
 
         tmpCtx.globalCompositeOperation = "destination-in";
-        tmpCtx.drawImage(images_sprites, 0, 0); // TODO must happen AFTER the image load
+        tmpCtx.drawImage(images_sprites, 0, 0);
 
         ctx.save(); // TODO check (no restore until the next save)
         ctx.translate(spriteX, spriteY);

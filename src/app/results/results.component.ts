@@ -265,6 +265,7 @@ export class ResultsComponent {
           // .filter(fsTransform => fsTransform.child_type === "none")
           // .at(-1);
           .findLast(fsTransform => fsTransform.child_type === "none");
+          // TODO test if just a find() has good enough results (and scale back to ES2022 compat)
 
         if (transform !== undefined) {
           singleSymbol = {
@@ -297,6 +298,7 @@ export class ResultsComponent {
                 && flagSymbol1.data.parent_type === fs0transform.child_type)] as const)
             .findLast(([, fs1transform]) => fs1transform !== undefined) as
               [FlagSymbolTransform, FlagSymbolTransform] | undefined;
+            // TODO test if just a find() has good enough results (and scale back to ES2022 compat)
 
           if (transformPair !== undefined) {
             const [transform0, transform1] = transformPair;

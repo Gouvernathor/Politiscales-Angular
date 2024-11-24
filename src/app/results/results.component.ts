@@ -147,7 +147,7 @@ export class ResultsComponent {
 
   private findFlagShape(numColors: number) {
     let flagFound = undefined;
-    let flagValue = [0, 0, 0];
+    let flagValue: [number, number, number] = [0, 0, 0];
     let flagColor = 0;
 
     for (let i = 0; i < flagShapes.length; i++) {
@@ -157,7 +157,7 @@ export class ResultsComponent {
         continue;
       }
 
-      let condValue = [0, 0, 0];
+      let condValue: [number, number, number] = [0, 0, 0];
       let accepted = true;
 
       for (let j = 0; j < flagShape.cond.length; j++) {
@@ -189,7 +189,7 @@ export class ResultsComponent {
           && (flagShape.numColors > flagColor
             || areArraysOrdered(flagValue, condValue))) {
         flagColor = flagShape.numColors;
-        [...flagValue] = condValue.slice(0, 3);
+        flagValue = condValue;
         flagFound = i;
       }
     }

@@ -261,27 +261,30 @@ export class ResultsComponent {
     let symbol1: Symbol|NoneSymbol = noneSymbol;
     let valueMax = 0;
 
-    for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
-      const flagSymbol0 = filteredValuedFlagSymbols[s0];
-      const charVal0 = flagSymbol0.value;
+    for (const flagSymbol of filteredValuedFlagSymbols) {
+      const charVal = flagSymbol.value;
       { // readability-only scope for the value variable
-        const value = charVal0*1.5;
+        const value = charVal*1.5;
         if (value > valueMax) {
-          const transform0 = flagSymbol0.data.transforms
-            .filter(fs0transform => fs0transform.child_type === "none")
+          const transform = flagSymbol.data.transforms
+            .filter(fsTransform => fsTransform.child_type === "none")
             .at(-1);
 
-          if (transform0 !== undefined) {
+          if (transform !== undefined) {
             symbol0 = {
-              parent_type: flagSymbol0.data.parent_type,
-              transform: transform0,
+              parent_type: flagSymbol.data.parent_type,
+              transform: transform,
             };
             symbol1 = noneSymbol;
             valueMax = value;
           }
         }
       }
+    }
 
+    for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
+      const flagSymbol0 = filteredValuedFlagSymbols[s0];
+      const charVal0 = flagSymbol0.value;
       for (const flagSymbol1 of filteredValuedFlagSymbols.slice(s0+1)) {
         const charVal1 = flagSymbol1.value;
         const value = charVal0 + charVal1;

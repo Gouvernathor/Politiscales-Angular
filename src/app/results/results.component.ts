@@ -262,8 +262,9 @@ export class ResultsComponent {
       const value = charVal*1.5;
       if (value > singleValueMax) {
         const transform = flagSymbol.data.transforms
-          .filter(fsTransform => fsTransform.child_type === "none")
-          .at(-1);
+          // .filter(fsTransform => fsTransform.child_type === "none")
+          // .at(-1);
+          .findLast(fsTransform => fsTransform.child_type === "none");
 
         if (transform !== undefined) {
           singleSymbol = {
@@ -286,11 +287,16 @@ export class ResultsComponent {
         const value = charVal0 + charVal1;
         if (value > doubleValueMax) {
           const transformPair = flagSymbol0.data.transforms
-            .flatMap(fs0transform => flagSymbol1.data.transforms
-              .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
-                && flagSymbol1.data.parent_type === fs0transform.child_type)
-              .map(fs1transform => [fs0transform, fs1transform] as const))
-            .at(-1);
+            // .flatMap(fs0transform => flagSymbol1.data.transforms
+            //   .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
+            //     && flagSymbol1.data.parent_type === fs0transform.child_type)
+            //   .map(fs1transform => [fs0transform, fs1transform] as const))
+            // .at(-1);
+            .map(fs0transform => [fs0transform, flagSymbol1.data.transforms
+              .findLast(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
+                && flagSymbol1.data.parent_type === fs0transform.child_type)] as const)
+            .findLast(([, fs1transform]) => fs1transform !== undefined) as
+              [FlagSymbolTransform, FlagSymbolTransform] | undefined;
 
           if (transformPair !== undefined) {
             const [transform0, transform1] = transformPair;

@@ -219,6 +219,7 @@ export class ResultsComponent {
    * Each is optional, but the alternate is the NoneSymbol instead of undefined.
    * If the second is defined, the first has to be defined too.
    * If the two are defined, then if the second has main to true, the first has to have it to true too.
+   * The criteria to maximize are very complex to specify.
    */
   private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
     const me = this;

@@ -1,8 +1,15 @@
-// TODO declare types in this module
-// both to help understand what the data means
-// and to help typing downstream
-
-export const flagShapes = [
+type FlagShapeCondition = {
+	name: string,
+	vmin: number,
+	vmax: number,
+};
+type FlagShape = {
+	numColors: number,
+	shapes: (number | string)[][], // TODO improve
+	symbol: number[],
+	cond: FlagShapeCondition[],
+};
+export const flagShapes: FlagShape[] = [
 	/*
 	****************************************************************************
 	3C, REVO, JREH
@@ -1427,7 +1434,17 @@ export const flagShapes = [
 	},
 ];
 
-export const flagColors = [
+type FlagColorCondition = {
+	name: string,
+	vmin: number,
+	vmax: number,
+};
+type FlagColor = {
+	bgColor: string,
+	fgColor: string,
+	cond: FlagColorCondition[],
+};
+export const flagColors: FlagColor[] = [
 	//Anarchisme
 	{
 		bgColor: "#000000",
@@ -1602,7 +1619,38 @@ export const flagColors = [
 	}
 ];
 
-export const flagSymbols = [
+export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";
+type FlagSymbolTransformChildType = "none" | "curve" | "dot" | "line" | "tri";
+export type FlagSymbolTransform = {
+	child_type: FlagSymbolTransformChildType,
+	x: number,
+	y: number,
+	main: boolean,
+	parent_tx: number,
+	parent_ty: number,
+	parent_sx: number,
+	parent_sy: number,
+	parent_r: number,
+	child_tx: number,
+	child_ty: number,
+	child_sx: number,
+	child_sy: number,
+	child_r: number,
+}
+type FlagSymbolData = {
+	parent_type: FlagSymbolDataParentType,
+	transforms: FlagSymbolTransform[],
+};
+type FlagSymbolCondition = {
+	name: string,
+	vmin: number,
+	vmax: number,
+};
+type FlagSymbol = {
+	data: FlagSymbolData,
+	cond: FlagSymbolCondition,
+};
+export const flagSymbols: FlagSymbol[] = [
 	//Féminisme
 	{
 		data: {

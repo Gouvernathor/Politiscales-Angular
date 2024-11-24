@@ -2,13 +2,19 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { flagColors, flagShapes, flagSymbols } from '../../services/flagConfigurationService';
+import { flagColors, flagShapes, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { arrayCmp, sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
+
+// TODO typing for the findFlagSymbol method, to be refined
+type Symbol = {
+  parent_type: FlagSymbolDataParentType|"none",
+  transform: FlagSymbolTransform|{},
+};
 
 @Component({
   selector: 'app-results',

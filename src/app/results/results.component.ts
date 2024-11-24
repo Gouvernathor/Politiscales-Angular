@@ -219,7 +219,7 @@ export class ResultsComponent {
    * Returns a major symbol and a minor symbol for the flag.
    * Each is optional, but the alternate is the NoneSymbol instead of undefined.
    * If the second is defined, the first has to be defined too.
-   * If the two are defined, then the symbol with main to true is preferred as the first.
+   * If the two are defined, then if the second has main to true, the first has to have it to true too.
    */
   private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
     const noneSymbol: NoneSymbol = {
@@ -253,7 +253,6 @@ export class ResultsComponent {
     } else {
       symbol0 = noneSymbol;
     }
-
     let symbol1: Symbol|NoneSymbol = noneSymbol;
     let valueMax = 0;
 
@@ -275,7 +274,7 @@ export class ResultsComponent {
               parent_type: flagSymbol0.data.parent_type,
               transform: transform0,
             };
-            symbol1.parent_type = null;
+            symbol1 = noneSymbol;
             valueMax = value;
           }
         }

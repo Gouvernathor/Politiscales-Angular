@@ -1,3 +1,7 @@
+// TODO declare types in this module
+// both to help understand what the data means
+// and to help typing downstream
+
 export const flagShapes = [
 	/*
 	****************************************************************************

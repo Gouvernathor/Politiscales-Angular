@@ -210,6 +210,13 @@ export class ResultsComponent {
   }
 
   private findFlagSymbol(numColors: number) {
+    const noneSymbol = {
+      parent_type: "none",
+      transform: {
+        main: false,
+      },
+    };
+
     let symbol0;
     if (numColors === 0) {
       symbol0 = {
@@ -232,16 +239,10 @@ export class ResultsComponent {
         },
       };
     } else {
-      symbol0 = {
-        parent_type: "none",
-        transform: {},
-      };
+      symbol0 = noneSymbol;
     }
 
-    let symbol1: typeof symbol0 = {
-      parent_type: "none",
-      transform: {},
-    };
+    let symbol1: typeof symbol0 = noneSymbol;
     let valueMax = 0;
 
     for (let s0 = 0; s0 < flagSymbols.length; s0++) {

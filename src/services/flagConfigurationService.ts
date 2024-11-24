@@ -1,10 +1,9 @@
-type FlagShapePath = (
-	[number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number] |
-	[number, number, number, number, number, number, number, number, number, number, number, number, number] |
-	[number, number, number, number, number, number, number, number, number] |
-	[number, number, number, number, number, number, number] |
-	[number, ("circle"|"circleSymbol"), number, number, number]
-);
+type NumberTuple41 = [number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number];
+type NumberTuple13 = [number, number, number, number, number, number, number, number, number, number, number, number, number];
+type NumberTuple9 = [number, number, number, number, number, number, number, number, number];
+type NumberTuple7 = [number, number, number, number, number, number, number];
+type CirclePath = [number, ("circle" | "circleSymbol"), number, number, number];
+type FlagShapePath = (NumberTuple41 | NumberTuple13 | NumberTuple9 | NumberTuple7 | CirclePath);
 type FlagShapeCondition = {
 	name: string,
 	vmin: number,

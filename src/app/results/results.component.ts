@@ -283,17 +283,17 @@ export class ResultsComponent {
       }
 
       for (const flagSymbol1 of filteredValuedFlagSymbols.slice(s0+1)) {
-        const transformPair = flagSymbol0.data.transforms
-          .flatMap(fs0transform => flagSymbol1.data.transforms
-            .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
-              && flagSymbol1.data.parent_type === fs0transform.child_type)
-            .map(fs1transform => [fs0transform, fs1transform] as [FlagSymbolTransform, FlagSymbolTransform]))
-          .at(-1);
+        const charVal1 = flagSymbol1.value;
+        const value = charVal0 + charVal1;
+        if (value > valueMax) {
+          const transformPair = flagSymbol0.data.transforms
+            .flatMap(fs0transform => flagSymbol1.data.transforms
+              .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
+                && flagSymbol1.data.parent_type === fs0transform.child_type)
+              .map(fs1transform => [fs0transform, fs1transform] as [FlagSymbolTransform, FlagSymbolTransform]))
+            .at(-1);
 
-        if (transformPair !== undefined) {
-          const charVal1 = flagSymbol1.value;
-          const value = charVal0 + charVal1;
-          if (value > valueMax) {
+          if (transformPair !== undefined) {
             const [transform0, transform1] = transformPair;
             symbol0 = {
               parent_type: flagSymbol0.data.parent_type,

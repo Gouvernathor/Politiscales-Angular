@@ -234,9 +234,8 @@ export class ResultsComponent {
       },
     };
 
-    let symbol0: Symbol|NoneSymbol;
-    if (numColors === 0) {
-      symbol0 = {
+    const initialSymbol: Symbol|NoneSymbol = numColors === 0 ?
+      {
         parent_type: "dot",
         transform: {
           child_type: "none",
@@ -254,39 +253,39 @@ export class ResultsComponent {
           child_sy: 1,
           child_r: 0,
         },
-      };
-    } else {
-      symbol0 = noneSymbol;
-    }
-    let symbol1: Symbol|NoneSymbol = noneSymbol;
-    let valueMax = 0;
+      } :
+      noneSymbol;
 
+    let singleSymbol = initialSymbol;
+    let singleValueMax = 0;
     for (const flagSymbol of filteredValuedFlagSymbols) {
       const charVal = flagSymbol.value;
       const value = charVal*1.5;
-      if (value > valueMax) {
+      if (value > singleValueMax) {
         const transform = flagSymbol.data.transforms
           .filter(fsTransform => fsTransform.child_type === "none")
           .at(-1);
 
         if (transform !== undefined) {
-          symbol0 = {
+          singleSymbol = {
             parent_type: flagSymbol.data.parent_type,
             transform: transform,
           };
-          symbol1 = noneSymbol;
-          valueMax = value;
+          singleValueMax = value;
         }
       }
     }
 
+    let doubleSymbol0 = initialSymbol;
+    let doubleSymbol1: Symbol|NoneSymbol = noneSymbol;
+    let doubleValueMax = 0;
     for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
       const flagSymbol0 = filteredValuedFlagSymbols[s0];
       const charVal0 = flagSymbol0.value;
       for (const flagSymbol1 of filteredValuedFlagSymbols.slice(s0+1)) {
         const charVal1 = flagSymbol1.value;
         const value = charVal0 + charVal1;
-        if (value > valueMax) {
+        if (value > doubleValueMax) {
           const transformPair = flagSymbol0.data.transforms
             .flatMap(fs0transform => flagSymbol1.data.transforms
               .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
@@ -296,19 +295,27 @@ export class ResultsComponent {
 
           if (transformPair !== undefined) {
             const [transform0, transform1] = transformPair;
-            symbol0 = {
+            doubleSymbol0 = {
               parent_type: flagSymbol0.data.parent_type,
               transform: transform0,
             };
-            symbol1 = {
+            doubleSymbol1 = {
               parent_type: flagSymbol1.data.parent_type,
               transform: transform1,
             };
-            valueMax = value;
+            doubleValueMax = value;
           }
         }
       }
     }
+
+    let symbol0, symbol1;
+    if (singleValueMax >= doubleValueMax) {
+      [symbol0, symbol1] = [singleSymbol, noneSymbol];
+    } else {
+      [symbol0, symbol1] = [doubleSymbol0, doubleSymbol1];
+    }
+
     if (symbol0.parent_type !== null && symbol1.parent_type !== null && symbol1.transform.main && !symbol0.transform.main) {
       return [symbol1, symbol0];
     } else {

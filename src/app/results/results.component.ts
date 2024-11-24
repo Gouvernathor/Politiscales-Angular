@@ -185,8 +185,18 @@ export class ResultsComponent {
       [0];
   }
 
-  private getCharacteristic(name: never, vmin: never, vmax: never) {
-    // TODO
+  // TODO make it return undefined instead of -1
+  private getCharacteristic(name: string, vmin: number, vmax: number) {
+    const axis = getAnyAxisFromId(name);
+    if (axis !== undefined) {
+      const value = this.characteristicsMap.get(axis);
+      if (value !== undefined) {
+        if (vmin <= value && value <= vmax) {
+          return value;
+        }
+      }
+    }
+    return -1;
   }
 
   private findFlagSymbol(numColors: number) {

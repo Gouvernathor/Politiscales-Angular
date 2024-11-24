@@ -11,9 +11,15 @@ import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
 
 // TODO typing for the findFlagSymbol method, to be refined
+type NoneSymbol = {
+  parent_type: "none",
+  transform: {
+    main: false,
+  },
+};
 type Symbol = {
-  parent_type: FlagSymbolDataParentType|"none",
-  transform: FlagSymbolTransform|{},
+  parent_type: FlagSymbolDataParentType,
+  transform: FlagSymbolTransform,
 };
 
 @Component({
@@ -209,15 +215,15 @@ export class ResultsComponent {
     return undefined;
   }
 
-  private findFlagSymbol(numColors: number) {
-    const noneSymbol = {
+  private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
+    const noneSymbol: NoneSymbol = {
       parent_type: "none",
       transform: {
         main: false,
       },
     };
 
-    let symbol0;
+    let symbol0: Symbol|NoneSymbol;
     if (numColors === 0) {
       symbol0 = {
         parent_type: "dot",

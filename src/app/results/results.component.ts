@@ -262,12 +262,9 @@ export class ResultsComponent {
       if (charVal0 !== undefined) {
         const value = charVal0*1.5;
         if (value > valueMax) {
-          let transform0 = undefined;
-          for (const fs0transform of flagSymbol0.data.transforms) {
-            if (fs0transform.child_type === "none") {
-              transform0 = fs0transform;
-            }
-          }
+          const transform0 = flagSymbol0.data.transforms
+            .filter(fs0transform => fs0transform.child_type === "none")
+            .at(-1);
 
           if (transform0 !== undefined) {
             symbol0 = {
@@ -280,24 +277,19 @@ export class ResultsComponent {
         }
 
         for (const flagSymbol1 of flagSymbols.slice(s0+1)) {
-          let transform0 = undefined;
-          let transform1 = undefined;
-          for (const fs0transform of flagSymbol0.data.transforms) {
-            for (const fs1transform of flagSymbol1.data.transforms) {
-              if (flagSymbol0.data.parent_type === fs1transform.child_type
-                && flagSymbol1.data.parent_type === fs0transform.child_type) {
+          const transformPair = flagSymbol0.data.transforms
+            .flatMap(fs0transform => flagSymbol1.data.transforms
+              .filter(fs1transform => flagSymbol0.data.parent_type === fs1transform.child_type
+                && flagSymbol1.data.parent_type === fs0transform.child_type)
+              .map(fs1transform => [fs0transform, fs1transform] as [FlagSymbolTransform, FlagSymbolTransform]))
+            .at(-1);
 
-                transform0 = fs0transform;
-                transform1 = fs1transform;
-              }
-            }
-          }
-
-          if (transform0 !== undefined && transform1 !== undefined) {
+          if (transformPair !== undefined) {
             const charVal1 = this.getCharacteristic(flagSymbol1.cond);
             if (charVal1 !== undefined) {
               const value = charVal0 + charVal1;
               if (value > valueMax) {
+                const [transform0, transform1] = transformPair;
                 symbol0 = {
                   parent_type: flagSymbol0.data.parent_type,
                   transform: transform0,

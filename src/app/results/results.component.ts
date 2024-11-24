@@ -40,8 +40,7 @@ export class ResultsComponent {
 
   async ngOnInit() {
     let lang: string;
-    lang = (await firstValueFrom(this.route.data))["lang"];
-    if (lang) {
+    if (lang = (await firstValueFrom(this.route.data))["lang"]) {
       setLanguage(lang);
     }
 
@@ -93,16 +92,7 @@ export class ResultsComponent {
       }
     }
 
-    const sloganMap = new Map<AnyAxis, string>();
-    for (const [axis, value] of this.characteristicsMap.entries()) {
-      const slogan = getSlogan(axis);
-      if (value > 0 && slogan) {
-        sloganMap.set(axis, slogan);
-      }
-    }
-
-    this.generatedSlogan = sorted(sloganMap.keys(), a => -this.characteristicsMap.get(a)!)
-      .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
+    this.generatedSlogan = this.generateSlogan();
 
     // twitterbutton
     // redditButton
@@ -112,6 +102,19 @@ export class ResultsComponent {
     // call to onImageLoaded when all callbacks are done
 
     // TODO continue
+  }
+
+  private generateSlogan() {
+    const sloganMap = new Map<AnyAxis, string>();
+    for (const [axis, value] of this.characteristicsMap.entries()) {
+      const slogan = getSlogan(axis);
+      if (value > 0 && slogan) {
+        sloganMap.set(axis, slogan);
+      }
+    }
+
+    return sorted(sloganMap.keys(), a => -this.characteristicsMap.get(a)!)
+      .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
   }
 
   /**

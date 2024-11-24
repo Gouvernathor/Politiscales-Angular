@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { flagColors, flagShapes } from '../../services/flagConfigurationService';
+import { flagColors, flagShapes, flagSymbols } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -186,7 +186,8 @@ export class ResultsComponent {
   }
 
   // TODO make it return undefined instead of -1
-  private getCharacteristic(name: string, vmin: number, vmax: number) {
+  // private getCharacteristic(name: string, vmin: number, vmax: number) {
+  private getCharacteristic({name, vmin, vmax}: {name: string, vmin: number, vmax: number}) {
     const axis = getAnyAxisFromId(name);
     if (axis !== undefined) {
       const value = this.characteristicsMap.get(axis);
@@ -196,11 +197,109 @@ export class ResultsComponent {
         }
       }
     }
-    return -1;
+    return undefined;
   }
 
   private findFlagSymbol(numColors: number) {
-    // TODO
+    let symbol0;
+    if (numColors === 0) {
+      symbol0 = {
+        parent_type: "dot",
+        transform: {
+          child_type: "none",
+          x: 3,
+          y: 3,
+          main: true,
+          parent_tx: 0,
+          parent_ty: 0,
+          parent_sx: 1,
+          parent_sy: 1,
+          parent_r: 0,
+          child_tx: 0,
+          child_ty: 0,
+          child_sx: 1,
+          child_sy: 1,
+          child_r: 0,
+        },
+      };
+    } else {
+      symbol0 = {
+        parent_type: "none",
+        transform: {},
+      };
+    }
+
+    let symbol1: typeof symbol0 = {
+      parent_type: "none",
+      transform: {},
+    };
+    let valueMax = 0;
+
+    for (let s0 = 0; s0 < flagSymbols.length; s0++) {
+      const flagSymbol0 = flagSymbols[s0];
+      const charVal0 = this.getCharacteristic(flagSymbol0.cond);
+      if (charVal0 !== undefined) {
+        let value = charVal0*1.5;
+        if (value > valueMax) {
+          let transform0 = undefined;
+          for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
+            if (flagSymbol0.data.transforms[k0].child_type === "none") {
+              transform0 = k0;
+            }
+          }
+
+          if (transform0 !== undefined) {
+            symbol0 = {
+              parent_type: flagSymbol0.data.parent_type,
+              transform: flagSymbol0.data.transforms[transform0],
+            }
+            symbol1.parent_type = "none";
+            valueMax = value;
+          }
+        }
+
+        for (let s1=s0+1; s1<flagSymbols.length; s1++) {
+          const flagSymbol1 = flagSymbols[s1];
+          let transform0 = undefined;
+          let transform1 = undefined;
+          for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
+            for (let k1 = 0; k1 < flagSymbol1.data.transforms.length; k1++) {
+              if (flagSymbol0.data.parent_type === flagSymbol1.data.transforms[k1].child_type
+                && flagSymbol1.data.parent_type === flagSymbol0.data.transforms[k0].child_type) {
+
+                transform0 = k0;
+                transform1 = k1;
+              }
+            }
+          }
+
+          if (transform0 === undefined || transform1 === undefined) {
+            continue;
+          }
+
+          const charVal1 = this.getCharacteristic(flagSymbol1.cond);
+          if (charVal1 !== undefined) {
+            const value = charVal0 + charVal1;
+            if (value > valueMax) {
+              symbol0 = {
+                parent_type: flagSymbol0.data.parent_type,
+                transform: flagSymbol0.data.transforms[transform0],
+              };
+              symbol1 = {
+                parent_type: flagSymbol1.data.parent_type,
+                transform: flagSymbol1.data.transforms[transform1],
+              };
+              valueMax = value;
+            }
+          }
+        }
+      }
+    }
+    if (symbol0.parent_type !== "none" && symbol1.parent_type !== "none" && symbol1.transform.main && !symbol0.transform.main) {
+      return [symbol1, symbol0];
+    } else {
+      return [symbol0, symbol1];
+    }
   }
 
   shareLink() {

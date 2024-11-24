@@ -1,3 +1,4 @@
+type FlagShapePath = (number | string)[]; // TODO improve
 type FlagShapeCondition = {
 	name: string,
 	vmin: number,
@@ -5,7 +6,7 @@ type FlagShapeCondition = {
 };
 type FlagShape = {
 	numColors: number,
-	shapes: (number | string)[][], // TODO improve
+	shapes: FlagShapePath[],
 	symbol: number[],
 	cond: FlagShapeCondition[],
 };

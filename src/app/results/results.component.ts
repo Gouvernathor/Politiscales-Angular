@@ -263,21 +263,19 @@ export class ResultsComponent {
 
     for (const flagSymbol of filteredValuedFlagSymbols) {
       const charVal = flagSymbol.value;
-      { // readability-only scope for the value variable
-        const value = charVal*1.5;
-        if (value > valueMax) {
-          const transform = flagSymbol.data.transforms
-            .filter(fsTransform => fsTransform.child_type === "none")
-            .at(-1);
+      const value = charVal*1.5;
+      if (value > valueMax) {
+        const transform = flagSymbol.data.transforms
+          .filter(fsTransform => fsTransform.child_type === "none")
+          .at(-1);
 
-          if (transform !== undefined) {
-            symbol0 = {
-              parent_type: flagSymbol.data.parent_type,
-              transform: transform,
-            };
-            symbol1 = noneSymbol;
-            valueMax = value;
-          }
+        if (transform !== undefined) {
+          symbol0 = {
+            parent_type: flagSymbol.data.parent_type,
+            transform: transform,
+          };
+          symbol1 = noneSymbol;
+          valueMax = value;
         }
       }
     }

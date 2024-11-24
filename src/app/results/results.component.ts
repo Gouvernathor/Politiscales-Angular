@@ -260,7 +260,7 @@ export class ResultsComponent {
       const flagSymbol0 = flagSymbols[s0];
       const charVal0 = this.getCharacteristic(flagSymbol0.cond);
       if (charVal0 !== undefined) {
-        let value = charVal0*1.5;
+        const value = charVal0*1.5;
         if (value > valueMax) {
           let transform0 = undefined;
           for (const fs0transform of flagSymbol0.data.transforms) {

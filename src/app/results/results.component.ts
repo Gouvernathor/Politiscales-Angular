@@ -59,7 +59,8 @@ export class ResultsComponent {
     // redditButton
 
     if (globalThis.document) { // TODO replace uses of document to enable server-side rendering of the canvas
-      await this.onAllImagesLoaded();
+      await this.generateFlagCanvas();
+      await this.generateResultsCanvas();
     }
   }
 
@@ -346,7 +347,7 @@ export class ResultsComponent {
     });
   }
 
-  private async onAllImagesLoaded() {
+  private async generateFlagCanvas() {
     const ctx = (document.getElementById("generatedFlag") as HTMLCanvasElement|null)?.getContext("2d");
     if (ctx) {
       let spriteX = 256,
@@ -433,7 +434,9 @@ export class ResultsComponent {
         ctx.restore();
       }
     }
+  }
 
+  private async generateResultsCanvas() {
     // TODO generatedResults
   }
 

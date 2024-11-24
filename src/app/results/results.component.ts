@@ -250,17 +250,17 @@ export class ResultsComponent {
       if (charVal0 !== undefined) {
         let value = charVal0*1.5;
         if (value > valueMax) {
-          let transformidx0 = undefined;
-          for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
-            if (flagSymbol0.data.transforms[k0].child_type === "none") {
-              transformidx0 = k0;
+          let transform0 = undefined;
+          for (const fs0transform of flagSymbol0.data.transforms) {
+            if (fs0transform.child_type === "none") {
+              transform0 = fs0transform;
             }
           }
 
-          if (transformidx0 !== undefined) {
+          if (transform0 !== undefined) {
             symbol0 = {
               parent_type: flagSymbol0.data.parent_type,
-              transform: flagSymbol0.data.transforms[transformidx0],
+              transform: transform0,
             }
             symbol1.parent_type = "none";
             valueMax = value;
@@ -268,20 +268,20 @@ export class ResultsComponent {
         }
 
         for (const flagSymbol1 of flagSymbols.slice(s0+1)) {
-          let transformidx0 = undefined;
-          let transformidx1 = undefined;
-          for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
-            for (let k1 = 0; k1 < flagSymbol1.data.transforms.length; k1++) {
-              if (flagSymbol0.data.parent_type === flagSymbol1.data.transforms[k1].child_type
-                && flagSymbol1.data.parent_type === flagSymbol0.data.transforms[k0].child_type) {
+          let transform0 = undefined;
+          let transform1 = undefined;
+          for (const fs0transform of flagSymbol0.data.transforms) {
+            for (const fs1transform of flagSymbol1.data.transforms) {
+              if (flagSymbol0.data.parent_type === fs1transform.child_type
+                && flagSymbol1.data.parent_type === fs0transform.child_type) {
 
-                transformidx0 = k0;
-                transformidx1 = k1;
+                transform0 = fs0transform;
+                transform1 = fs1transform;
               }
             }
           }
 
-          if (transformidx0 === undefined || transformidx1 === undefined) {
+          if (transform0 === undefined || transform1 === undefined) {
             continue;
           }
 
@@ -291,11 +291,11 @@ export class ResultsComponent {
             if (value > valueMax) {
               symbol0 = {
                 parent_type: flagSymbol0.data.parent_type,
-                transform: flagSymbol0.data.transforms[transformidx0],
+                transform: transform0,
               };
               symbol1 = {
                 parent_type: flagSymbol1.data.parent_type,
-                transform: flagSymbol1.data.transforms[transformidx1],
+                transform: transform1,
               };
               valueMax = value;
             }

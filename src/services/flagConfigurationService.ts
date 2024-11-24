@@ -1625,12 +1625,41 @@ export const flagColors: FlagColor[] = [
 	}
 ];
 
+enum FlagSprite {
+	// in reading order
+	Scythe, // 0, 0
+	GearArc, // 1, 0
+	PartialVenus, // 2, 0
+	PartialUnionStars, // 3, 0
+	Sword, // 0, 1
+	Compass, // 1, 1
+	FistVenus, // 2, 1
+	UnionStars, // 3, 1
+	Hammer, // 0, 2
+	Arrows, // 1, 2
+	Wheat, // 2, 2
+	Flower, // 3, 2
+	XX, // 0, 3
+	Star, // 1, 3
+	FleurDeLys, // 2, 3
+	SmileyFrown, // 3, 3
+}
+type FlagSpriteCoordinates = {x: number, y: number};
+function getFlagSpriteCoordinates(flagSprite: FlagSprite): FlagSpriteCoordinates {
+	return {x: flagSprite % 4, y: Math.floor(flagSprite / 4)};
+}
+function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
+	const rv = x + y * 4;
+	if (rv in FlagSprite) {
+		return rv as FlagSprite;
+	}
+	return undefined;
+}
+
 export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";
 type FlagSymbolTransformChildType = "none" | "curve" | "dot" | "line" | "tri";
-export type FlagSymbolTransform = {
+export type FlagSymbolTransform = FlagSpriteCoordinates & {
 	child_type: FlagSymbolTransformChildType,
-	x: number,
-	y: number,
 	main: boolean,
 	parent_tx: number,
 	parent_ty: number,

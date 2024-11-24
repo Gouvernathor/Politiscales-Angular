@@ -12,7 +12,7 @@ import { getAllEnumValues } from 'enum-for';
 
 // TODO typing for the findFlagSymbol method, to be refined
 type NoneSymbol = {
-  parent_type: "none",
+  parent_type: null,
   transform: {
     main: false,
   },
@@ -223,7 +223,7 @@ export class ResultsComponent {
    */
   private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
     const noneSymbol: NoneSymbol = {
-      parent_type: "none",
+      parent_type: null,
       transform: {
         main: false,
       },
@@ -275,7 +275,7 @@ export class ResultsComponent {
               parent_type: flagSymbol0.data.parent_type,
               transform: transform0,
             };
-            symbol1.parent_type = "none";
+            symbol1.parent_type = null;
             valueMax = value;
           }
         }
@@ -314,7 +314,7 @@ export class ResultsComponent {
         }
       }
     }
-    if (symbol0.parent_type !== "none" && symbol1.parent_type !== "none" && symbol1.transform.main && !symbol0.transform.main) {
+    if (symbol0.parent_type !== null && symbol1.parent_type !== null && symbol1.transform.main && !symbol0.transform.main) {
       return [symbol1, symbol0];
     } else {
       return [symbol0, symbol1];

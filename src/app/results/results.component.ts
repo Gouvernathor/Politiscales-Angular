@@ -223,8 +223,8 @@ export class ResultsComponent {
   private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
     const me = this;
     const filteredValuedFlagSymbols = flagSymbols
-      .map(fs => ({...fs, value: me.getCharacteristic(fs.cond)}))
-      .filter(fs => fs.value !== undefined) as (FlagSymbol & {value: number})[];
+      .map(fs => ({...fs, charVal: me.getCharacteristic(fs.cond)}))
+      .filter(fs => fs.charVal !== undefined) as (FlagSymbol & {charVal: number})[];
 
     const noneSymbol: NoneSymbol = {
       parent_type: null,
@@ -258,7 +258,7 @@ export class ResultsComponent {
     let singleSymbol = initialSymbol;
     let singleValueMax = 0;
     for (const flagSymbol of filteredValuedFlagSymbols) {
-      const charVal = flagSymbol.value;
+      const charVal = flagSymbol.charVal;
       const value = charVal*1.5;
       if (value > singleValueMax) {
         const transform = flagSymbol.data.transforms
@@ -280,9 +280,9 @@ export class ResultsComponent {
     let doubleValueMax = 0;
     for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
       const flagSymbol0 = filteredValuedFlagSymbols[s0];
-      const charVal0 = flagSymbol0.value;
+      const charVal0 = flagSymbol0.charVal;
       for (const flagSymbol1 of filteredValuedFlagSymbols.slice(s0+1)) {
-        const charVal1 = flagSymbol1.value;
+        const charVal1 = flagSymbol1.charVal;
         const value = charVal0 + charVal1;
         if (value > doubleValueMax) {
           const transformPair = flagSymbol0.data.transforms

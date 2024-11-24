@@ -4,15 +4,16 @@ type NumberTuple9 = [number, number, number, number, number, number, number, num
 type NumberTuple7 = [number, number, number, number, number, number, number];
 type CirclePath = [number, ("circle" | "circleSymbol"), number, number, number];
 type FlagShapePath = (NumberTuple41 | NumberTuple13 | NumberTuple9 | NumberTuple7 | CirclePath);
+type FlagShapeSymbolPlacement = [number, number, number]; // x, y, scale
 type FlagShapeCondition = {
 	name: string,
 	vmin: number,
 	vmax: number,
 };
 type FlagShape = {
-	numColors: number,
+	numColors: 0|1|2|3,
 	shapes: FlagShapePath[],
-	symbol: number[],
+	symbol: FlagShapeSymbolPlacement,
 	cond: FlagShapeCondition[],
 };
 export const flagShapes: FlagShape[] = [
@@ -1644,16 +1645,12 @@ enum FlagSprite {
 	FleurDeLys, // 2, 3
 	SmileyFrown, // 3, 3
 }
-type FlagSpriteCoordinates = {x: number, y: number};
+type FlagSpriteCoordinates = {x: 0|1|2|3, y: 0|1|2|3};
 function getFlagSpriteCoordinates(flagSprite: FlagSprite): FlagSpriteCoordinates {
-	return {x: flagSprite % 4, y: Math.floor(flagSprite / 4)};
+	return {x: flagSprite % 4, y: Math.floor(flagSprite / 4)} as FlagSpriteCoordinates;
 }
 function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
-	const rv = x + y * 4;
-	if (rv in FlagSprite) {
-		return rv as FlagSprite;
-	}
-	return undefined;
+	return x + y * 4 as FlagSprite;
 }
 
 export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";

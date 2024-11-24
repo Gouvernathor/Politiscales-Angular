@@ -1,4 +1,9 @@
-type FlagShapePath = (number | string)[]; // TODO improve
+type FlagShapePath = (
+	[number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number] |
+	[number, number, number, number, number, number, number, number, number, number, number, number, number] |
+	[number, number, number, number, number, number, number, number, number] |
+	[number, number, number, number, number, number, number] |
+	[number, string, number, number, number]); // TODO improve
 type FlagShapeCondition = {
 	name: string,
 	vmin: number,

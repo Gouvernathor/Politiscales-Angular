@@ -250,17 +250,17 @@ export class ResultsComponent {
       if (charVal0 !== undefined) {
         let value = charVal0*1.5;
         if (value > valueMax) {
-          let transform0 = undefined;
+          let transformidx0 = undefined;
           for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
             if (flagSymbol0.data.transforms[k0].child_type === "none") {
-              transform0 = k0;
+              transformidx0 = k0;
             }
           }
 
-          if (transform0 !== undefined) {
+          if (transformidx0 !== undefined) {
             symbol0 = {
               parent_type: flagSymbol0.data.parent_type,
-              transform: flagSymbol0.data.transforms[transform0],
+              transform: flagSymbol0.data.transforms[transformidx0],
             }
             symbol1.parent_type = "none";
             valueMax = value;
@@ -268,20 +268,20 @@ export class ResultsComponent {
         }
 
         for (const flagSymbol1 of flagSymbols.slice(s0+1)) {
-          let transform0 = undefined;
-          let transform1 = undefined;
+          let transformidx0 = undefined;
+          let transformidx1 = undefined;
           for (let k0 = 0; k0 < flagSymbol0.data.transforms.length; k0++) {
             for (let k1 = 0; k1 < flagSymbol1.data.transforms.length; k1++) {
               if (flagSymbol0.data.parent_type === flagSymbol1.data.transforms[k1].child_type
                 && flagSymbol1.data.parent_type === flagSymbol0.data.transforms[k0].child_type) {
 
-                transform0 = k0;
-                transform1 = k1;
+                transformidx0 = k0;
+                transformidx1 = k1;
               }
             }
           }
 
-          if (transform0 === undefined || transform1 === undefined) {
+          if (transformidx0 === undefined || transformidx1 === undefined) {
             continue;
           }
 
@@ -291,11 +291,11 @@ export class ResultsComponent {
             if (value > valueMax) {
               symbol0 = {
                 parent_type: flagSymbol0.data.parent_type,
-                transform: flagSymbol0.data.transforms[transform0],
+                transform: flagSymbol0.data.transforms[transformidx0],
               };
               symbol1 = {
                 parent_type: flagSymbol1.data.parent_type,
-                transform: flagSymbol1.data.transforms[transform1],
+                transform: flagSymbol1.data.transforms[transformidx1],
               };
               valueMax = value;
             }

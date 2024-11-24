@@ -340,10 +340,8 @@ export class ResultsComponent {
   }
 
   private onAllImagesLoaded() {
-    const flag: any = null!; // #generatedFlag element
-    if (flag) {
-      const ctx = flag.getContext("2d");
-
+    const ctx = (document.getElementById("generatedFlag") as HTMLCanvasElement|null)?.getContext("2d");
+    if (ctx) {
       let spriteX = 256,
           spriteY = 128,
           spriteS = 1.0;
@@ -354,19 +352,31 @@ export class ResultsComponent {
       const flagShape = this.findFlagShape(colors.length);
 
       if (colors.length <= 0) {
-        // TODO maybe do this in findFlagColors() ???
         colors.push({bgColor: "#fff", fgColor: "#000"});
       }
 
       if (flagShape === undefined) {
-        // TODO
-        // draw a rectangle (0, 0, 512, 256) filled with "#fff"
+        // ctx.beginPath(); // TODO check
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, 512, 256);
       } else {
         for (const path of flagShape.shapes) {
-          const numPoints = path.length/2;
+          const numPoints = path.length/2; // TODO check (with the for loop)
 
-          // TODO
-          // draw a SVG path
+          ctx.beginPath();
+          ctx.moveTo((path[1] as number)*512, path[2]*256); // FIXME
+
+          if (path[1] === "circle") {
+            ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
+          } else if (path[1] === "circleSymbol" && symbol0.parent_type !== null) { // TODO the && should be in an inner if ?
+            ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
+          } else {
+            for (let j=1; j < numPoints; j++) {
+              ctx.lineTo((path[1+j*2] as number)*512, (path[1+j*2+1] as number)*256); // FIXME
+            }
+          }
+          ctx.fillStyle = colors[path[0]].bgColor;
+          ctx.fill();
         }
 
         spriteX = flagShape.symbol[0]*512;
@@ -374,8 +384,50 @@ export class ResultsComponent {
         spriteS = flagShape.symbol[2];
       }
 
-      // TODO continue
+      if (symbol0.parent_type !== null) {
+        const tmpC = document.createElement("canvas");
+        const images_sprites = null as unknown as Exclude<CanvasImageSource, VideoFrame|SVGImageElement>; // TODO
+        tmpC.width = images_sprites.width;
+        tmpC.height = images_sprites.height;
+        const tmpCtx = tmpC.getContext("2d")!;
+        tmpCtx.getImageData(0, 0, tmpC.width, tmpC.height); // TODO check if necessary, legacy put that in an unused variable
+
+        // tmpCtx.beginPath(); // TODO check
+        tmpCtx.fillStyle = colors[0].fgColor;
+        tmpCtx.fillRect(0, 0, tmpC.width, tmpC.height);
+
+        tmpCtx.globalCompositeOperation = "destination-in";
+        tmpCtx.drawImage(images_sprites, 0, 0); // TODO must happen AFTER the image load
+
+        ctx.save(); // TODO check (no restore until the next save)
+        ctx.translate(spriteX, spriteY);
+        ctx.scale(spriteS, spriteS);
+
+        ctx.save();
+        ctx.translate(symbol0.transform.parent_tx, -symbol0.transform.parent_ty);
+        ctx.rotate(symbol0.transform.parent_r * Math.PI / 180);
+        ctx.scale(symbol0.transform.parent_sx, symbol0.transform.parent_sy);
+        ctx.drawImage(tmpC, symbol0.transform.x*128, symbol0.transform.y*128, 128, 128, -64, -64, 128, 128);
+        ctx.restore();
+
+        if (symbol1.parent_type !== null) {
+          ctx.translate(symbol0.transform.child_tx, -symbol0.transform.child_ty);
+          ctx.rotate(symbol0.transform.child_r * Math.PI / 180);
+          ctx.scale(symbol0.transform.child_sx, symbol0.transform.child_sy);
+
+          ctx.translate(symbol1.transform.parent_tx, -symbol1.transform.parent_ty);
+          ctx.rotate(symbol1.transform.parent_r * Math.PI / 180);
+          ctx.scale(symbol1.transform.parent_sx, symbol1.transform.parent_sy);
+
+          ctx.drawImage(tmpC, symbol1.transform.x*128, symbol1.transform.y*128, 128, 128, -64, -64, 128, 128);
+          ctx.restore();
+        }
+
+        ctx.restore();
+      }
     }
+
+    // TODO generatedResults
   }
 
   debug() {

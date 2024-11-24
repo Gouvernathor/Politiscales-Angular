@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { flagColors, flagShapes, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform } from '../../services/flagConfigurationService';
+import { FlagColor, flagColors, FlagShape, flagShapes, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -134,7 +134,7 @@ export class ResultsComponent {
    */
   private findFlagColors(): {bgColor: string, fgColor: string}[] {
     const me = this;
-    function getColorMainValue(flagColor: typeof flagColors[0]) {
+    function getColorMainValue(flagColor: FlagColor) {
       let mainValue = undefined;
       for (const cond of flagColor.cond) {
         const axis = getAnyAxisFromId(cond.name);
@@ -170,9 +170,9 @@ export class ResultsComponent {
    * then with the highest value of the BaseAxis of its first condition,
    * then of its second, and so on (with the most number of conditions winning in case of a tie).
    */
-  private findFlagShape(numColors: number): Pick<typeof flagShapes[0], "symbol"|"shapes">|undefined {
+  private findFlagShape(numColors: number): Pick<FlagShape, "symbol"|"shapes">|undefined {
     const me = this;
-    function getConditionValues(flagShape: typeof flagShapes[0]): number[]|undefined {
+    function getConditionValues(flagShape: FlagShape): number[]|undefined {
       let condValues = [];
       for (const cond of flagShape.cond) {
         const baseAxis = getBaseAxisFromId(cond.name);
@@ -254,7 +254,7 @@ export class ResultsComponent {
       symbol0 = noneSymbol;
     }
 
-    let symbol1: typeof symbol0 = noneSymbol;
+    let symbol1: Symbol|NoneSymbol = noneSymbol;
     let valueMax = 0;
 
     for (let s0 = 0; s0 < flagSymbols.length; s0++) {

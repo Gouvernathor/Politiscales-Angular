@@ -10,7 +10,7 @@ type FlagShapeCondition = {
 	vmin: number,
 	vmax: number,
 };
-type FlagShape = {
+export type FlagShape = {
 	numColors: 0|1|2|3,
 	shapes: FlagShapePath[],
 	symbol: FlagShapeSymbolPlacement,
@@ -1446,7 +1446,7 @@ type FlagColorCondition = {
 	vmin: number,
 	vmax: number,
 };
-type FlagColor = {
+export type FlagColor = {
 	bgColor: string,
 	fgColor: string,
 	cond: FlagColorCondition[],

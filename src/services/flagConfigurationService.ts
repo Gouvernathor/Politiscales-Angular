@@ -1,3 +1,26 @@
+/**
+ * These are layouts to construct a flag.
+ * Each layout, or FlagShape, has:
+ * - a given number of colors,
+ * - a series of shapes,
+ * - a location for a symbol,
+ * - a set of conditions based upon the axes.
+ *
+ * The conditions are pretty much straightforward, and are used elsewhere in this module:
+ * each condition specifies a baseAxis (by id) and a numeric range,
+ * and the value for that axis must be in the range for all conditions, for the layout to be eligible.
+ *
+ * The symbol location is a triplet giving x and y coordinates, and a scale, to draw a symbol on the flag.
+ * Note that even though all layouts must have a symbol location, not all generated flags have symbols.
+ *
+ * The shapes are implemented as tuples,
+ * where each tuple starts with a number identifying a color (among the number of colors of the layout).
+ * When the second element of the tuple is "circle" or "circleSymbol",
+ * the three other elements are x and y coordinates of the center and the radius of a circle to be drawn.
+ * When it is "circleSymbol", the circle is only drawn if a symbol is to be drawn on top of it.
+ * Otherwise, the tuples contain only numbers and are a series of x and y coordinates with which to draw polygons.
+ * (Some of these values may be skipped though, and that's something to be investigated.)
+ */
 type NumberTuple41 = [number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number];
 type NumberTuple13 = [number, number, number, number, number, number, number, number, number, number, number, number, number];
 type NumberTuple9 = [number, number, number, number, number, number, number, number, number];
@@ -1442,6 +1465,13 @@ export const flagShapes: FlagShape[] = [
 	},
 ];
 
+/**
+ * Pretty much self-explanatory.
+ * Pairs of colors (one front and one back),
+ * each matching a set of conditions for a range of one or several axes (incl. special axes) :
+ * A pair of color is acceptable if and when for each of the pair's conditions, the value of the axis is in the range.
+ * Axes (and special axes) are identified by their ids.
+ */
 type FlagColorCondition = {
 	name: string,
 	vmin: number,
@@ -1675,6 +1705,50 @@ export function getFlagSpriteFileExtension(fs: FlagSprite) {
 	return flagSpriteFileExtension.get(fs);
 }
 
+/**
+ * These describe symbols to be drawn as part of a flag.
+ * Each FlagSymbol entry has:
+ * - one condition,
+ * - a parent type,
+ * - a series of transforms.
+ * Note that there isn't a direct relationship
+ * between FlagSymbol entries and flag sprites.
+ *
+ * The condition is of the same kind as others in this module:
+ * An axis (or special axis) is specified by id,
+ * and its value must be in the specified range for the symbol entry to be eligible.
+ * The specificity here is that each symbol entry has a single condition.
+ *
+ * Each of the specified transforms is one way the symbol may exist and be drawn ;
+ * some FlagSymbol entries have transforms using different FlagSprites
+ * (for instance, one to be combined with others and one to be standalone).
+ * Each symbol transform specifies a FlagSprite.
+ * A symbol transform with a child type of "none" may only appear on its own.
+ * For two symbol transforms to appear combined on a flag,
+ * the child_type of each must be equal to the parent_type of the FlagSymbol of the other.
+ * Given that "none" is not a valid parent type value, symbol transforms are
+ * either only standalone (if their child_type is "none") or only to be combined (if not).
+ * There is no combining more than two symbol transforms on a single flag.
+ * There is no combining two transforms from the same FlagSymbol entry.
+ * The "main" field of a transform gives it priority
+ * to be the enclosing transform of the two, when combined
+ * (it is ignored for standalone transforms).
+ * Otherwise, the first transform in the order of the FlagSymbol entries
+ * (so, in the order this module defines them) is the enclosing one.
+ *
+ * From the location set by the flag's layout to receive a symbol,
+ * the enclosing or standalone transform's sprite is displayed after translating
+ * in parent_tx pixels in the horizontal direction, -parent_ty pixels in the vertical direction,
+ * rotating parent_sx degrees clockwise,
+ * and scaling by a factor of parent_sx horizontally and parent_sy vertically.
+ *
+ * If a second sprite is to be drawn, it is applied the transformations specified
+ * by the child_ fields of the enclosing transform,
+ * and then the parent_ ones of the second transform.
+ *
+ * TODO The main and child_ fields (except child_type) of standalone transforms,
+ * meaning on which child_type is "none", is meaningless.
+ */
 export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";
 type FlagSymbolTransformChildType = "none" | "curve" | "dot" | "line" | "tri";
 export type FlagSymbolTransform = FlagSpriteCoordinates & {

@@ -100,7 +100,3 @@ export function arrayCmp(a: number[], b: number[]): number {
     }
     return a.length - b.length;
 }
-
-function areArraysOrdered(a: number[], b: number[]) {
-    return arrayCmp(a, b) === -1;
-}

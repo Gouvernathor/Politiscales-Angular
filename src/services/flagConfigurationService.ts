@@ -1669,7 +1669,7 @@ export type FlagSymbolTransform = FlagSpriteCoordinates & {
 	child_sx: number,
 	child_sy: number,
 	child_r: number,
-}
+};
 type FlagSymbolData = {
 	parent_type: FlagSymbolDataParentType,
 	transforms: FlagSymbolTransform[],

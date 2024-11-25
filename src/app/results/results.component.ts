@@ -452,8 +452,4 @@ export class ResultsComponent {
   gotoQuiz() {
     this.router.navigate(['..', 'quiz'], {relativeTo: this.route});
   }
-
-  // TODO extract uses for the flagConfigurationService constants
-  // and export them as functions only, protecting the arrays
-  // also add typing in datamodel/flagConfiguration
 }

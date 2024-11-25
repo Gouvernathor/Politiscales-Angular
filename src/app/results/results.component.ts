@@ -60,7 +60,11 @@ export class ResultsComponent {
 
     if (globalThis.document) { // TODO replace uses of document to enable server-side rendering of the canvas
       await this.generateFlagCanvas();
-      await this.generateResultsCanvas();
+
+      // TODO do not await this function *here*
+      // if the generatedResults are optional or removed from the page
+      // if stuff (i.e the download button) depends on it finishing, maybe store the awaitable somewhere
+      this.generateResultsCanvas();
     }
   }
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlagColor, flagColors, FlagShape, flagShapes, FlagSymbol, FlagSymbolCondition, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform } from '../../services/flagConfigurationService';
+import { FlagColor, flagColors, FlagShape, flagShapes, FlagSymbol, FlagSymbolCondition, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension, getFlagSpriteFromCoordinates } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -410,7 +410,8 @@ export class ResultsComponent {
       }
 
       if (symbol0.parent_type !== null) {
-        const spritesCanvas = await this.getSpriteCanvas("/images/flag_sprites.png", colors[0].fgColor);
+        const sprite0 = getFlagSpriteFromCoordinates(symbol0.transform);
+        const sprite0Canvas = await this.getSpriteCanvas(`/images/sprites/${sprite0}.${getFlagSpriteFileExtension(sprite0)}`, colors[0].fgColor);
 
         ctx.save();
         ctx.translate(spriteX, spriteY);
@@ -420,10 +421,13 @@ export class ResultsComponent {
         ctx.translate(symbol0.transform.parent_tx, -symbol0.transform.parent_ty);
         ctx.rotate(symbol0.transform.parent_r * Math.PI / 180);
         ctx.scale(symbol0.transform.parent_sx, symbol0.transform.parent_sy);
-        ctx.drawImage(spritesCanvas, symbol0.transform.x*128, symbol0.transform.y*128, 128, 128, -64, -64, 128, 128);
+        ctx.drawImage(sprite0Canvas, -64, -64, 128, 128);
         ctx.restore();
 
         if (symbol1.parent_type !== null) {
+          const sprite1 = getFlagSpriteFromCoordinates(symbol1.transform);
+          const sprite1Canvas = await this.getSpriteCanvas(`/images/sprites/${sprite1}.${getFlagSpriteFileExtension(sprite1)}`, colors[0].fgColor);
+
           ctx.translate(symbol0.transform.child_tx, -symbol0.transform.child_ty);
           ctx.rotate(symbol0.transform.child_r * Math.PI / 180);
           ctx.scale(symbol0.transform.child_sx, symbol0.transform.child_sy);
@@ -432,7 +436,7 @@ export class ResultsComponent {
           ctx.rotate(symbol1.transform.parent_r * Math.PI / 180);
           ctx.scale(symbol1.transform.parent_sx, symbol1.transform.parent_sy);
 
-          ctx.drawImage(spritesCanvas, symbol1.transform.x*128, symbol1.transform.y*128, 128, 128, -64, -64, 128, 128);
+          ctx.drawImage(sprite1Canvas, -64, -64, 128, 128);
           // ctx.restore();
         }
 

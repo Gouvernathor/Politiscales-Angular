@@ -202,8 +202,6 @@ export class ResultsComponent {
       [0];
   }
 
-  // TODO make it return undefined instead of -1
-  // private getCharacteristic(name: string, vmin: number, vmax: number) {
   private getCharacteristic({name, vmin, vmax}: FlagSymbolCondition) {
     const axis = getAnyAxisFromId(name);
     if (axis !== undefined) {
@@ -334,14 +332,6 @@ export class ResultsComponent {
     }
   }
 
-  shareLink() {
-    // TODO
-  }
-
-  shareFacebook() {
-    // TODO
-  }
-
   private imageLoadPromise(imageSrc: string): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -449,6 +439,14 @@ export class ResultsComponent {
 
   private async generateResultsCanvas() {
     // TODO generatedResults
+  }
+
+  shareLink() {
+    // TODO
+  }
+
+  shareFacebook() {
+    // TODO
   }
 
   debug() {

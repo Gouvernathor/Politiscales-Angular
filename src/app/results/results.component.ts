@@ -376,13 +376,13 @@ export class ResultsComponent {
           ctx.beginPath();
           ctx.moveTo((path[1] as number)*512, path[2]*256); // FIXME
 
-          if (path[1] === "circle") {
-            ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
-          } else if (path[1] === "circleSymbol" && symbol0 !== null) { // TODO the && should be in an inner if ?
-            ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
+          if (typeof path[1] === "string") {
+            if (path[1] !== "circleSymbol" || symbol0 === null) {
+              ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
+            }
           } else {
             for (let j=1; j < numPoints; j++) {
-              ctx.lineTo((path[1+j*2] as number)*512, (path[1+j*2+1] as number)*256); // FIXME
+              ctx.lineTo(path[1+j*2]*512, path[1+j*2+1]*256);
             }
           }
           ctx.fillStyle = colors[path[0]].bgColor;

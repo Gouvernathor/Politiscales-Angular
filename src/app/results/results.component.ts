@@ -10,13 +10,6 @@ import { arrayCmp, sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
 
-// TODO typing for the findFlagSymbol method, to be refined
-type NoneSymbol = {
-  parent_type: null,
-  transform: {
-    main: false,
-  },
-};
 type Symbol = {
   parent_type: FlagSymbolDataParentType,
   transform: FlagSymbolTransform,
@@ -222,20 +215,13 @@ export class ResultsComponent {
    * If the two are defined, then if the second has main to true, the first has to have it to true too.
    * The criteria to maximize are very complex to specify.
    */
-  private findFlagSymbol(numColors: number): [Symbol|NoneSymbol, Symbol|NoneSymbol] {
+  private findFlagSymbol(numColors: number): [Symbol|null, Symbol|null] {
     const me = this;
     const filteredValuedFlagSymbols = flagSymbols
       .map(fs => ({...fs, charVal: me.getCharacteristic(fs.cond)}))
       .filter(fs => fs.charVal !== undefined) as (FlagSymbol & {charVal: number})[];
 
-    const noneSymbol: NoneSymbol = {
-      parent_type: null,
-      transform: {
-        main: false,
-      },
-    };
-
-    const initialSymbol: Symbol|NoneSymbol = numColors === 0 ?
+    const initialSymbol: Symbol|null = numColors === 0 ?
       {
         parent_type: "dot",
         transform: {
@@ -255,7 +241,7 @@ export class ResultsComponent {
           child_r: 0,
         },
       } :
-      noneSymbol;
+      null;
 
     let singleSymbol = initialSymbol;
     let singleValueMax = 0;
@@ -280,7 +266,7 @@ export class ResultsComponent {
     }
 
     let doubleSymbol0 = initialSymbol;
-    let doubleSymbol1: Symbol|NoneSymbol = noneSymbol;
+    let doubleSymbol1: Symbol|null = null;
     let doubleValueMax = 0;
     for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
       const flagSymbol0 = filteredValuedFlagSymbols[s0];
@@ -320,12 +306,12 @@ export class ResultsComponent {
 
     let symbol0, symbol1;
     if (singleValueMax >= doubleValueMax) {
-      [symbol0, symbol1] = [singleSymbol, noneSymbol];
+      [symbol0, symbol1] = [singleSymbol, null];
     } else {
       [symbol0, symbol1] = [doubleSymbol0, doubleSymbol1];
     }
 
-    if (symbol0.parent_type !== null && symbol1.parent_type !== null && symbol1.transform.main && !symbol0.transform.main) {
+    if (symbol0 !== null && symbol1 !== null && symbol1.transform.main && !symbol0.transform.main) {
       return [symbol1, symbol0];
     } else {
       return [symbol0, symbol1];
@@ -368,9 +354,9 @@ export class ResultsComponent {
       const colors = this.findFlagColors();
       const [symbol0, symbol1] = this.findFlagSymbol(colors.length);
       // run these as early as possible
-      const sprite0CanvasPromise = (symbol0.parent_type === null) ? null :
+      const sprite0CanvasPromise = (symbol0 === null) ? null :
           this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
-      const sprite1CanvasPromise = (symbol1.parent_type === null) ? null :
+      const sprite1CanvasPromise = (symbol1 === null) ? null :
           this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
 
       const flagShape = this.findFlagShape(colors.length);
@@ -392,7 +378,7 @@ export class ResultsComponent {
 
           if (path[1] === "circle") {
             ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
-          } else if (path[1] === "circleSymbol" && symbol0.parent_type !== null) { // TODO the && should be in an inner if ?
+          } else if (path[1] === "circleSymbol" && symbol0 !== null) { // TODO the && should be in an inner if ?
             ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
           } else {
             for (let j=1; j < numPoints; j++) {
@@ -408,7 +394,7 @@ export class ResultsComponent {
         spriteS = flagShape.symbol[2];
       }
 
-      if (symbol0.parent_type !== null) {
+      if (symbol0 !== null) {
         ctx.save();
         ctx.translate(spriteX, spriteY);
         ctx.scale(spriteS, spriteS);
@@ -420,7 +406,7 @@ export class ResultsComponent {
         ctx.drawImage(await sprite0CanvasPromise!, -64, -64, 128, 128);
         ctx.restore();
 
-        if (symbol1.parent_type !== null) {
+        if (symbol1 !== null) {
           ctx.translate(symbol0.transform.child_tx, -symbol0.transform.child_ty);
           ctx.rotate(symbol0.transform.child_r * Math.PI / 180);
           ctx.scale(symbol0.transform.child_sx, symbol0.transform.child_sy);

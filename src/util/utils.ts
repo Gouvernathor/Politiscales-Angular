@@ -3,8 +3,7 @@
  */
 export function sorted(array: Iterable<number>, {reverse}: {reverse?: boolean}): number[];
 export function sorted(array: Iterable<string>, {reverse}: {reverse?: boolean}): string[];
-export function sorted<T>(array: Iterable<T>, {key, reverse}: {key: (_:T)=> number, reverse?: boolean}): T[];
-export function sorted<T>(array: Iterable<T>, {key, reverse}: {key: (_:T)=> string, reverse?: boolean}): T[];
+export function sorted<T>(array: Iterable<T>, {key, reverse}: {key: ((_:T)=> number)|((_:T)=> string), reverse?: boolean}): T[];
 export function sorted<T>(array: Iterable<T>, {key, reverse=false}: {key?: ((_:T) => any), reverse?: boolean}): T[] {
     return [...array].sort((a, b) => {
         if (key) {

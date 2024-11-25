@@ -1752,7 +1752,7 @@ export const flagSymbols: FlagSymbol[] = [
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: 3, // 0 ?
+					child_tx: 3, // 0
 					child_ty: 17,
 					child_sx: 0.55,
 					child_sy: 0.55,
@@ -1858,7 +1858,7 @@ export const flagSymbols: FlagSymbol[] = [
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: -13, // -15 ?
+					child_tx: -13, // -15
 					child_ty: -20,
 					child_sx: -1,
 					child_sy: 1,
@@ -1874,7 +1874,7 @@ export const flagSymbols: FlagSymbol[] = [
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: 2, // 0 ?
+					child_tx: 2, // 0
 					child_ty: 0,
 					child_sx: 0.55,
 					child_sy: 0.55,

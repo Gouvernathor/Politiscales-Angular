@@ -1650,8 +1650,29 @@ type FlagSpriteCoordinates = {x: 0|1|2|3, y: 0|1|2|3};
 function getFlagSpriteCoordinates(flagSprite: FlagSprite): FlagSpriteCoordinates {
 	return {x: flagSprite % 4, y: Math.floor(flagSprite / 4)} as FlagSpriteCoordinates;
 }
-function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
+export function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
 	return x + y * 4 as FlagSprite;
+}
+const flagSpriteFileExtension = new Map<FlagSprite, string>([
+	[FlagSprite.Scythe, "webp"],
+	[FlagSprite.GearArc, "webp"],
+	[FlagSprite.PartialVenus, "svg"],
+	[FlagSprite.PartialUnionStars, "svg"],
+	[FlagSprite.Sword, "webp"],
+	[FlagSprite.Compass, "webp"],
+	[FlagSprite.FistVenus, "webp"],
+	[FlagSprite.UnionStars, "svg"],
+	[FlagSprite.Hammer, "webp"],
+	[FlagSprite.Arrows, "webp"],
+	[FlagSprite.Wheat, "webp"],
+	[FlagSprite.Flower, "webp"],
+	[FlagSprite.XX, "svg"],
+	[FlagSprite.Star, "svg"],
+	[FlagSprite.FleurDeLys, "webp"],
+	[FlagSprite.SmileyFrown, "webp"],
+]);
+export function getFlagSpriteFileExtension(fs: FlagSprite) {
+	return flagSpriteFileExtension.get(fs);
 }
 
 export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";

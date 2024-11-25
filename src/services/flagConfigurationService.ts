@@ -1727,23 +1727,23 @@ export const flagSymbols: FlagSymbol[] = [
 					child_r: 0
 				},
 				{
-					child_type: "line",
+					child_type: "line", // TODO offset itself (the parent), the child, or both ?
 					x: 2,
 					y: 0,
 					main: true,
-					parent_tx: 10,
+					parent_tx: 10, // 7 ? 13 ?
 					parent_ty: 0,
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: -2,
+					child_tx: -2, // -5 ?
 					child_ty: 0,
 					child_sx: -1,
 					child_sy: 1,
 					child_r: 1
 				},
 				{
-					child_type: "dot",
+					child_type: "dot", // TODO offset itself (the parent), the child, or both ?
 					x: 2,
 					y: 0,
 					main: true,
@@ -1752,7 +1752,7 @@ export const flagSymbols: FlagSymbol[] = [
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: 3,
+					child_tx: 3, // 0 ?
 					child_ty: 17,
 					child_sx: 0.55,
 					child_sy: 0.55,
@@ -1833,7 +1833,7 @@ export const flagSymbols: FlagSymbol[] = [
 			parent_type: "curve",
 			transforms: [
 				{
-					child_type: "none",
+					child_type: "none", // TODO no child, fix ?
 					x: 3,
 					y: 1,
 					main: true,
@@ -1849,7 +1849,7 @@ export const flagSymbols: FlagSymbol[] = [
 					child_r: 0
 				},
 				{
-					child_type: "line",
+					child_type: "line", // TODO offset itself (the parent), the child, or both ?
 					x: 3,
 					y: 0,
 					main: true,
@@ -1858,14 +1858,14 @@ export const flagSymbols: FlagSymbol[] = [
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: -13,
+					child_tx: -13, // -15 ?
 					child_ty: -20,
 					child_sx: -1,
 					child_sy: 1,
 					child_r: 0
 				},
 				{
-					child_type: "dot",
+					child_type: "dot", // TODO offset itself (the parent), the child, or both ?
 					x: 3,
 					y: 0,
 					main: true,
@@ -1874,7 +1874,7 @@ export const flagSymbols: FlagSymbol[] = [
 					parent_sx: 1,
 					parent_sy: 1,
 					parent_r: 0,
-					child_tx: 2,
+					child_tx: 2, // 0 ?
 					child_ty: 0,
 					child_sx: 0.55,
 					child_sy: 0.55,

@@ -1627,7 +1627,7 @@ export const flagColors: FlagColor[] = [
 	}
 ];
 
-enum FlagSprite {
+export enum FlagSprite {
 	// in reading order
 	Scythe, // 0, 0
 	GearArc, // 1, 0

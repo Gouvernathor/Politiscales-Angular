@@ -347,6 +347,23 @@ export class ResultsComponent {
     });
   }
 
+  private async getSpriteCanvas(imageSrc: string, color: string) {
+    const image = await this.imageLoadPromise(imageSrc);
+    const canvas = document.createElement("canvas");
+    canvas.width = image.width;
+    canvas.height = image.height;
+    const ctx = canvas.getContext("2d")!;
+
+    // fill the canvas with the primary color
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // make it so that the drawn shape remains, with the color, and the rest is cut out
+    ctx.globalCompositeOperation = "destination-in";
+    ctx.drawImage(image, 0, 0);
+    return canvas;
+  }
+
   private async generateFlagCanvas() {
     const ctx = (document.getElementById("generatedFlag") as HTMLCanvasElement|null)?.getContext("2d");
     if (ctx) {
@@ -393,19 +410,7 @@ export class ResultsComponent {
       }
 
       if (symbol0.parent_type !== null) {
-        const images_sprites = await this.imageLoadPromise("/images/flag_sprites.png");
-        const spritesCanvas = document.createElement("canvas");
-        spritesCanvas.width = images_sprites.width;
-        spritesCanvas.height = images_sprites.height;
-        const spritesCanvasCtx = spritesCanvas.getContext("2d")!;
-        // spritesCanvasCtx.getImageData(0, 0, spritesCanvas.width, spritesCanvas.height); // TODO check if necessary, legacy put that in an unused variable
-
-        // tmpCtx.beginPath(); // TODO check
-        spritesCanvasCtx.fillStyle = colors[0].fgColor;
-        spritesCanvasCtx.fillRect(0, 0, spritesCanvas.width, spritesCanvas.height);
-
-        spritesCanvasCtx.globalCompositeOperation = "destination-in";
-        spritesCanvasCtx.drawImage(images_sprites, 0, 0);
+        const spritesCanvas = await this.getSpriteCanvas("/images/flag_sprites.png", colors[0].fgColor);
 
         ctx.save();
         ctx.translate(spriteX, spriteY);

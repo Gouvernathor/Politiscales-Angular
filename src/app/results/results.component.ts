@@ -118,7 +118,7 @@ export class ResultsComponent {
       }
     }
 
-    return sorted(sloganMap.keys(), a => -this.characteristicsMap.get(a)!)
+    return sorted(sloganMap.keys(), {key: a => -this.characteristicsMap.get(a)!})
       .slice(0, 3).map(a => sloganMap.get(a)!).join(" · ");
   }
 

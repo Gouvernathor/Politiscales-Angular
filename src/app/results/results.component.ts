@@ -407,7 +407,7 @@ export class ResultsComponent {
         tmpCtx.globalCompositeOperation = "destination-in";
         tmpCtx.drawImage(images_sprites, 0, 0);
 
-        ctx.save(); // TODO check (no restore until the next save)
+        ctx.save();
         ctx.translate(spriteX, spriteY);
         ctx.scale(spriteS, spriteS);
 
@@ -428,7 +428,7 @@ export class ResultsComponent {
           ctx.scale(symbol1.transform.parent_sx, symbol1.transform.parent_sy);
 
           ctx.drawImage(tmpC, symbol1.transform.x*128, symbol1.transform.y*128, 128, 128, -64, -64, 128, 128);
-          ctx.restore();
+          // ctx.restore();
         }
 
         ctx.restore();

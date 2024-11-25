@@ -367,6 +367,11 @@ export class ResultsComponent {
 
       const colors = this.findFlagColors();
       const [symbol0, symbol1] = this.findFlagSymbol(colors.length);
+      // run these as early as possible
+      const sprite0CanvasPromise = (symbol0.parent_type === null) ? null :
+          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
+      const sprite1CanvasPromise = (symbol1.parent_type === null) ? null :
+          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
 
       const flagShape = this.findFlagShape(colors.length);
 
@@ -404,10 +409,6 @@ export class ResultsComponent {
       }
 
       if (symbol0.parent_type !== null) {
-        const sprite0CanvasPromise = this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
-        const sprite1CanvasPromise = (symbol1.parent_type === null) ? null :
-          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
-
         ctx.save();
         ctx.translate(spriteX, spriteY);
         ctx.scale(spriteS, spriteS);
@@ -416,7 +417,7 @@ export class ResultsComponent {
         ctx.translate(symbol0.transform.parent_tx, -symbol0.transform.parent_ty);
         ctx.rotate(symbol0.transform.parent_r * Math.PI / 180);
         ctx.scale(symbol0.transform.parent_sx, symbol0.transform.parent_sy);
-        ctx.drawImage(await sprite0CanvasPromise, -64, -64, 128, 128);
+        ctx.drawImage(await sprite0CanvasPromise!, -64, -64, 128, 128);
         ctx.restore();
 
         if (symbol1.parent_type !== null) {

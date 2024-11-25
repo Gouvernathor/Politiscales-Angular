@@ -410,7 +410,9 @@ export class ResultsComponent {
       }
 
       if (symbol0.parent_type !== null) {
-        const sprite0Canvas = await this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
+        const sprite0CanvasPromise = this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
+        const sprite1CanvasPromise = (symbol1.parent_type === null) ? null :
+          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
 
         ctx.save();
         ctx.translate(spriteX, spriteY);
@@ -420,12 +422,10 @@ export class ResultsComponent {
         ctx.translate(symbol0.transform.parent_tx, -symbol0.transform.parent_ty);
         ctx.rotate(symbol0.transform.parent_r * Math.PI / 180);
         ctx.scale(symbol0.transform.parent_sx, symbol0.transform.parent_sy);
-        ctx.drawImage(sprite0Canvas, -64, -64, 128, 128);
+        ctx.drawImage(await sprite0CanvasPromise, -64, -64, 128, 128);
         ctx.restore();
 
         if (symbol1.parent_type !== null) {
-          const sprite1Canvas = await this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
-
           ctx.translate(symbol0.transform.child_tx, -symbol0.transform.child_ty);
           ctx.rotate(symbol0.transform.child_r * Math.PI / 180);
           ctx.scale(symbol0.transform.child_sx, symbol0.transform.child_sy);
@@ -434,7 +434,7 @@ export class ResultsComponent {
           ctx.rotate(symbol1.transform.parent_r * Math.PI / 180);
           ctx.scale(symbol1.transform.parent_sx, symbol1.transform.parent_sy);
 
-          ctx.drawImage(sprite1Canvas, -64, -64, 128, 128);
+          ctx.drawImage(await sprite1CanvasPromise!, -64, -64, 128, 128);
           // ctx.restore();
         }
 

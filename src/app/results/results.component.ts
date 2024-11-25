@@ -393,19 +393,19 @@ export class ResultsComponent {
       }
 
       if (symbol0.parent_type !== null) {
-        const tmpC = document.createElement("canvas");
         const images_sprites = await this.imageLoadPromise("/images/flag_sprites.png");
-        tmpC.width = images_sprites.width;
-        tmpC.height = images_sprites.height;
-        const tmpCtx = tmpC.getContext("2d")!;
-        tmpCtx.getImageData(0, 0, tmpC.width, tmpC.height); // TODO check if necessary, legacy put that in an unused variable
+        const spritesCanvas = document.createElement("canvas");
+        spritesCanvas.width = images_sprites.width;
+        spritesCanvas.height = images_sprites.height;
+        const spritesCanvasCtx = spritesCanvas.getContext("2d")!;
+        // spritesCanvasCtx.getImageData(0, 0, spritesCanvas.width, spritesCanvas.height); // TODO check if necessary, legacy put that in an unused variable
 
         // tmpCtx.beginPath(); // TODO check
-        tmpCtx.fillStyle = colors[0].fgColor;
-        tmpCtx.fillRect(0, 0, tmpC.width, tmpC.height);
+        spritesCanvasCtx.fillStyle = colors[0].fgColor;
+        spritesCanvasCtx.fillRect(0, 0, spritesCanvas.width, spritesCanvas.height);
 
-        tmpCtx.globalCompositeOperation = "destination-in";
-        tmpCtx.drawImage(images_sprites, 0, 0);
+        spritesCanvasCtx.globalCompositeOperation = "destination-in";
+        spritesCanvasCtx.drawImage(images_sprites, 0, 0);
 
         ctx.save();
         ctx.translate(spriteX, spriteY);
@@ -415,7 +415,7 @@ export class ResultsComponent {
         ctx.translate(symbol0.transform.parent_tx, -symbol0.transform.parent_ty);
         ctx.rotate(symbol0.transform.parent_r * Math.PI / 180);
         ctx.scale(symbol0.transform.parent_sx, symbol0.transform.parent_sy);
-        ctx.drawImage(tmpC, symbol0.transform.x*128, symbol0.transform.y*128, 128, 128, -64, -64, 128, 128);
+        ctx.drawImage(spritesCanvas, symbol0.transform.x*128, symbol0.transform.y*128, 128, 128, -64, -64, 128, 128);
         ctx.restore();
 
         if (symbol1.parent_type !== null) {
@@ -427,7 +427,7 @@ export class ResultsComponent {
           ctx.rotate(symbol1.transform.parent_r * Math.PI / 180);
           ctx.scale(symbol1.transform.parent_sx, symbol1.transform.parent_sy);
 
-          ctx.drawImage(tmpC, symbol1.transform.x*128, symbol1.transform.y*128, 128, 128, -64, -64, 128, 128);
+          ctx.drawImage(spritesCanvas, symbol1.transform.x*128, symbol1.transform.y*128, 128, 128, -64, -64, 128, 128);
           // ctx.restore();
         }
 

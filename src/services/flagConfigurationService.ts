@@ -1693,7 +1693,7 @@ const flagSpriteFileExtension = new Map<FlagSprite, string>([
 	[FlagSprite.FistVenus, "webp"],
 	[FlagSprite.UnionStars, "svg"],
 	[FlagSprite.Hammer, "webp"],
-	[FlagSprite.Arrows, "webp"],
+	[FlagSprite.Arrows, "svg"],
 	[FlagSprite.Wheat, "webp"],
 	[FlagSprite.Flower, "webp"],
 	[FlagSprite.XX, "svg"],

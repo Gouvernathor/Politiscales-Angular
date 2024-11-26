@@ -372,13 +372,13 @@ export class ResultsComponent {
       } else {
         for (const path of flagShape.shapes) {
           ctx.beginPath();
-          ctx.moveTo((path[1] as number)*512, path[2]*256); // FIXME
 
           if (typeof path[1] === "string") {
             if (path[1] !== "circleSymbol" || symbol0 !== null) {
               ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
             }
           } else {
+            ctx.moveTo(path[1]*512, path[2]*256);
             for (let j=1; j < (path.length-1)/2; j++) {
               ctx.lineTo(path[1+j*2]*512, path[1+j*2+1]*256);
             }

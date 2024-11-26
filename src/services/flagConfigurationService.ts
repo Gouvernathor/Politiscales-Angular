@@ -18,8 +18,7 @@
  * When the second element of the tuple is "circle" or "circleSymbol",
  * the three other elements are x and y coordinates of the center and the radius of a circle to be drawn.
  * When it is "circleSymbol", the circle is only drawn if a symbol is to be drawn on top of it.
- * Otherwise, the tuples contain only numbers and are a series of x and y coordinates with which to draw polygons.
- * (Some of these values may be skipped though, and that's something to be investigated.)
+ * Otherwise, the tuples contain only numbers and are a series of x and y coordinates being the vertices of a polygon.
  */
 type NumberTuple41 = [number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number, number];
 type NumberTuple13 = [number, number, number, number, number, number, number, number, number, number, number, number, number];

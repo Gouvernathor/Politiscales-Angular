@@ -381,5 +381,7 @@
     <a class="button buttonTwitter" id="buttonTwitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
     <a class="button buttonFacebook" (click)="shareFacebook()"><i class="fa fa-facebook" aria-hidden="true"></i></a>
     <a class="button buttonReddit" id="buttonReddit"><i class="fa fa-reddit" aria-hidden="true"></i></a>
-    <a class="button buttonLink" (click)="shareLink()" id="buttonLink"><i class="fa fa-link" aria-hidden="true"></i></a>
+    <a id="buttonLink" class="button" [class]="linkBeingShared ? 'buttonLinkGood' : 'buttonLink'" (click)="shareLink()">
+        <i class="fa fa-link" aria-hidden="true"></i>
+    </a>
 </div>

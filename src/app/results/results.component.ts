@@ -428,8 +428,17 @@ export class ResultsComponent {
     // TODO generatedResults
   }
 
+  linkBeingShared = false;
+
   shareLink() {
-    // TODO
+    if (globalThis.navigator?.clipboard) {
+      // set display = "block" on the urlToCopyContainer (?)
+      globalThis.navigator.clipboard.writeText(this.currentUrl);
+      this.linkBeingShared = true;
+      setTimeout(() => {
+        this.linkBeingShared = false;
+      }, 2000);
+    }
   }
 
   shareFacebook() {

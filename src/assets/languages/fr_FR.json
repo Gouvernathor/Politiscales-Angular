@@ -205,6 +205,9 @@
 	"slogan_ecology": "Écologie",
 	"slogan_revo": "Révolution",
 
+	"share_reddit": "Mon résultat sur #PolitiScales : %slogan%",
+	"share_twitter": "Mon résultat sur #PolitiScales : %slogan%",
+
 	"result_title": "Résultats",
 
 	"result_share": "Partagez votre résultat avec ce lien, ou à l'aide des boutons de partage :"

@@ -371,8 +371,6 @@ export class ResultsComponent {
         ctx.fillRect(0, 0, 512, 256);
       } else {
         for (const path of flagShape.shapes) {
-          const numPoints = path.length/2; // TODO check (with the for loop)
-
           ctx.beginPath();
           ctx.moveTo((path[1] as number)*512, path[2]*256); // FIXME
 
@@ -381,7 +379,7 @@ export class ResultsComponent {
               ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
             }
           } else {
-            for (let j=1; j < numPoints; j++) {
+            for (let j=1; j < path.length/2; j++) { // TODO check max value
               ctx.lineTo(path[1+j*2]*512, path[1+j*2+1]*256);
             }
           }

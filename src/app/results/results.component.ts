@@ -50,9 +50,6 @@ export class ResultsComponent {
     this.storeAxesData();
     this.applyResults();
 
-    // twitterbutton
-    // redditButton
-
     if (globalThis.document) { // TODO replace uses of document to enable server-side rendering of the canvas
       await this.generateFlagCanvas();
 
@@ -428,6 +425,26 @@ export class ResultsComponent {
     // TODO generatedResults
   }
 
+  twitterHref() {
+    const text = getLine("share_twitter").replace("%slogan%", this.generatedSlogan);
+    return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(this.currentUrl);
+  }
+
+  // shareFacebook() {
+  //   const uri = this.currentUrl;
+  //   FB.ui({
+  //     method: 'share',
+  //     hashtag: '#PolitiScales',
+  //     quote: getLine("share_facebook").replace("%slogan%", this.generatedSlogan),
+  //     href: uri,
+  //   }, function(response: any){});
+  // }
+
+  redditHref() {
+    const text = getLine("share_reddit").replace("%slogan%", this.generatedSlogan);
+    return "https://www.reddit.com/submit?url=" + encodeURIComponent(this.currentUrl) + "&title=" + encodeURIComponent(text);
+  }
+
   linkBeingShared = false;
 
   shareLink() {
@@ -439,10 +456,6 @@ export class ResultsComponent {
         this.linkBeingShared = false;
       }, 2000);
     }
-  }
-
-  shareFacebook() {
-    // TODO
   }
 
   debug() {

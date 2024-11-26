@@ -378,9 +378,15 @@
 <div class="shareText">{{localize("result_share")}}</div>
 <div id="urlToCopyContainer" class="urlToCopyContainer"><div id="urlToCopy" class="urlToCopy">{{currentUrl}}</div></div>
 <div class="navButtons">
-    <a class="button buttonTwitter" id="buttonTwitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-    <a class="button buttonFacebook" (click)="shareFacebook()"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-    <a class="button buttonReddit" id="buttonReddit"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+    <a id="buttonTwitter" class="button buttonTwitter" [href]="twitterHref()">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+    </a>
+    <!-- <a class="button buttonFacebook" (click)="shareFacebook()">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+    </a> -->
+    <a id="buttonReddit" class="button buttonReddit" [href]="redditHref()">
+        <i class="fa fa-reddit" aria-hidden="true"></i>
+    </a>
     <a id="buttonLink" class="button" [class]="linkBeingShared ? 'buttonLinkGood' : 'buttonLink'" (click)="shareLink()">
         <i class="fa fa-link" aria-hidden="true"></i>
     </a>

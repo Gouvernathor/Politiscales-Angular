@@ -35,15 +35,13 @@ export class ResultsComponent {
   generatedSlogan = "";
   private characteristicsMap!: Map<AnyAxis, number>;
   bonusEnabled = false; // TODO make it a property on the SpecialAxis storage (once fully segregated)
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, public router: Router) {}
 
   async ngOnInit() {
     let lang: string;
     if (lang = (await firstValueFrom(this.route.data))["lang"]) {
       setLanguage(lang);
     }
-
-    // TODO remplissage de #urlToCopy avec l'url actuel
 
     this.storeAxesData();
     this.applyResults();

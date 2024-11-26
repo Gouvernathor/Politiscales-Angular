@@ -379,7 +379,7 @@ export class ResultsComponent {
               ctx.arc(path[2]*512, path[3]*256, path[4]*256, 0, 2*Math.PI, false);
             }
           } else {
-            for (let j=1; j < path.length/2; j++) { // TODO check max value
+            for (let j=1; j < (path.length-1)/2; j++) {
               ctx.lineTo(path[1+j*2]*512, path[1+j*2+1]*256);
             }
           }

@@ -35,7 +35,11 @@ export class ResultsComponent {
   generatedSlogan = "";
   private characteristicsMap!: Map<AnyAxis, number>;
   bonusEnabled = false; // TODO make it a property on the SpecialAxis storage (once fully segregated)
-  constructor(private route: ActivatedRoute, public router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  get currentUrl() {
+    return this.router.url;
+  }
 
   async ngOnInit() {
     let lang: string;

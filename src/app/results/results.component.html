@@ -2,18 +2,6 @@
 
 <p class="simpleText">{{localize("result_desc")}}</p>
 
-<div class="generatedResultsDecorations"><canvas id="generatedResults" width="800" height="1200"></canvas></div>
-
-<div class="shareText">{{localize("result_share")}}</div>
-<div class="navButtons">
-    <a class="button buttonTwitter" id="buttonTwitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-    <a class="button buttonFacebook" (click)="shareFacebook()"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-    <a class="button buttonReddit" id="buttonReddit"><i class="fa fa-reddit" aria-hidden="true"></i></a>
-    <a class="button buttonLink" (click)="shareLink()" id="buttonLink"><i class="fa fa-link" aria-hidden="true"></i></a>
-</div>
-
-<hr/>
-
 <div class="flagDecoration">
     <canvas id="generatedFlag" width="512" height="256"></canvas>
     <div id="slogan">{{generatedSlogan}}</div>
@@ -379,4 +367,16 @@
 
 <div class="navButtons">
     <a class="button" (click)="gotoQuiz()">{{localize("result_btn_redo")}}</a>
+</div>
+
+<hr/>
+
+<div class="generatedResultsDecorations"><canvas id="generatedResults" width="800" height="1200"></canvas></div>
+
+<div class="shareText">{{localize("result_share")}}</div>
+<div class="navButtons">
+    <a class="button buttonTwitter" id="buttonTwitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    <a class="button buttonFacebook" (click)="shareFacebook()"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a class="button buttonReddit" id="buttonReddit"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+    <a class="button buttonLink" (click)="shareLink()" id="buttonLink"><i class="fa fa-link" aria-hidden="true"></i></a>
 </div>

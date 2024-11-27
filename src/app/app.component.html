@@ -22,13 +22,13 @@
     </div>
 </header>
 
-<div id="content">
+<div id="content" [lang]="getLang()">
     <div id="mainFrame">
         <router-outlet />
     </div>
 </div>
 
-<div id="footer">
+<div id="footer" [lang]="getLang()">
     <p>{{localize('footer')}}</p> <!-- TODO add myself -->
 
     <!-- prompt to participate in translation, replaced -->

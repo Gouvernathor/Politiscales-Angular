@@ -15,6 +15,10 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
+  getLang() {
+    return getLanguageOrDefault().replace('_', '-');
+  }
+
   gotoHelp() {
     // if in a language page, go to /xx_XX/help
     // if not, go to /help

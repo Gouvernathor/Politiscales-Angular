@@ -378,8 +378,8 @@ export class ResultsComponent {
             }
           } else {
             ctx.moveTo(path[1]*512, path[2]*256);
-            for (let j=1; j < (path.length-1)/2; j++) {
-              ctx.lineTo(path[1+j*2]*512, path[1+j*2+1]*256);
+            for (let j=2; j < path.length/2; j++) {
+              ctx.lineTo(path[j*2-1]*512, path[j*2]*256);
             }
           }
           ctx.fillStyle = colors[path[0]].bgColor;

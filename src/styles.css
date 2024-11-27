@@ -27,6 +27,10 @@ body
 	text-align:left;
 	padding-left:2vmin;
 }
+.headerLeft > a:not(:first-child)
+{
+	margin-left: .25em;
+}
 
 .headerMiddle
 {

@@ -51,12 +51,18 @@ export class ResultsComponent {
     this.applyResults();
 
     if (globalThis.document) { // TODO replace uses of document to enable server-side rendering of the canvas
-      await this.generateFlagCanvas();
+      const flagElement = document.getElementById("generatedFlag") as HTMLCanvasElement|null;
+      if (flagElement) {
+        await this.generateFlagCanvas(flagElement);
 
-      // TODO do not await this function *here*
-      // if the generatedResults are optional or removed from the page
-      // if stuff (i.e the download button) depends on it finishing, maybe store the awaitable somewhere
-      this.generateResultsCanvas();
+        // TODO do not await this function *here*
+        // if the generatedResults are optional or removed from the page
+        // if stuff (i.e the download button) depends on it finishing, maybe store the awaitable somewhere
+        const resultsElement = document.getElementById("generatedResults") as HTMLCanvasElement|null
+        if (resultsElement) {
+          this.generateResultsCanvas(flagElement, resultsElement);
+        }
+      }
     }
   }
 
@@ -343,8 +349,8 @@ export class ResultsComponent {
     return canvas;
   }
 
-  private async generateFlagCanvas() {
-    const ctx = (document.getElementById("generatedFlag") as HTMLCanvasElement|null)?.getContext("2d");
+  private async generateFlagCanvas(flagElement: HTMLCanvasElement) {
+    const ctx = flagElement.getContext("2d");
     if (ctx) {
       let spriteX = 256,
           spriteY = 128,
@@ -421,7 +427,58 @@ export class ResultsComponent {
     }
   }
 
-  private async generateResultsCanvas() {
+  private async generateResultsCanvas(flagElement: HTMLCanvasElement, resultsElement: HTMLCanvasElement) {
+    const ctx = resultsElement.getContext("2d");
+    if (ctx) {
+      ctx.fillStyle = "#ebebeb";
+      ctx.fillRect(0, 0, resultsElement.width, resultsElement.height);
+
+      let ypos = 20;
+
+      const flagSize = 160;
+
+      // Logo
+      ctx.fillStyle = "#500076";
+      ctx.fillRect(0, 0, ypos, 42);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 25px Montserrat";
+      ctx.textAlign = "left";
+      ctx.fillText("PolitiScales", 10, 30);
+
+      // ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 15px Montserrat";
+      ctx.textAlign = "right";
+      ctx.fillText(this.currentUrl, resultsElement.width-10, 27);
+
+
+      ypos += 48;
+
+      // Flag
+      ctx.drawImage(flagElement, resultsElement.width/2-flagSize, ypos, flagSize*2, flagSize);
+      ypos += flagSize + 10;
+
+      // Slogan
+      ctx.fillStyle = "#000000";
+      ctx.font = "25px Montserrat";
+      ctx.textAlign = "center";
+      ctx.fillText(this.generatedSlogan, resultsElement.width/2, ypos+30);
+      ypos += 70;
+
+      // Axes
+      // TODO axesDrawInfo
+
+      const axeMargin = 100;
+      const axeWidth = resultsElement.width - axeMargin*2;
+      ctx.strokeStyle = "#888888";
+      for (const baseAxis of getAllEnumValues(BaseAxis)) {
+        const drawInfo = { // TODO
+          color0: "#bbbbbb",
+          color1: "#aaaaaa",
+          name0: BaseAxis[baseAxis]+"0"
+        }
+      }
+    }
     // TODO generatedResults
   }
 

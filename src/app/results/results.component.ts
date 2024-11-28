@@ -349,17 +349,18 @@ export class ResultsComponent {
 
       const colors = this.findFlagColors();
       const [symbol0, symbol1] = this.findFlagSymbol(colors.length);
-      // run these as early as possible
-      const sprite0CanvasPromise = (symbol0 === null) ? null :
-          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
-      const sprite1CanvasPromise = (symbol1 === null) ? null :
-          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
 
       const flagShape = this.findFlagShape(colors.length);
 
       if (colors.length <= 0) {
         colors.push({bgColor: "#fff", fgColor: "#000"});
       }
+
+      // run these as early as possible
+      const sprite0CanvasPromise = (symbol0 === null) ? null :
+          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
+      const sprite1CanvasPromise = (symbol1 === null) ? null :
+          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
 
       if (flagShape === undefined) {
         // ctx.beginPath(); // TODO check

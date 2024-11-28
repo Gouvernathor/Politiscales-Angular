@@ -283,7 +283,7 @@ export class ResultsComponent {
 
     if (singleValueMax >= doubleValueMax) {
       if (singleSymbol === null && zeroColors) {
-        return [{
+        singleSymbol = {
           parent_type: "dot",
           transform: {
             child_type: "none",
@@ -301,10 +301,9 @@ export class ResultsComponent {
             child_sy: 1,
             child_r: 0,
           },
-        }, null];
-      } else {
-        return [singleSymbol, null];
+        };
       }
+      return [singleSymbol, null];
     } else {
       if (doubleSymbol0 === null || doubleSymbol1 === null || doubleSymbol0.transform.main || !doubleSymbol1.transform.main) {
         return [doubleSymbol0, doubleSymbol1];

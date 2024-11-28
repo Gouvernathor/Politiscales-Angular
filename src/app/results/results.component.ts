@@ -220,29 +220,7 @@ export class ResultsComponent {
       .map(fs => ({...fs, charVal: me.getCharacteristic(fs.cond)}))
       .filter(fs => fs.charVal !== undefined) as (FlagSymbol & {charVal: number})[];
 
-    const initialSymbol: Symbol|null = numColors === 0 ?
-      {
-        parent_type: "dot",
-        transform: {
-          child_type: "none",
-          x: 3,
-          y: 3,
-          main: true,
-          parent_tx: 0,
-          parent_ty: 0,
-          parent_sx: 1,
-          parent_sy: 1,
-          parent_r: 0,
-          child_tx: 0,
-          child_ty: 0,
-          child_sx: 1,
-          child_sy: 1,
-          child_r: 0,
-        },
-      } :
-      null;
-
-    let singleSymbol = initialSymbol;
+    let singleSymbol: Symbol|null = null;
     let singleValueMax = 0;
     for (const flagSymbol of filteredValuedFlagSymbols) {
       const charVal = flagSymbol.charVal;
@@ -264,7 +242,7 @@ export class ResultsComponent {
       }
     }
 
-    let doubleSymbol0 = initialSymbol;
+    let doubleSymbol0: Symbol|null = null;
     let doubleSymbol1: Symbol|null = null;
     let doubleValueMax = 0;
     for (let s0 = 0; s0 < filteredValuedFlagSymbols.length; s0++) {
@@ -310,10 +288,31 @@ export class ResultsComponent {
       [symbol0, symbol1] = [doubleSymbol0, doubleSymbol1];
     }
 
-    if (symbol0 !== null && symbol1 !== null && symbol1.transform.main && !symbol0.transform.main) {
-      return [symbol1, symbol0];
-    } else {
+    if (symbol0 === null && numColors === 0) {
+      return [{
+        parent_type: "dot",
+        transform: {
+          child_type: "none",
+          x: 3,
+          y: 3,
+          main: true,
+          parent_tx: 0,
+          parent_ty: 0,
+          parent_sx: 1,
+          parent_sy: 1,
+          parent_r: 0,
+          child_tx: 0,
+          child_ty: 0,
+          child_sx: 1,
+          child_sy: 1,
+          child_r: 0,
+        },
+      }, null];
+    }
+    if (symbol0 === null || symbol1 === null || symbol0.transform.main || !symbol1.transform.main) {
       return [symbol0, symbol1];
+    } else {
+      return [symbol1, symbol0];
     }
   }
 

@@ -281,38 +281,36 @@ export class ResultsComponent {
       }
     }
 
-    let symbol0, symbol1;
     if (singleValueMax >= doubleValueMax) {
-      [symbol0, symbol1] = [singleSymbol, null];
+      if (singleSymbol === null && numColors === 0) {
+        return [{
+          parent_type: "dot",
+          transform: {
+            child_type: "none",
+            x: 3,
+            y: 3,
+            main: true,
+            parent_tx: 0,
+            parent_ty: 0,
+            parent_sx: 1,
+            parent_sy: 1,
+            parent_r: 0,
+            child_tx: 0,
+            child_ty: 0,
+            child_sx: 1,
+            child_sy: 1,
+            child_r: 0,
+          },
+        }, null];
+      } else {
+        return [singleSymbol, null];
+      }
     } else {
-      [symbol0, symbol1] = [doubleSymbol0, doubleSymbol1];
-    }
-
-    if (symbol0 === null && numColors === 0) {
-      return [{
-        parent_type: "dot",
-        transform: {
-          child_type: "none",
-          x: 3,
-          y: 3,
-          main: true,
-          parent_tx: 0,
-          parent_ty: 0,
-          parent_sx: 1,
-          parent_sy: 1,
-          parent_r: 0,
-          child_tx: 0,
-          child_ty: 0,
-          child_sx: 1,
-          child_sy: 1,
-          child_r: 0,
-        },
-      }, null];
-    }
-    if (symbol0 === null || symbol1 === null || symbol0.transform.main || !symbol1.transform.main) {
-      return [symbol0, symbol1];
-    } else {
-      return [symbol1, symbol0];
+      if (doubleSymbol0 === null || doubleSymbol1 === null || doubleSymbol0.transform.main || !doubleSymbol1.transform.main) {
+        return [doubleSymbol0, doubleSymbol1];
+      } else {
+        return [doubleSymbol1, doubleSymbol0];
+      }
     }
   }
 

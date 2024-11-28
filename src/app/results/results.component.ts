@@ -214,7 +214,7 @@ export class ResultsComponent {
    * If the two are defined, then if the second has main to true, the first has to have it to true too.
    * The criteria to maximize are very complex to specify.
    */
-  private findFlagSymbol(numColors: number): [Symbol|null, Symbol|null] {
+  private findFlagSymbol(zeroColors: boolean): [Symbol|null, Symbol|null] {
     const me = this;
     const filteredValuedFlagSymbols = flagSymbols
       .map(fs => ({...fs, charVal: me.getCharacteristic(fs.cond)}))
@@ -282,7 +282,7 @@ export class ResultsComponent {
     }
 
     if (singleValueMax >= doubleValueMax) {
-      if (singleSymbol === null && numColors === 0) {
+      if (singleSymbol === null && zeroColors) {
         return [{
           parent_type: "dot",
           transform: {
@@ -348,7 +348,7 @@ export class ResultsComponent {
           spriteS = 1.0;
 
       const colors = this.findFlagColors();
-      const [symbol0, symbol1] = this.findFlagSymbol(colors.length);
+      const [symbol0, symbol1] = this.findFlagSymbol(colors.length === 0);
 
       const flagShape = this.findFlagShape(colors.length);
 

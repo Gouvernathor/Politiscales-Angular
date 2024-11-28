@@ -425,7 +425,7 @@ export class ResultsComponent {
 
   twitterHref() {
     const text = getLine("share_twitter").replace("%slogan%", this.generatedSlogan);
-    return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(this.currentUrl);
+    return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(this.currentUrl)}`;
   }
 
   // shareFacebook() {
@@ -440,7 +440,7 @@ export class ResultsComponent {
 
   redditHref() {
     const text = getLine("share_reddit").replace("%slogan%", this.generatedSlogan);
-    return "https://www.reddit.com/submit?url=" + encodeURIComponent(this.currentUrl) + "&title=" + encodeURIComponent(text);
+    return `https://www.reddit.com/submit?url=${encodeURIComponent(this.currentUrl)}&title=${encodeURIComponent(text)}`;
   }
 
   linkBeingShared = false;

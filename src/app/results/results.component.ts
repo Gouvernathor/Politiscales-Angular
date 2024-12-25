@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension, getFlagSpriteFromCoordinates } from '../../services/flagConfigurationService';
+import { FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -287,8 +287,7 @@ export class ResultsComponent {
           parent_type: "dot",
           transform: {
             child_type: "none",
-            x: 3,
-            y: 3,
+            sprite: 15,
             main: true,
             parent_tx: 0,
             parent_ty: 0,
@@ -357,9 +356,9 @@ export class ResultsComponent {
 
       // run these as early as possible
       const sprite0CanvasPromise = (symbol0 === null) ? null :
-          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol0.transform), colors[0].fgColor);
+          this.getSpriteCanvas(symbol0.transform.sprite, colors[0].fgColor);
       const sprite1CanvasPromise = (symbol1 === null) ? null :
-          this.getSpriteCanvas(getFlagSpriteFromCoordinates(symbol1.transform), colors[0].fgColor);
+          this.getSpriteCanvas(symbol1.transform.sprite, colors[0].fgColor);
 
       if (flagShape === undefined) {
         // ctx.beginPath(); // TODO check

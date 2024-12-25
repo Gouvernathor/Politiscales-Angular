@@ -1679,7 +1679,7 @@ type FlagSpriteCoordinates = {x: 0|1|2|3, y: 0|1|2|3};
 function getFlagSpriteCoordinates(flagSprite: FlagSprite): FlagSpriteCoordinates {
 	return {x: flagSprite % 4, y: Math.floor(flagSprite / 4)} as FlagSpriteCoordinates;
 }
-export function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
+function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
 	return x + y * 4 as FlagSprite;
 }
 const flagSpriteFileExtension = new Map<FlagSprite, string>([
@@ -1750,9 +1750,10 @@ export function getFlagSpriteFileExtension(fs: FlagSprite) {
  */
 export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";
 type FlagSymbolTransformChildType = "none" | "curve" | "dot" | "line" | "tri";
-export type FlagSymbolTransform = FlagSpriteCoordinates & {
+export type FlagSymbolTransform = {
 	child_type: FlagSymbolTransformChildType,
 	main: boolean,
+	sprite: FlagSprite,
 	parent_tx: number,
 	parent_ty: number,
 	parent_sx: number,
@@ -1785,8 +1786,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 2,
-					y: 1,
+					sprite: 6,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1801,8 +1801,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 2,
-					y: 0,
+					sprite: 2,
 					main: true,
 					parent_tx: 10,
 					parent_ty: 0,
@@ -1817,8 +1816,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 2,
-					y: 0,
+					sprite: 2,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1846,8 +1844,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 0,
-					y: 0,
+					sprite: 0,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1862,8 +1859,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 0,
-					y: 0,
+					sprite: 0,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1878,8 +1874,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 0,
-					y: 0,
+					sprite: 0,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1907,8 +1902,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 3,
-					y: 1,
+					sprite: 7,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1923,8 +1917,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 3,
-					y: 0,
+					sprite: 3,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1939,8 +1932,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 3,
-					y: 0,
+					sprite: 3,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1968,8 +1960,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 1,
-					y: 0,
+					sprite: 1,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -1984,8 +1975,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 1,
-					y: 0,
+					sprite: 1,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2000,8 +1990,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 1,
-					y: 0,
+					sprite: 1,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2029,8 +2018,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 0,
-					y: 2,
+					sprite: 8,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2045,8 +2033,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 0,
-					y: 2,
+					sprite: 8,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2061,8 +2048,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 0,
-					y: 2,
+					sprite: 8,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2077,8 +2063,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 0,
-					y: 2,
+					sprite: 8,
 					main: true,
 					parent_tx: 0,
 					parent_ty: -18,
@@ -2093,8 +2078,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 0,
-					y: 2,
+					sprite: 8,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 5,
@@ -2122,8 +2106,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 0,
-					y: 1,
+					sprite: 4,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2138,8 +2121,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 0,
-					y: 1,
+					sprite: 4,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2154,8 +2136,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 0,
-					y: 1,
+					sprite: 4,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2170,8 +2151,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 0,
-					y: 1,
+					sprite: 4,
 					main: true,
 					parent_tx: 0,
 					parent_ty: -18,
@@ -2186,8 +2166,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 0,
-					y: 1,
+					sprite: 4,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2215,8 +2194,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 1,
-					y: 2,
+					sprite: 9,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2231,8 +2209,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 1,
-					y: 2,
+					sprite: 9,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2247,8 +2224,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 1,
-					y: 2,
+					sprite: 9,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2263,8 +2239,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 1,
-					y: 2,
+					sprite: 9,
 					main: true,
 					parent_tx: 0,
 					parent_ty: -18,
@@ -2279,8 +2254,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 1,
-					y: 2,
+					sprite: 9,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2308,8 +2282,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 3,
-					y: 2,
+					sprite: 11,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2324,8 +2297,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 2,
-					y: 2,
+					sprite: 10,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2340,8 +2312,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 2,
-					y: 2,
+					sprite: 10,
 					main: false,
 					parent_tx: -6,
 					parent_ty: 0,
@@ -2356,8 +2327,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 2,
-					y: 2,
+					sprite: 10,
 					main: true,
 					parent_tx: 5,
 					parent_ty: -15,
@@ -2372,8 +2342,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 3,
-					y: 2,
+					sprite: 11,
 					main: false,
 					parent_tx: -20,
 					parent_ty: -20,
@@ -2401,8 +2370,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 0,
-					y: 3,
+					sprite: 12,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2417,8 +2385,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 0,
-					y: 3,
+					sprite: 12,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2433,8 +2400,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 0,
-					y: 3,
+					sprite: 12,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2449,8 +2415,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 0,
-					y: 3,
+					sprite: 12,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2478,8 +2443,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 1,
-					y: 3,
+					sprite: 13,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2494,8 +2458,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 1,
-					y: 3,
+					sprite: 13,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2510,8 +2473,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 1,
-					y: 3,
+					sprite: 13,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2526,8 +2488,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 1,
-					y: 3,
+					sprite: 13,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2555,8 +2516,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 2,
-					y: 3,
+					sprite: 14,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2571,8 +2531,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "curve",
-					x: 2,
-					y: 3,
+					sprite: 14,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2587,8 +2546,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 2,
-					y: 3,
+					sprite: 14,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2603,8 +2561,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "tri",
-					x: 2,
-					y: 3,
+					sprite: 14,
 					main: false,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2632,8 +2589,7 @@ export const flagSymbols: FlagSymbol[] = [
 			transforms: [
 				{
 					child_type: "none",
-					x: 1,
-					y: 1,
+					sprite: 5,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2648,8 +2604,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "line",
-					x: 1,
-					y: 1,
+					sprite: 5,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,
@@ -2664,8 +2619,7 @@ export const flagSymbols: FlagSymbol[] = [
 				},
 				{
 					child_type: "dot",
-					x: 1,
-					y: 1,
+					sprite: 5,
 					main: true,
 					parent_tx: 0,
 					parent_ty: 0,

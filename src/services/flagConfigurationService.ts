@@ -1744,8 +1744,8 @@ export type FlagSymbolDataParentType = "curve" | "dot" | "line" | "tri";
 type FlagSymbolTransformChildType = "none" | "curve" | "dot" | "line" | "tri";
 export type FlagSymbolTransform = {
 	child_type: FlagSymbolTransformChildType,
-	main: boolean,
 	sprite: FlagSprite,
+	main: boolean,
 	parent_tx: number,
 	parent_ty: number,
 	parent_sx: number,

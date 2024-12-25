@@ -1683,7 +1683,7 @@ export function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
 	return x + y * 4 as FlagSprite;
 }
 const flagSpriteFileExtension = new Map<FlagSprite, string>([
-	[FlagSprite.Scythe, "webp"],
+	[FlagSprite.Scythe, "svg"],
 	[FlagSprite.GearArc, "webp"],
 	[FlagSprite.PartialVenus, "svg"],
 	[FlagSprite.PartialUnionStars, "svg"],
@@ -1691,7 +1691,7 @@ const flagSpriteFileExtension = new Map<FlagSprite, string>([
 	[FlagSprite.Compass, "webp"],
 	[FlagSprite.FistVenus, "webp"],
 	[FlagSprite.UnionStars, "svg"],
-	[FlagSprite.Hammer, "webp"],
+	[FlagSprite.Hammer, "svg"],
 	[FlagSprite.Arrows, "svg"],
 	[FlagSprite.Wheat, "webp"],
 	[FlagSprite.Flower, "webp"],

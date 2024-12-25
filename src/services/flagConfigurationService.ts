@@ -1657,7 +1657,6 @@ export const flagColors: FlagColor[] = [
 ];
 
 export enum FlagSprite {
-	// in reading order
 	Scythe, // 0, 0
 	GearArc, // 1, 0
 	PartialVenus, // 2, 0
@@ -1674,13 +1673,6 @@ export enum FlagSprite {
 	Star, // 1, 3
 	FleurDeLys, // 2, 3
 	SmileyFrown, // 3, 3
-}
-type FlagSpriteCoordinates = {x: 0|1|2|3, y: 0|1|2|3};
-function getFlagSpriteCoordinates(flagSprite: FlagSprite): FlagSpriteCoordinates {
-	return {x: flagSprite % 4, y: Math.floor(flagSprite / 4)} as FlagSpriteCoordinates;
-}
-function getFlagSpriteFromCoordinates({x, y}: FlagSpriteCoordinates) {
-	return x + y * 4 as FlagSprite;
 }
 const flagSpriteFileExtension = new Map<FlagSprite, string>([
 	[FlagSprite.Scythe, "svg"],

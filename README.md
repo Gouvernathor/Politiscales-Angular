@@ -1,6 +1,10 @@
 # Politiscales
 
-This is a remake of the Politiscales tool, itself a fork of the 8values test, using the Angular framework.
+An online political test that represents you politically along 8 ideological axes.
+
+You can see it in action on [politiscales.gouvernathor.fr](https://politiscales.gouvernathor.fr).
+
+This is a remake, using the Angular framework, of the original Politiscales tool, which ran on `politiscales.net` and was taken offline between the 21st and the 28th of August 2020. That original Politiscales was itself was a fork of the [8values test](http://8values.github.io/), licensed under Expat/MIT license.
 
 ## Development server
 

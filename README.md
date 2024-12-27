@@ -8,7 +8,7 @@ This is a remake, using the Angular framework, of the original Politiscales tool
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to [`http://localhost:4200/`](http://localhost:4200/). The application will automatically reload if you change any of the source files.
 
 ## Build
 

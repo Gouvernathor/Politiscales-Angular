@@ -191,7 +191,7 @@
 	"quiz_btn_random": "Voir un résultat aléatoire",
 	"quiz_question_counter": "Question %num% sur %sum%",
 	"result_special": "Caractéristiques supplémentaires",
-	"result_desc": "Le résultat de votre PolitiScales est décomposé en 8 axes. Chaque axe indique votre positionnement par rapport à deux idéologies contradictoires. Des caractéristiques particulières, affichés en bas de page, peuvent également venir compléter votre résultat. Pour plus d’information sur les différents axes, <a href=\"help.html\">consultez la page d’aide</a>.",
+	"result_desc": "Le résultat de votre PolitiScales est décomposé en 8 axes. Chaque axe indique votre positionnement par rapport à deux idéologies contradictoires. Des caractéristiques particulières, affichés en bas de page, peuvent également venir compléter votre résultat. Pour plus d’information sur les différents axes, <a href=\"fr_FR/help\">consultez la page d’aide</a>.",
 	"result_btn_redo": "Recommencer le test",
 	"slogan_constructivism": "Égalité",
 	"slogan_internationalism": "Humanité",

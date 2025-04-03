@@ -8,13 +8,14 @@ import { getAnyAxisId } from '../../services/commonConfigurationService';
 import { getQuestions } from '../../services/questionsConfigurationService';
 import { getAllEnumValues } from 'enum-for';
 import { hashString, RNG } from '../../util/utils';
+import { ClickCursorDirective } from '../style.directive';
 
 type Answer = number;
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [],
+  imports: [ClickCursorDirective],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css'
 })

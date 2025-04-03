@@ -9,6 +9,7 @@ import { getBonusThreshold, getSlogan } from '../../services/resultsConfiguratio
 import { arrayCmp, sorted } from '../../util/utils';
 import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
+import { ClickCursorDirective } from '../style.directive';
 
 type Symbol = {
   parent_type: FlagSymbolDataPairingType,
@@ -18,7 +19,7 @@ type Symbol = {
 @Component({
   selector: 'app-results',
   standalone: true,
-  imports: [VisibilityDirective],
+  imports: [VisibilityDirective, ClickCursorDirective],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })

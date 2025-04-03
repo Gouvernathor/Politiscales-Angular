@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { getLine, languageIds } from '../../services/localizationService';
 import { Router } from '@angular/router';
+import { ClickCursorDirective } from '../style.directive';
 
 @Component({
   selector: 'app-language-selector',
   standalone: true,
-  imports: [],
+  imports: [ClickCursorDirective],
   templateUrl: './language-selector.component.html',
   styleUrl: './language-selector.component.css'
 })

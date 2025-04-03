@@ -18,7 +18,6 @@ type Symbol = {
 
 @Component({
   selector: 'app-results',
-  standalone: true,
   imports: [VisibilityDirective, ClickCursorDirective],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'

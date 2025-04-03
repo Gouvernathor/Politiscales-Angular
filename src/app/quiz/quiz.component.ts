@@ -14,7 +14,6 @@ type Answer = number;
 
 @Component({
   selector: 'app-quiz',
-  standalone: true,
   imports: [ClickCursorDirective],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css'

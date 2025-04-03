@@ -6,7 +6,6 @@ import { ClickCursorDirective } from '../style.directive';
 
 @Component({
   selector: 'app-start',
-  standalone: true,
   imports: [ClickCursorDirective],
   templateUrl: './start.component.html',
   styleUrl: './start.component.css'

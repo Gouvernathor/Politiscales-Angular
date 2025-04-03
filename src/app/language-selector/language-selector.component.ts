@@ -5,7 +5,6 @@ import { ClickCursorDirective } from '../style.directive';
 
 @Component({
   selector: 'app-language-selector',
-  standalone: true,
   imports: [ClickCursorDirective],
   templateUrl: './language-selector.component.html',
   styleUrl: './language-selector.component.css'

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { getLine, setLanguage } from '../../services/localizationService';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataParentType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension } from '../../services/flagConfigurationService';
+import { CombinedFlagSymbolTransform, FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataPairingType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension } from '../../services/flagConfigurationService';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
@@ -11,7 +11,7 @@ import { VisibilityDirective } from './visibility.directive';
 import { getAllEnumValues } from 'enum-for';
 
 type Symbol = {
-  parent_type: FlagSymbolDataParentType,
+  parent_type: FlagSymbolDataPairingType,
   transform: FlagSymbolTransform,
 };
 
@@ -294,11 +294,6 @@ export class ResultsComponent {
             parent_sx: 1,
             parent_sy: 1,
             parent_r: 0,
-            child_tx: 0,
-            child_ty: 0,
-            child_sx: 1,
-            child_sy: 1,
-            child_r: 0,
           },
         };
       }
@@ -400,9 +395,10 @@ export class ResultsComponent {
         ctx.restore();
 
         if (symbol1 !== null) {
-          ctx.translate(symbol0.transform.child_tx, -symbol0.transform.child_ty);
-          ctx.rotate(symbol0.transform.child_r * Math.PI / 180);
-          ctx.scale(symbol0.transform.child_sx, symbol0.transform.child_sy);
+          const transform0 = symbol0.transform as CombinedFlagSymbolTransform;
+          ctx.translate(transform0.child_tx, -transform0.child_ty);
+          ctx.rotate(transform0.child_r * Math.PI / 180);
+          ctx.scale(transform0.child_sx, transform0.child_sy);
 
           ctx.translate(symbol1.transform.parent_tx, -symbol1.transform.parent_ty);
           ctx.rotate(symbol1.transform.parent_r * Math.PI / 180);

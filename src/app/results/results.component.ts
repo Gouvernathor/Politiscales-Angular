@@ -418,6 +418,16 @@ export class ResultsComponent {
     // TODO generatedResults
   }
 
+  /**
+   * List the special axes that are above the threshold,
+   * sorted by decreasing score.
+   */
+  getValidBonuses() {
+    return getAllEnumValues(SpecialAxis)
+      .filter(axis => this.axesData.get(axis)! > getBonusThreshold(axis))
+      .sort((a, b) => this.axesData.get(b)! - this.axesData.get(a)!);
+  }
+
   twitterHref() {
     const text = getLine("share_twitter").replace("%slogan%", this.generatedSlogan);
     return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(this.currentUrl)}`;

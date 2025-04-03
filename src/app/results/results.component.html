@@ -278,90 +278,91 @@
 <div id="bonusBox">
     <h2>{{localize("result_special")}}</h2>
 
-    @if (axesData.get(SpecialAxis.Anarchism)! > getBonusThreshold(SpecialAxis.Anarchism)) {
-    <div id="anarBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Anarchism)!*axesData.get(SpecialAxis.Anarchism)!">
-        <div class="descImg"><img src="images/anarchism.png" [alt]="localize('anarchism')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("anarchism")}}</b> {{localize("result_anarchism")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_anar" (change)="debug()"/>
-            }
+    @for (specialAxis of getValidBonuses(); track specialAxis) {
+        @if (specialAxis === SpecialAxis.Anarchism) {
+        <div id="anarBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Anarchism)!*axesData.get(SpecialAxis.Anarchism)!">
+            <div class="descImg"><img src="images/anarchism.png" [alt]="localize('anarchism')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("anarchism")}}</b> {{localize("result_anarchism")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_anar" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
-    }
+        }
 
-    @if (axesData.get(SpecialAxis.Pragmatism)! > getBonusThreshold(SpecialAxis.Pragmatism)) {
-    <div id="pragBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Pragmatism)!*axesData.get(SpecialAxis.Pragmatism)!">
-        <div class="descImg"><img src="images/pragmatism.png" [alt]="localize('pragmatism')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("pragmatism")}}</b> {{localize("result_pragmatism")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_pragmatism" (change)="debug()"/>
-            }
+        @if (specialAxis === SpecialAxis.Pragmatism) {
+        <div id="pragBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Pragmatism)!*axesData.get(SpecialAxis.Pragmatism)!">
+            <div class="descImg"><img src="images/pragmatism.png" [alt]="localize('pragmatism')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("pragmatism")}}</b> {{localize("result_pragmatism")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_pragmatism" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
-    }
+        }
 
-    @if (axesData.get(SpecialAxis.Feminism)! > getBonusThreshold(SpecialAxis.Feminism)) {
-    <div id="femiBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Feminism)!*axesData.get(SpecialAxis.Feminism)!">
-        <div class="descImg"><img src="images/feminism.png" [alt]="localize('feminism')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("feminism")}}</b> {{localize("result_feminism")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_femi" (change)="debug()"/>
-            }
+        @if (specialAxis === SpecialAxis.Feminism) {
+        <div id="femiBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Feminism)!*axesData.get(SpecialAxis.Feminism)!">
+            <div class="descImg"><img src="images/feminism.png" [alt]="localize('feminism')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("feminism")}}</b> {{localize("result_feminism")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_femi" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
-    }
+        }
 
-    @if (axesData.get(SpecialAxis.Conspiracy)! > getBonusThreshold(SpecialAxis.Conspiracy)) {
-    <div id="compBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Conspiracy)!*axesData.get(SpecialAxis.Conspiracy)!">
-        <div class="descImg"><img src="images/complotism.png" [alt]="localize('complotism')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("complotism")}}</b> {{localize("result_complotism")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_comp" (change)="debug()"/>
-            }
+        @if (specialAxis === SpecialAxis.Conspiracy) {
+        <div id="compBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Conspiracy)!*axesData.get(SpecialAxis.Conspiracy)!">
+            <div class="descImg"><img src="images/complotism.png" [alt]="localize('complotism')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("complotism")}}</b> {{localize("result_complotism")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_comp" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
-    }
+        }
 
-    @if (axesData.get(SpecialAxis.Veganism)! > getBonusThreshold(SpecialAxis.Veganism)) {
-    <div id="vegaBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Veganism)!*axesData.get(SpecialAxis.Veganism)!">
-        <div class="descImg"><img src="images/veganism.png" [alt]="localize('veganism')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("veganism")}}</b> {{localize("result_veganism")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_vega" (change)="debug()"/>
-            }
+        @if (specialAxis === SpecialAxis.Veganism) {
+        <div id="vegaBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Veganism)!*axesData.get(SpecialAxis.Veganism)!">
+            <div class="descImg"><img src="images/veganism.png" [alt]="localize('veganism')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("veganism")}}</b> {{localize("result_veganism")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_vega" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
-    }
+        }
 
-    @if (axesData.get(SpecialAxis.Monarchism)! > getBonusThreshold(SpecialAxis.Monarchism)) {
-    <div id="monaBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Monarchism)!*axesData.get(SpecialAxis.Monarchism)!">
-        <div class="descImg"><img src="images/monarchism.png" [alt]="localize('monarchism')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("monarchism")}}</b> {{localize("result_monarchism")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_mona" (change)="debug()"/>
-            }
+        @if (specialAxis === SpecialAxis.Monarchism) {
+        <div id="monaBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Monarchism)!*axesData.get(SpecialAxis.Monarchism)!">
+            <div class="descImg"><img src="images/monarchism.png" [alt]="localize('monarchism')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("monarchism")}}</b> {{localize("result_monarchism")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_mona" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
-    }
+        }
 
-    @if (axesData.get(SpecialAxis.Religion)! > getBonusThreshold(SpecialAxis.Religion)) {
-    <div id="reliBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Religion)!*axesData.get(SpecialAxis.Religion)!">
-        <div class="descImg"><img src="images/religion.png" [alt]="localize('religion')"/></div>
-        <div class="descTextMono">
-            <p><b>{{localize("religion")}}</b> {{localize("result_religion")}}</p>
-            @if (false) {
-                <input type="checkbox" id="debug_reli" (change)="debug()"/>
-            }
+        @if (specialAxis === SpecialAxis.Religion) {
+        <div id="reliBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Religion)!*axesData.get(SpecialAxis.Religion)!">
+            <div class="descImg"><img src="images/religion.png" [alt]="localize('religion')"/></div>
+            <div class="descTextMono">
+                <p><b>{{localize("religion")}}</b> {{localize("result_religion")}}</p>
+                @if (false) {
+                    <input type="checkbox" id="debug_reli" (change)="debug()"/>
+                }
+            </div>
         </div>
-    </div>
+        }
     }
-    <!-- TODO reorder these elements dynamically depending on score -->
 </div>
 }
 

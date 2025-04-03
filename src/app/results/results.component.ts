@@ -35,7 +35,16 @@ export class ResultsComponent {
   private axesValues = new Map<BaseAxis, number>();
   generatedSlogan = "";
   private characteristicsMap!: Map<AnyAxis, number>;
-  bonusEnabled = false; // TODO make it a property on the SpecialAxis storage (once fully segregated)
+  /**
+   * List the special axes that are above the threshold,
+   * sorted by decreasing score.
+   */
+  validBonuses: SpecialAxis[] = [];
+
+  get bonusEnabled() {
+    return this.validBonuses.length > 0;
+  }
+
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   get currentUrl() {
@@ -98,10 +107,11 @@ export class ResultsComponent {
       const thresh = getBonusThreshold(axis);
 
       if (value > thresh) {
-        this.bonusEnabled = true;
         this.characteristicsMap.set(axis, value);
+        this.validBonuses.push(axis);
       }
     }
+    this.validBonuses.sort((a, b) => this.axesData.get(b)! - this.axesData.get(a)!);
 
     this.generatedSlogan = this.generateSlogan();
   }
@@ -416,16 +426,6 @@ export class ResultsComponent {
 
   private async generateResultsCanvas() {
     // TODO generatedResults
-  }
-
-  /**
-   * List the special axes that are above the threshold,
-   * sorted by decreasing score.
-   */
-  getValidBonuses() {
-    return getAllEnumValues(SpecialAxis)
-      .filter(axis => this.axesData.get(axis)! > getBonusThreshold(axis))
-      .sort((a, b) => this.axesData.get(b)! - this.axesData.get(a)!);
   }
 
   twitterHref() {

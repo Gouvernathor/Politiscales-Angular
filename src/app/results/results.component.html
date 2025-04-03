@@ -278,7 +278,7 @@
 <div id="bonusBox">
     <h2>{{localize("result_special")}}</h2>
 
-    @for (specialAxis of getValidBonuses(); track specialAxis) {
+    @for (specialAxis of validBonuses; track specialAxis) {
         @if (specialAxis === SpecialAxis.Anarchism) {
         <div id="anarBonus" class="description" [style.opacity]="axesData.get(SpecialAxis.Anarchism)!*axesData.get(SpecialAxis.Anarchism)!">
             <div class="descImg"><img src="images/anarchism.png" [alt]="localize('anarchism')"/></div>

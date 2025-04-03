@@ -47,7 +47,7 @@ export class ResultsComponent {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   get currentUrl() {
-    return this.router.url;
+    return globalThis.document?.location.href;
   }
 
   async ngOnInit() {

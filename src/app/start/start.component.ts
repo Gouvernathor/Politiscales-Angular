@@ -1,8 +1,8 @@
+import { firstValueFrom } from 'rxjs';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getLine, setLanguage } from '../../services/localizationService';
-import { firstValueFrom } from 'rxjs';
 import { ClickCursorDirective } from '../style.directive';
+import { getLine, setLanguage } from '../../services/localizationService';
 
 @Component({
   selector: 'app-start',

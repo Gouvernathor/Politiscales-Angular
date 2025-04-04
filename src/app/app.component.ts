@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { getLanguageOrDefault, getLine, languageIds } from '../services/localizationService';
 import { ClickCursorDirective } from './style.directive';
+import { getLanguageOrDefault, getLine, languageIds } from '../services/localizationService';
 
 @Component({
   selector: 'app-root',

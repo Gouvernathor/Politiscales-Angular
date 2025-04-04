@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { getLine, setLanguage } from '../../services/localizationService';
 import { firstValueFrom } from 'rxjs';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
-import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
-import { getAnyAxisId } from '../../services/commonConfigurationService';
-import { getQuestions } from '../../services/questionsConfigurationService';
 import { getAllEnumValues } from 'enum-for';
-import { hashString, RNG } from '../../util/utils';
 import { ClickCursorDirective } from '../style.directive';
+import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
+import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
+import { getAnyAxisId } from '../../services/commonConfigurationService';
+import { getLine, setLanguage } from '../../services/localizationService';
+import { getQuestions } from '../../services/questionsConfigurationService';
+import { hashString, RNG } from '../../util/utils';
 
 type Answer = number;
 

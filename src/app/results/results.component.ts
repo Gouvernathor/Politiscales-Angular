@@ -28,17 +28,15 @@ export class ResultsComponent {
   BaseAxis = BaseAxis;
   Axis = Axis;
   SpecialAxis = SpecialAxis;
-  // TODO segregate the final values between Axes and SpecialAxes
-  // only store the special axis if above the threshold, and store the square/opacity value
+  /** Values directly taken from the URL */
   axesData = new Map<AnyAxis, number>();
-  private axesValues = new Map<BaseAxis, number>();
-  generatedSlogan = "";
+  /** Only the 8 base axes, with a relative unidimentional value */
+  private baseAxesValues = new Map<BaseAxis, number>();
+  /** Only winning directions and valid bonuses */
   private characteristicsMap!: Map<AnyAxis, number>;
-  /**
-   * List the special axes that are above the threshold,
-   * sorted by decreasing score.
-   */
+  /** The special axes that are above the threshold, sorted by decreasing score. */
   validBonuses: SpecialAxis[] = [];
+  generatedSlogan = "";
 
   get bonusEnabled() {
     return this.validBonuses.length > 0;
@@ -98,7 +96,7 @@ export class ResultsComponent {
         this.characteristicsMap.set(-baseAxis, rightValue);
       }
 
-      this.axesValues.set(baseAxis, rightValue-leftValue);
+      this.baseAxesValues.set(baseAxis, rightValue-leftValue);
     }
 
     for (const axis of getAllEnumValues(SpecialAxis)) {
@@ -182,7 +180,7 @@ export class ResultsComponent {
       for (const cond of flagShape.cond) {
         const baseAxis = getBaseAxisFromId(cond.name);
         if (baseAxis !== undefined) {
-          const value = me.axesValues.get(baseAxis);
+          const value = me.baseAxesValues.get(baseAxis);
           if (value !== undefined) {
             if (cond.vmin <= value && value <= cond.vmax) {
               condValues.push(Math.abs(value));

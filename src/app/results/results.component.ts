@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { getLine, setLanguage } from '../../services/localizationService';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CombinedFlagSymbolTransform, FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataPairingType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension } from '../../services/flagConfigurationService';
+import { getAllEnumValues } from 'enum-for';
+import { VisibilityDirective } from './visibility.directive';
+import { ClickCursorDirective } from '../style.directive';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
+import { CombinedFlagSymbolTransform, FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataPairingType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension } from '../../services/flagConfigurationService';
+import { getLine, setLanguage } from '../../services/localizationService';
 import { getBonusThreshold, getSlogan } from '../../services/resultsConfigurationService';
 import { arrayCmp, sorted } from '../../util/utils';
-import { VisibilityDirective } from './visibility.directive';
-import { getAllEnumValues } from 'enum-for';
-import { ClickCursorDirective } from '../style.directive';
 
 type Symbol = {
   parent_type: FlagSymbolDataPairingType,
@@ -28,6 +28,7 @@ export class ResultsComponent {
   BaseAxis = BaseAxis;
   Axis = Axis;
   SpecialAxis = SpecialAxis;
+
   /** Values directly taken from the URL */
   axesData = new Map<AnyAxis, number>();
   /** Only the 8 base axes, with a relative unidimentional value */

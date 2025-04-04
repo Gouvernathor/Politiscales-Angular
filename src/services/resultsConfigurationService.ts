@@ -1,5 +1,5 @@
-import { AnyAxis, Axis, SpecialAxis } from "../datamodel/commonConfiguration";
 import { getLine } from "./localizationService";
+import { AnyAxis, Axis, SpecialAxis } from "../datamodel/commonConfiguration";
 
 const bonusThresholds = new Map<SpecialAxis, number>([
     [SpecialAxis.Anarchism, .9],

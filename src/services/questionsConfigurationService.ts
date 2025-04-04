@@ -1,6 +1,6 @@
+import { getAnyAxisFromId } from "./commonConfigurationService";
 import rawQuestions from '../assets/questions.json';
 import { AnswerValue, Question } from "../datamodel/questionsConfiguration";
-import { getAnyAxisFromId } from "./commonConfigurationService";
 
 type RawAnswerValue = {
     axis: string,

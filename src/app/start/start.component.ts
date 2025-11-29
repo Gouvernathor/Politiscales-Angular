@@ -10,7 +10,7 @@ import { getLine, setLanguage } from '../../services/localizationService';
   styleUrl: './start.component.css'
 })
 export class StartComponent {
-  readonly route = inject(ActivatedRoute);
+  private readonly route = inject(ActivatedRoute);
 
   localize = getLine;
 

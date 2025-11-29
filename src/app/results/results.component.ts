@@ -22,7 +22,7 @@ type Symbol = {
   styleUrl: './results.component.css'
 })
 export class ResultsComponent {
-  readonly route = inject(ActivatedRoute);
+  private readonly route = inject(ActivatedRoute);
 
   localize = getLine;
   getBonusThreshold = getBonusThreshold;

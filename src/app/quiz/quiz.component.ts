@@ -2,7 +2,6 @@ import { firstValueFrom } from 'rxjs';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { getAllEnumValues } from 'enum-for';
-import { ClickCursorDirective } from '../style.directive';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { AnswerValue, Question } from '../../datamodel/questionsConfiguration';
 import { getAnyAxisId } from '../../services/commonConfigurationService';
@@ -14,7 +13,7 @@ type Answer = number;
 
 @Component({
   selector: 'app-quiz',
-  imports: [ClickCursorDirective],
+  imports: [],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css'
 })

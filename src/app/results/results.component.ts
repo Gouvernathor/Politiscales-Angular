@@ -1,9 +1,8 @@
 import { firstValueFrom } from 'rxjs';
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { getAllEnumValues } from 'enum-for';
 import { VisibilityDirective } from './visibility.directive';
-import { ClickCursorDirective } from '../style.directive';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
 import { getAnyAxisFromId, getBaseAxisFromId, getIdsAndAnyAxes } from '../../services/commonConfigurationService';
 import { CombinedFlagSymbolTransform, FlagColor, flagColors, FlagShape, flagShapes, FlagSprite, FlagSymbol, FlagSymbolCondition, FlagSymbolDataPairingType, flagSymbols, FlagSymbolTransform, getFlagSpriteFileExtension } from '../../services/flagConfigurationService';
@@ -18,11 +17,13 @@ type Symbol = {
 
 @Component({
   selector: 'app-results',
-  imports: [VisibilityDirective, ClickCursorDirective],
+  imports: [VisibilityDirective, RouterLink],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })
 export class ResultsComponent {
+  readonly route = inject(ActivatedRoute);
+
   localize = getLine;
   getBonusThreshold = getBonusThreshold;
   BaseAxis = BaseAxis;
@@ -42,8 +43,6 @@ export class ResultsComponent {
   get bonusEnabled() {
     return this.validBonuses.length > 0;
   }
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
 
   get currentUrl() {
     return globalThis.document?.location.href;
@@ -461,9 +460,5 @@ export class ResultsComponent {
 
   debug() {
     // TODO (maybe)
-  }
-
-  gotoQuiz() {
-    this.router.navigate(['..', 'quiz'], {relativeTo: this.route});
   }
 }

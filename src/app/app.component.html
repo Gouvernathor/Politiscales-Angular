@@ -1,15 +1,15 @@
 <header>
     <div id="header">
         <div class="headerLeft">
-            <a (click)="gotoHelp()">
+            <a [routerLink]="helpCommands()">
                 <i class="fa fa-question-circle-o" aria-hidden="true"></i>
             </a>
-            <a (click)="gotoLangSelect()">
+            <a [routerLink]="langSelectCommands()">
                 <i class="fa fa-language" aria-hidden="true"></i>
             </a>
         </div>
         <div class="headerMiddle">
-            <h1><a (click)="gotoStart()">
+            <h1><a [routerLink]="startCommands()">
                 PolitiScales <!-- TODO site name -->
             </a></h1>
         </div>

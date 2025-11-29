@@ -1,5 +1,5 @@
 import { firstValueFrom } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { getAllEnumValues } from 'enum-for';
 import { AnyAxis, Axis, BaseAxis, SpecialAxis } from '../../datamodel/commonConfiguration';
@@ -18,12 +18,14 @@ type Answer = number;
   styleUrl: './quiz.component.css'
 })
 export class QuizComponent {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+
   localize = getLine;
   loading = true;
   private readonly rng: RNG = new RNG();
   questions!: Readonly<Question[]>;
   readonly answers: Answer[] = [];
-  constructor(private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit() {
     // manage language
